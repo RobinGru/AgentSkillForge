@@ -11,12 +11,6 @@ Important:
 - The goal is better maintainability, not a complete rewrite.
 - Please answer in English and provide complete code blocks, not partial snippets.
 
-Here is the current code of my Vue component:
-
----
-[PASTE THE FULL CODE OF THE .vue FILE HERE]
----
-
 Please proceed step by step:
 
 ## Step 1: Analyze the component
