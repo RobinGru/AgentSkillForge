@@ -1,5 +1,5 @@
 ---
-name: frontend-product-design
+name: frontend-product-designer
 description: Create distinctive, accessible, production-ready frontend UI. Use when building or reshaping user-facing components, pages, flows, design-system elements, responsive layouts, interaction states, visual polish, or frontend UI fixes.
 allowed-tools: read_file write_file run_command list_files
 ---
