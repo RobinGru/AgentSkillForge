@@ -158,7 +158,7 @@ observable results.
 | Check | Result | Evidence |
 |---|---|---|
 | `gh skill publish --dry-run` | PASS | Completed successfully from the repository root. |
-| Tag protection | WARNING | CLI reported no active tag-protection rulesets. |
+| Tag protection | PASS | Active repository ruleset `Protect release tags` blocks updates and deletion for `refs/tags/v*` without bypass actors. |
 | Preview each new skill at the pinned commit | PASS | All three skills and their references rendered successfully from `RobinGru/AgentSkillForge@84761d1`. |
 | Local installation of all nine skills | PASS | `gh skill install . --from-local --all --dir build/gh-skill-local` copied every skill and reference file. |
 | Local installed-copy provenance | PASS | Every installed `SKILL.md` received the expected `metadata.github.local-path` value. |
@@ -166,9 +166,8 @@ observable results.
 | Source provenance fields | PASS | Repository search found no installation-injected `metadata.github-*` fields. |
 | Remote installed-copy provenance | PASS | Every installed skill records the expected `github-repo` and full-SHA `github-ref`. |
 
-The CLI and provenance checks are complete for the pinned candidate commit. The
-tag-protection warning remains a repository-hardening recommendation and does not
-invalidate skill validation.
+The CLI, provenance, and immutable release-tag checks are complete for the pinned
+candidate commit.
 
 ## Release gate
 
