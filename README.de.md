@@ -7,7 +7,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
 
-Portable Anleitungspakete, die KI-Coding-Assistenten zu sorgfältigen Änderungen und verständlichen Ergebnissen anleiten.
+Wiederverwendbare Agent Skills, die KI-Coding-Assistenten zu sorgfältigen Änderungen und verständlichen Ergebnissen anleiten.
 
 [Skills entdecken](#skill-katalog) · [Mit Zed installieren](#schnellstart) · [Mitwirken](CONTRIBUTING.md)
 
