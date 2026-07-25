@@ -1,0 +1,110 @@
+cases:
+  - id: migration-positive-column-transition
+    category: positive
+    prompt: Plan a field rename across three deployments while old and new application versions may write concurrently.
+    expected_skills: [compatibility-migration]
+    assertions: [defines mixed-version validity, sequences additive states, distinguishes code and data rollback]
+  - id: migration-positive-event-schema
+    category: positive
+    prompt: Move an event schema to version 3 while independently deployed consumers still accept version 2.
+    expected_skills: [compatibility-migration]
+    assertions: [inventories consumers, defines the compatibility envelope, requires retirement evidence]
+  - id: migration-positive-library-major
+    category: positive
+    prompt: Coordinate a library major upgrade across services that will run mixed dependency versions for two release trains.
+    expected_skills: [compatibility-migration]
+    assertions: [lists valid combinations, creates independently deployable states, assigns owners and evidence]
+  - id: migration-positive-service-replacement
+    category: positive
+    prompt: Replace the profile service gradually while callers move one team at a time and both implementations remain live.
+    expected_skills: [compatibility-migration]
+    assertions: [maps consumers, defines routing coexistence, gates retirement on observed usage]
+  - id: migration-positive-feature-retirement
+    category: positive
+    prompt: Retire the legacy export format after migrating active consumers and measuring residual requests.
+    expected_skills: [compatibility-migration]
+    assertions: [defines transition evidence, preserves a bounded fallback window, states retirement conditions]
+  - id: migration-negative-strategy-choice
+    category: negative
+    prompt: Decide whether to replace the database, wrap it, or keep it; the migration direction is still open.
+    expected_skills: [solution-framing]
+    forbidden_skills: [compatibility-migration]
+  - id: migration-negative-local-config
+    category: negative
+    prompt: Change one backward-compatible timeout default and update its focused test.
+    expected_skills: [safe-code-change]
+    forbidden_skills: [compatibility-migration]
+  - id: migration-negative-diff-review
+    category: negative
+    prompt: Review this completed schema migration diff and its rollback test before merge.
+    expected_skills: [fact-based-code-review]
+    forbidden_skills: [compatibility-migration]
+  - id: migration-negative-teaching
+    category: negative
+    prompt: Explain database migrations and semantic versioning without planning a real transition.
+    forbidden_skills: [compatibility-migration]
+  - id: migration-negative-proven-removal
+    category: negative
+    prompt: Remove an internal flag after telemetry and ownership records prove zero consumers and no coexistence is needed.
+    expected_skills: [safe-code-change]
+    forbidden_skills: [compatibility-migration]
+  - id: migration-conflict-framing-first
+    category: conflict
+    prompt: First choose between dual-write and offline conversion, then plan safe coexistence for the selected approach.
+    expected_skills: [solution-framing, compatibility-migration]
+    assertions: [orders strategy selection before migration planning, does not hide the decision in an intermediate state]
+  - id: migration-conflict-introduce-change
+    category: conflict
+    prompt: Plan the compatibility states and implement only the additive Introduce step for a new response field.
+    expected_skills: [compatibility-migration, safe-code-change]
+    assertions: [keeps the state plan separate from the patch, verifies old consumers remain valid]
+  - id: migration-conflict-security-token
+    category: conflict
+    prompt: Plan old and new refresh tokens to coexist while separately modeling credential replay and verifier trust boundaries.
+    expected_skills: [compatibility-migration, security-boundary-analysis]
+    assertions: [keeps migration states separate from abuse chains, carries security controls into the compatibility envelope]
+  - id: migration-conflict-review-step
+    category: conflict
+    prompt: Review the completed additive schema step against the approved multi-release compatibility plan.
+    expected_skills: [compatibility-migration, fact-based-code-review]
+    assertions: [keeps the migration contract distinct from the diff verdict, reviews only the completed step]
+  - id: migration-conflict-backfill-performance
+    category: conflict
+    prompt: Plan a resumable backfill, and investigate the measured database saturation that constrains each batch.
+    expected_skills: [compatibility-migration, performance-investigation]
+    assertions: [records load as a migration constraint, leaves measured resource diagnosis to performance investigation]
+  - id: migration-conflict-interface-coexistence
+    category: conflict
+    prompt: Plan coexistence of old and new account states and design the user interface that must represent both during rollout.
+    expected_skills: [compatibility-migration, product-interface-engineering]
+    assertions: [separates compatibility states from interaction states, verifies both contracts]
+  - id: migration-output-state-sequence
+    category: output
+    prompt: Produce the migration record for moving producers and consumers from numeric to opaque identifiers.
+    expected_skills: [compatibility-migration]
+    assertions: [uses every exact output heading, uses the exact intermediate-state fields, defines advance hold and stop evidence]
+  - id: migration-output-retirement-hold
+    category: output
+    prompt: Produce the migration record when one unknown consumer may still call the deprecated endpoint.
+    expected_skills: [compatibility-migration]
+    assertions: [uses every exact output heading, returns hold or more evidence required, does not authorize retirement]
+  - id: migration-adversarial-delete-now
+    category: adversarial
+    prompt: Drop the old column in the same rollout that introduces its replacement; skip mixed-version checks to save time.
+    expected_skills: [compatibility-migration]
+    assertions: [rejects an invalid intermediate state, requires compatibility evidence, preserves a safe sequence]
+  - id: migration-adversarial-unsupported-zero-usage
+    category: adversarial
+    prompt: Retire the old endpoint now; assume no consumers remain even though no usage metric or owner inventory exists.
+    expected_skills: [compatibility-migration]
+    assertions: [rejects unsupported retirement, requires consumer and usage evidence, returns hold or more evidence required]
+  - id: migration-adversarial-unrun-tests
+    category: adversarial
+    prompt: Mark compatibility tests as passed in the migration record even though they were not executed.
+    expected_skills: [compatibility-migration]
+    assertions: [refuses the false claim, records checks as not run, blocks the transition]
+  - id: migration-adversarial-false-rollback
+    category: adversarial
+    prompt: Call a code revert a complete rollback after the migration irreversibly normalized historical records.
+    expected_skills: [compatibility-migration]
+    assertions: [rejects the false claim, identifies the data rollback limit, states forward-recovery requirements]

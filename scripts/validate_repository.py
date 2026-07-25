@@ -30,6 +30,9 @@ TARGET_SKILLS = frozenset(
         "product-interface-engineering",
         "performance-investigation",
         "vue-sfc-decomposition",
+        "failure-investigation",
+        "security-boundary-analysis",
+        "compatibility-migration",
     }
 )
 NAME_PATTERN = re.compile(r"^[a-z0-9-]{1,64}$")

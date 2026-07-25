@@ -12,7 +12,7 @@ Wiederverwendbare Agent Skills, die KI-Coding-Assistenten zu sorgfältigen Ände
 [Skills entdecken](#skill-katalog) · [Mit Zed installieren](#schnellstart) · [Mitwirken](CONTRIBUTING.md)
 
 > [!WARNING]
-> AgentSkillForge befindet sich in der Beta-Phase. Die Paketversion ist `0.2.0b1`; alle sechs Skill-Dokumente verwenden `0.2.0-beta.1`. Repository-Prüfungen decken Struktur, lokale Links, Paketierung und statische Aktivierungsfälle ab. Sie führen keine Agentenmodelle aus und belegen keine Kompatibilität mit jedem Client. Eine formale Wartungsrichtlinie oder ein Release-Rhythmus sind nicht dokumentiert.
+> AgentSkillForge befindet sich in der Beta-Phase. Die Paketversion ist `0.3.0b1`; alle neun Skill-Dokumente verwenden `0.3.0-beta.1`. Repository-Prüfungen decken Struktur, lokale Links, Paketierung und statische Aktivierungsfälle ab. Sie führen keine Agentenmodelle aus und belegen keine Kompatibilität mit jedem Client. Das Runtime-Routing der drei neuen Skills wurde noch nicht beobachtet; das Beta-Release bleibt blockiert, bis die [Runtime-Routing-Matrix](docs/evaluation/runtime-routing-0.3.0-beta.1.md) ausgeführt wurde und sowohl ihr Runtime- als auch ihr `gh skill`-Provenienz-Gate bestehen. Eine formale Wartungsrichtlinie oder ein Release-Rhythmus sind nicht dokumentiert.
 
 ## Was ist AgentSkillForge?
 
@@ -39,6 +39,9 @@ Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelne
 | [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | Eine Seite, ein Formular, eine Interaktion, Accessibility oder responsives Verhalten braucht Arbeit. | „Mache dieses Checkout-Formular mobil nutzbar.“ |
 | [`skills/performance-investigation/`](skills/performance-investigation/) | Du untersuchst ein gemessenes Latenz-, Durchsatz- oder Speicherproblem. | „Warum ist dieser Endpunkt langsamer geworden?“ |
 | [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente soll ohne Verhaltensänderung aufgeteilt werden. | „Teile diese große Vue-SFC in wartbare Teile auf.“ |
+| [`skills/failure-investigation/`](skills/failure-investigation/) | Ein technischer Fehler außerhalb der Performance-Domäne hat eine unbekannte Ursache oder sichere Änderungsgrenze. | „Ermittle vor einem Fix, warum diese Integration fehlschlägt.“ |
+| [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | Eine explizite Security- oder Threat-Modeling-Aufgabe benötigt Vertrauensübergänge, Missbrauchspfade, Kontrollen und Restunsicherheit. | „Erstelle ein Threat Model für diese Webhook-Grenze.“ |
+| [`skills/compatibility-migration/`](skills/compatibility-migration/) | Eine festgelegte Richtung erfordert sichere Koexistenz von altem und neuem Verhalten über mehrere Schritte oder Konsumenten. | „Plane eine kompatible API-Migration über mehrere Releases.“ |
 
 Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre das vollständige Verzeichnis einschließlich vorhandener `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
 
@@ -93,14 +96,14 @@ Die [vollständige Zed-Installationsanleitung](docs/clients/zed.md) beschreibt a
 
 ## Skills kombinieren
 
-Eine häufige Reihenfolge ist:
+Häufige Reihenfolgen sind:
 
-1. Verwende `solution-framing`, wenn eine wichtige Richtung noch unklar ist.
-2. Verwende `performance-investigation`, wenn du ein gemessenes Performance-Problem hast.
-3. Verwende `safe-code-change` für eine gezielte Änderung.
-4. Verwende `fact-based-code-review`, um die fertige Änderung zu prüfen.
+- Unbekannter technischer Fehler außerhalb der Performance-Domäne: `failure-investigation` belegt Ursache und sichere Änderungsgrenze, danach implementiert `safe-code-change` den Fix und `fact-based-code-review` prüft ihn.
+- Gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem: Verwende `performance-investigation`, nicht `failure-investigation`; übergib eine verstandene Änderung an `safe-code-change` und prüfe sie anschließend mit `fact-based-code-review`.
+- Mehrstufige Migration: `solution-framing` wählt die Richtung nur, wenn sie noch offen ist, `compatibility-migration` definiert sichere Koexistenz- und Stilllegungszustände und `safe-code-change` implementiert jeden lokalen Schritt.
+- Explizites Threat Model: `security-boundary-analysis` definiert Vertrauensübergänge, Missbrauchspfade und Kontrollpflichten. Danach übernimmt `solution-framing` Architekturentscheidungen, `product-interface-engineering` sichtbare Berechtigungs- oder Recovery-Interaktionen oder `compatibility-migration` die gestufte Koexistenz; die Outputs bleiben getrennt.
 
-Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Jeder Skill definiert außerdem, welche Art Antwort der Assistent erzeugen soll.
+Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Die Repository-Evals sind statisch und die Runtime-Matrix für `0.3.0-beta.1` steht derzeit auf `NOT RUN`; aus der Installation allein folgt weder Runtime-Portabilität noch zuverlässige Aktivierung.
 
 ## Kompatibilität
 

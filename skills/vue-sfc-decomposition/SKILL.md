@@ -4,7 +4,7 @@ description: Refactor a Vue single-file component by characterizing behavior, se
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.2.0-beta.1
+  version: 0.3.0-beta.1
 ---
 
 # Vue SFC decomposition

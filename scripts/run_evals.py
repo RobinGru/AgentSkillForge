@@ -1,46 +1,146 @@
 #!/usr/bin/env python3
-"""Validate the static skill-evaluation manifest.
+"""Validate static catalog and per-skill evaluation declarations.
 
-This command checks coverage declarations only. It does not execute an agent or
-claim runtime portability.
+This command checks declared coverage only. It does not execute an agent or
+claim runtime routing behavior.
 """
 
 from __future__ import annotations
 
 import argparse
 from collections import Counter
+from dataclasses import dataclass
 from pathlib import Path
 
 import yaml
 
-REQUIRED = {"positive": 5, "negative": 5, "conflict": 3, "output": 2, "adversarial": 1}
-PREFIXES = {"sf", "sc", "cr", "ui", "pi", "vue"}
+
+@dataclass(frozen=True)
+class SkillEvalSpec:
+    prefix: str
+    detailed_minimum: int
+    legacy_manifest_matrix: bool = False
 
 
-def validate_manifest(path: Path) -> list[str]:
+SKILL_EVAL_SPECS = {
+    "solution-framing": SkillEvalSpec("sf", 6, True),
+    "safe-code-change": SkillEvalSpec("sc", 5, True),
+    "fact-based-code-review": SkillEvalSpec("cr", 5, True),
+    "product-interface-engineering": SkillEvalSpec("ui", 5, True),
+    "performance-investigation": SkillEvalSpec("pi", 5, True),
+    "vue-sfc-decomposition": SkillEvalSpec("vue", 5, True),
+    "failure-investigation": SkillEvalSpec("fi", 18),
+    "security-boundary-analysis": SkillEvalSpec("sec", 18),
+    "compatibility-migration": SkillEvalSpec("cm", 18),
+}
+LEGACY_MANIFEST_REQUIRED = {
+    "positive": 5,
+    "negative": 5,
+    "conflict": 3,
+    "output": 2,
+    "adversarial": 1,
+}
+NEW_SKILLS = {
+    name for name, spec in SKILL_EVAL_SPECS.items() if not spec.legacy_manifest_matrix
+}
+
+
+
+def load_cases(path: Path) -> tuple[list[dict], list[str]]:
     try:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
     except (OSError, yaml.YAMLError) as error:
-        return [f"could not read manifest: {error}"]
+        return [], [f"could not read {path}: {error}"]
     if not isinstance(data, dict) or not isinstance(data.get("cases"), list):
-        return ["manifest must contain a cases list"]
+        return [], [f"{path} must contain a cases list"]
+    if not all(isinstance(case, dict) for case in data["cases"]):
+        return [], [f"{path} cases must be mappings"]
+    return data["cases"], []
 
-    cases = data["cases"]
-    identifiers = [case.get("id") for case in cases if isinstance(case, dict)]
+
+def validate_case_identity(cases: list[dict], label: str) -> list[str]:
     errors: list[str] = []
-    if len(cases) < 96:
-        errors.append(f"expected at least 96 cases, found {len(cases)}")
-    if len(identifiers) != len(cases) or any(not isinstance(item, str) or not item for item in identifiers):
-        errors.append("every case must have a non-empty string id")
+    identifiers = [case.get("id") for case in cases]
+    prompts = [case.get("prompt") for case in cases]
+    if any(not isinstance(value, str) or not value.strip() for value in identifiers):
+        errors.append(f"{label}: every case must have a non-empty string id")
     elif len(set(identifiers)) != len(identifiers):
-        errors.append("case ids must be unique")
+        errors.append(f"{label}: case ids must be unique")
+    if any(not isinstance(value, str) or not value.strip() for value in prompts):
+        errors.append(f"{label}: every case must have a non-empty string prompt")
+    elif len(set(prompts)) != len(prompts):
+        errors.append(f"{label}: prompts must be unique")
+    return errors
 
-    for prefix in PREFIXES:
-        skill_cases = [case for case in cases if isinstance(case, dict) and str(case.get("id", "")).startswith(f"{prefix}-")]
-        counts = Counter(case.get("category") for case in skill_cases)
-        for category, minimum in REQUIRED.items():
-            if counts[category] < minimum:
-                errors.append(f"{prefix}: expected {minimum} {category} cases, found {counts[category]}")
+
+def validate_detailed_evals(eval_dir: Path) -> tuple[list[str], set[str]]:
+    errors: list[str] = []
+    prompts: set[str] = set()
+    for skill, spec in SKILL_EVAL_SPECS.items():
+        path = eval_dir / f"{skill}.yaml"
+        cases, load_errors = load_cases(path)
+        errors.extend(load_errors)
+        if load_errors:
+            continue
+        errors.extend(validate_case_identity(cases, skill))
+        if len(cases) < spec.detailed_minimum:
+            errors.append(f"{skill}: expected at least {spec.detailed_minimum} detailed cases, found {len(cases)}")
+        for case in cases:
+            prompt = case.get("prompt")
+            if isinstance(prompt, str):
+                if prompt in prompts:
+                    errors.append(f"detailed eval prompt is duplicated across skills: {prompt}")
+                prompts.add(prompt)
+    return errors, prompts
+
+
+def validate_manifest(path: Path) -> list[str]:
+    cases, errors = load_cases(path)
+    if errors:
+        return errors
+    errors.extend(validate_case_identity(cases, "manifest"))
+
+    expected_minimum = sum(
+        sum(LEGACY_MANIFEST_REQUIRED.values())
+        if spec.legacy_manifest_matrix
+        else len(SKILL_EVAL_SPECS) - 1
+        for spec in SKILL_EVAL_SPECS.values()
+    )
+    if len(cases) < expected_minimum:
+        errors.append(f"expected at least {expected_minimum} catalog cases, found {len(cases)}")
+
+    for skill, spec in SKILL_EVAL_SPECS.items():
+        skill_cases = [case for case in cases if str(case.get("id", "")).startswith(f"{spec.prefix}-")]
+        if spec.legacy_manifest_matrix:
+            counts = Counter(case.get("category") for case in skill_cases)
+            for category, minimum in LEGACY_MANIFEST_REQUIRED.items():
+                if counts[category] < minimum:
+                    errors.append(f"{spec.prefix}: expected {minimum} {category} cases, found {counts[category]}")
+        else:
+            comparison_skills = set(SKILL_EVAL_SPECS) - {skill}
+            contrasted = {
+                other
+                for case in skill_cases
+                for other in case.get("forbidden_skills", [])
+                if other in comparison_skills
+            }
+            missing = sorted(comparison_skills - contrasted)
+            if missing:
+                errors.append(f"{spec.prefix}: missing catalog contrasts against {', '.join(missing)}")
+    return errors
+
+
+def validate_eval_suite(manifest: Path) -> list[str]:
+    errors = validate_manifest(manifest)
+    detailed_errors, detailed_prompts = validate_detailed_evals(manifest.parent)
+    errors.extend(detailed_errors)
+    manifest_cases, load_errors = load_cases(manifest)
+    if not load_errors:
+        duplicates = sorted(
+            case["prompt"] for case in manifest_cases if case.get("prompt") in detailed_prompts
+        )
+        if duplicates:
+            errors.append(f"manifest prompts duplicate detailed evals: {duplicates}")
     return errors
 
 
@@ -48,12 +148,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=Path("evals/manifest.yaml"))
     args = parser.parse_args()
-    errors = validate_manifest(args.manifest)
+    errors = validate_eval_suite(args.manifest)
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Static eval manifest coverage is valid; runtime agent evaluation is not performed.")
+    print("Static eval coverage is valid; runtime agent evaluation was not performed.")
     return 0
 
 

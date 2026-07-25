@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag to verify, for example v0.2.0b1
+        description: Release tag to verify, for example v0.3.0b1
         required: true
         type: string
 

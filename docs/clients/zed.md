@@ -36,22 +36,22 @@ skill directory.
 
 ## Install or update selected skills
 
-Install one skill:
+Install one of the new skills:
 
 ```sh
-python3 scripts/install_zed_skills.py --skill performance-investigation
+python3 scripts/install_zed_skills.py --skill failure-investigation
 ```
 
-Install several skills:
+Install all three new skills:
 
 ```sh
-python3 scripts/install_zed_skills.py --skill safe-code-change --skill vue-sfc-decomposition
+python3 scripts/install_zed_skills.py --skill failure-investigation --skill security-boundary-analysis --skill compatibility-migration
 ```
 
-Replace only the selected existing skill directories:
+Replace only a selected existing skill directory:
 
 ```sh
-python3 scripts/install_zed_skills.py --skill safe-code-change --force
+python3 scripts/install_zed_skills.py --skill compatibility-migration --force
 ```
 
 `--force` deletes and recreates each selected destination directory. Review any
@@ -73,11 +73,19 @@ py scripts\install_zed_skills.py --target "$HOME\.agents\skills"
 
 Start a new agent session after installation. If the skills are not visible,
 restart Zed and confirm that its configured agent-skill directory matches the
-target printed by the installer. Each skill directory must retain its `SKILL.md`
-and any `references/` or `assets/` files.
+target printed by the installer. For a selected installation, verify directories
+such as `~/.agents/skills/failure-investigation`,
+`~/.agents/skills/security-boundary-analysis`, and
+`~/.agents/skills/compatibility-migration`. Each selected directory must retain
+its `SKILL.md` and any `references/` or `assets/` files.
+
+Visibility verifies installation only. It does not prove which skill Zed or its
+configured model will load for a prompt. Runtime routing for `0.3.0-beta.1` is
+tracked separately in [the reproducible routing matrix](../evaluation/runtime-routing-0.3.0-beta.1.md)
+and remains `NOT RUN` until observed.
 
 ## Uninstall
 
 Remove the desired `<skill-name>` directory from the configured skill directory.
 For the default location, remove only paths such as
-`~/.agents/skills/performance-investigation`; do not remove unrelated skills.
+`~/.agents/skills/failure-investigation`; do not remove unrelated skills.
