@@ -1,0 +1,34 @@
+from pathlib import Path
+
+from scripts.check_release_version import check_release_version, expected_skill_version
+
+
+def write_repository(root: Path, package_version: str, skill_version: str) -> None:
+    (root / "skills" / "example").mkdir(parents=True)
+    (root / "pyproject.toml").write_text(
+        f"[project]\nversion = {package_version!r}\n", encoding="utf-8"
+    )
+    (root / "skills" / "example" / "SKILL.md").write_text(
+        f"---\nmetadata:\n  version: {skill_version}\n---\n", encoding="utf-8"
+    )
+
+
+def test_expected_skill_version_converts_prerelease_versions() -> None:
+    assert expected_skill_version("1.2.3") == "1.2.3"
+    assert expected_skill_version("1.2.3b4") == "1.2.3-beta.4"
+    assert expected_skill_version("1.2.3rc1") == "1.2.3-rc.1"
+
+
+def test_release_version_validation_accepts_matching_versions(tmp_path: Path) -> None:
+    write_repository(tmp_path, "1.2.3b4", "1.2.3-beta.4")
+
+    assert check_release_version(tmp_path, "v1.2.3b4") == []
+
+
+def test_release_version_validation_reports_tag_and_skill_mismatches(tmp_path: Path) -> None:
+    write_repository(tmp_path, "1.2.3b4", "1.2.3-beta.3")
+
+    findings = check_release_version(tmp_path, "v1.2.3")
+
+    assert any("does not match package version" in finding for finding in findings)
+    assert any("has version" in finding for finding in findings)

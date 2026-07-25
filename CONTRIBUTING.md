@@ -35,9 +35,9 @@ Run the closest relevant checks before submitting:
 python -m pip install -e ".[dev]"
 python scripts/validate_repository.py
 python scripts/check_links.py
-
+python -m pytest -q evals
+python scripts/run_evals.py
 python scripts/check_distribution.py
-pytest -q evals
 ```
 
 Report commands actually run and their results. If a check cannot run, state why.

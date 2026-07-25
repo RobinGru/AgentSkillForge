@@ -2,6 +2,10 @@
 
 # AgentSkillForge
 
+[![Validate](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
+
 Klare, wiederverwendbare Anleitungen, die KI-Coding-Assistenten helfen, sorgfältig zu arbeiten und ihre Ergebnisse verständlich zu erklären.
 
 [Zed-Installation](docs/clients/zed.md) · [Skill-Pakete](skills/) · [Mitwirken](CONTRIBUTING.md)
