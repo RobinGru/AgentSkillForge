@@ -52,7 +52,7 @@ def check_release_version(root: Path, tag: str) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("tag", help="Release tag, for example v0.3.0b1")
+    parser.add_argument("tag", help="Release tag, for example v0.4.0")
     args = parser.parse_args()
 
     findings = check_release_version(Path(__file__).resolve().parents[1], args.tag)

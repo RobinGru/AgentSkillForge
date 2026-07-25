@@ -12,7 +12,7 @@ Reusable Agent Skills that help AI coding assistants make careful changes and ex
 [Explore skills](#skill-catalog) · [Install with Zed](#quick-start) · [Contribute](CONTRIBUTING.md)
 
 > [!WARNING]
-> AgentSkillForge is in beta. The package version is `0.3.0b1`; all nine skill documents use `0.3.0-beta.1`. Repository checks cover structure, local links, packaging, and static activation cases. They do not execute agent models or prove compatibility with every client. Runtime routing for the three new skills is not yet observed; the beta release remains blocked until the [runtime routing matrix](docs/evaluation/runtime-routing-0.3.0-beta.1.md) is executed and both its runtime and `gh skill` provenance gates pass. A formal maintenance policy and release cadence are not documented.
+Repository checks cover structure, local links, packaging, static activation cases, and GitHub CLI skill validation. They do not execute agent models or prove compatibility with every client. A formal maintenance policy and release cadence are not documented.
 
 ## What is AgentSkillForge?
 
@@ -103,7 +103,7 @@ Common sequences are:
 - Multi-step migration: `solution-framing` chooses the direction only when it is still open, `compatibility-migration` defines safe coexistence and retirement states, and `safe-code-change` implements each local step.
 - Explicit threat model: `security-boundary-analysis` defines trust transitions, abuse paths, and control obligations. Follow with `solution-framing` for architecture choices, `product-interface-engineering` for visible permission or recovery interactions, or `compatibility-migration` for staged coexistence; keep each output separate.
 
-Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. The repository's evals are static, and the `0.3.0-beta.1` runtime matrix is currently `NOT RUN`; do not infer runtime portability or reliable activation from installation alone.
+Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. The repository's evals are static; do not infer runtime portability or reliable activation from installation alone.
 
 ## Compatibility
 

@@ -4,7 +4,7 @@ description: Establish a defensible direction for an unclear or consequential so
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.3.0-beta.1
+  version: 0.4.0
 ---
 
 # Solution framing

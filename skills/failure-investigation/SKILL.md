@@ -4,7 +4,7 @@ description: Investigate an unexpected test, build, runtime, integration, or dat
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.3.0-beta.1
+  version: 0.4.0
 ---
 
 # Failure investigation
