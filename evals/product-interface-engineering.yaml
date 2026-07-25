@@ -1,0 +1,18 @@
+cases:
+  - id: interface-checkout-form
+    prompt: Build a checkout form with validation, payment failure recovery, and mobile use.
+    expected_skills: [product-interface-engineering]
+  - id: interface-color-token-local
+    prompt: Correct one existing color token in a button state.
+    expected_skills: [product-interface-engineering]
+    assertions: [uses local scope]
+  - id: interface-backend-nontrigger
+    prompt: Add a backend endpoint with no UI changes.
+    forbidden_skills: [product-interface-engineering]
+  - id: interface-figma-accessibility-conflict
+    prompt: Implement supplied Figma where light text fails contrast.
+    expected_skills: [product-interface-engineering]
+    assertions: [identifies conflict, proposes accessible alternative]
+  - id: interface-vue-structural-nonprimary
+    prompt: Extract composables from a Vue component without changing UX.
+    forbidden_skills: [product-interface-engineering]

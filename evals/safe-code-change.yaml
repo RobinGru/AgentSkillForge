@@ -1,0 +1,39 @@
+cases:
+  - id: safe-code-change-local-bugfix
+    prompt: Correct the off-by-one total in the invoice formatter and add a regression test.
+    expected_skills:
+      - safe-code-change
+    forbidden_skills: []
+    assertions:
+      - defines preserved and changed behavior
+      - runs a targeted regression check
+  - id: safe-code-change-small-refactor
+    prompt: Extract a private helper from this parser without changing its output.
+    expected_skills:
+      - safe-code-change
+    forbidden_skills: []
+    assertions:
+      - preserves the public behavior
+  - id: safe-code-change-review-nontrigger
+    prompt: Review this pull request for security and correctness.
+    expected_skills: []
+    forbidden_skills:
+      - safe-code-change
+    assertions:
+      - performs review rather than editing
+  - id: safe-code-change-performance-routing
+    prompt: Find out why the export endpoint became slow after a deployment.
+    expected_skills:
+      - performance-investigation
+    forbidden_skills:
+      - safe-code-change
+    assertions:
+      - begins with a measurable performance baseline
+  - id: safe-code-change-vue-composition
+    prompt: Break down this 1500-line Vue component while retaining current behavior.
+    expected_skills:
+      - vue-sfc-decomposition
+      - safe-code-change
+    forbidden_skills: []
+    assertions:
+      - decomposes the component in controlled steps

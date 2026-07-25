@@ -1,0 +1,20 @@
+cases:
+  - id: vue-visual-sections
+    prompt: This Vue SFC has independent profile, billing, and activity visual sections that are hard to test separately.
+    expected_skills: [vue-sfc-decomposition]
+    assertions: [characterizes public contract, selects child component as first seam, protects emitted events]
+  - id: vue-reusable-form-logic
+    prompt: Three Vue forms duplicate validation state, field dependencies, and submit pending behavior.
+    expected_skills: [vue-sfc-decomposition]
+    assertions: [selects composable, protects reactive semantics and cleanup]
+  - id: vue-api-mapping-and-cache
+    prompt: A Vue page maps API data and owns caching plus retries in its setup block.
+    expected_skills: [vue-sfc-decomposition]
+    assertions: [selects existing query service or repository layer, avoids central composable]
+  - id: vue-existing-stores
+    prompt: This application already has three global stores; add a new shared UI flag.
+    expected_skills: [vue-sfc-decomposition]
+    assertions: [uses existing store convention, does not recommend new state library]
+  - id: vue-long-but-stable
+    prompt: This 180-line Vue component works, has clear ownership, and has no requested change.
+    forbidden_skills: [vue-sfc-decomposition]

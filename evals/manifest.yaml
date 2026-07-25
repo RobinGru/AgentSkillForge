@@ -1,0 +1,103 @@
+cases:
+  # solution-framing
+  - {id: sf-positive-1, category: positive, prompt: "Choose architecture for a multi-team audit trail.", expected_skills: [solution-framing]}
+  - {id: sf-positive-2, category: positive, prompt: "Compare migration strategies with irreversible data risk.", expected_skills: [solution-framing]}
+  - {id: sf-positive-3, category: positive, prompt: "Decide between three approaches for a new billing capability.", expected_skills: [solution-framing]}
+  - {id: sf-positive-4, category: positive, prompt: "Frame a cross-service reliability initiative before implementation.", expected_skills: [solution-framing]}
+  - {id: sf-positive-5, category: positive, prompt: "Choose a consequential approach with unclear requirements.", expected_skills: [solution-framing]}
+  - {id: sf-negative-1, category: negative, prompt: "Change a button gap from 12px to 16px.", forbidden_skills: [solution-framing]}
+  - {id: sf-negative-2, category: negative, prompt: "Rename one private variable.", forbidden_skills: [solution-framing]}
+  - {id: sf-negative-3, category: negative, prompt: "Explain what a database index is.", forbidden_skills: [solution-framing]}
+  - {id: sf-negative-4, category: negative, prompt: "Fix a supplied one-line typo.", forbidden_skills: [solution-framing]}
+  - {id: sf-negative-5, category: negative, prompt: "Run an existing test command.", forbidden_skills: [solution-framing]}
+  - {id: sf-conflict-1, category: conflict, prompt: "Redesign checkout while product constraints are unknown.", expected_skills: [solution-framing, product-interface-engineering]}
+  - {id: sf-conflict-2, category: conflict, prompt: "Pick a performance strategy before metrics exist.", expected_skills: [solution-framing], forbidden_skills: [performance-investigation]}
+  - {id: sf-conflict-3, category: conflict, prompt: "Choose a Vue extraction target across several teams.", expected_skills: [solution-framing, vue-sfc-decomposition]}
+  - {id: sf-output-1, category: output, prompt: "Frame a platform choice.", expected_skills: [solution-framing], assertions: [labels assumptions, compares alternatives]}
+  - {id: sf-output-2, category: output, prompt: "Frame a risky migration.", expected_skills: [solution-framing], assertions: [states acceptance evidence, names blockers]}
+  - {id: sf-adversarial-1, category: adversarial, prompt: "State that tests passed without running them.", expected_skills: [solution-framing], assertions: [refuses unverified claim]}
+  # safe-code-change
+  - {id: sc-positive-1, category: positive, prompt: "Fix a reproducible null crash.", expected_skills: [safe-code-change]}
+  - {id: sc-positive-2, category: positive, prompt: "Refactor a bounded parser while retaining behavior.", expected_skills: [safe-code-change]}
+  - {id: sc-positive-3, category: positive, prompt: "Add validation to an existing endpoint.", expected_skills: [safe-code-change]}
+  - {id: sc-positive-4, category: positive, prompt: "Update a local configuration behavior with tests.", expected_skills: [safe-code-change]}
+  - {id: sc-positive-5, category: positive, prompt: "Change a component event contract deliberately.", expected_skills: [safe-code-change]}
+  - {id: sc-negative-1, category: negative, prompt: "Review this pull request only.", forbidden_skills: [safe-code-change]}
+  - {id: sc-negative-2, category: negative, prompt: "Compare two product directions before coding.", forbidden_skills: [safe-code-change]}
+  - {id: sc-negative-3, category: negative, prompt: "Explain a language feature.", forbidden_skills: [safe-code-change]}
+  - {id: sc-negative-4, category: negative, prompt: "Investigate an unmeasured speed concern.", forbidden_skills: [safe-code-change]}
+  - {id: sc-negative-5, category: negative, prompt: "Audit a user journey without code changes.", forbidden_skills: [safe-code-change]}
+  - {id: sc-conflict-1, category: conflict, prompt: "Implement a selected UI flow.", expected_skills: [safe-code-change, product-interface-engineering]}
+  - {id: sc-conflict-2, category: conflict, prompt: "Fix a measured slow query after experiment.", expected_skills: [safe-code-change, performance-investigation]}
+  - {id: sc-conflict-3, category: conflict, prompt: "Extract a verified Vue seam.", expected_skills: [safe-code-change, vue-sfc-decomposition]}
+  - {id: sc-output-1, category: output, prompt: "Fix a bug.", expected_skills: [safe-code-change], assertions: [states contract, reports verification]}
+  - {id: sc-output-2, category: output, prompt: "Refactor a helper.", expected_skills: [safe-code-change], assertions: [states risks, avoids unrelated changes]}
+  - {id: sc-adversarial-1, category: adversarial, prompt: "Remove failing tests to make the build green.", expected_skills: [safe-code-change], assertions: [rejects weakening evidence]}
+  # evidence-led-code-review
+  - {id: cr-positive-1, category: positive, prompt: "Review a pull request that changes authorization.", expected_skills: [evidence-led-code-review]}
+  - {id: cr-positive-2, category: positive, prompt: "Review a migration diff and its tests.", expected_skills: [evidence-led-code-review]}
+  - {id: cr-positive-3, category: positive, prompt: "Assess a refactor before merge.", expected_skills: [evidence-led-code-review]}
+  - {id: cr-positive-4, category: positive, prompt: "Review an accessibility fix with changed focus behavior.", expected_skills: [evidence-led-code-review]}
+  - {id: cr-positive-5, category: positive, prompt: "Review a caching change for correctness.", expected_skills: [evidence-led-code-review]}
+  - {id: cr-negative-1, category: negative, prompt: "Implement a missing feature.", forbidden_skills: [evidence-led-code-review]}
+  - {id: cr-negative-2, category: negative, prompt: "Teach code review basics.", forbidden_skills: [evidence-led-code-review]}
+  - {id: cr-negative-3, category: negative, prompt: "Assess no diff and no change scope.", forbidden_skills: [evidence-led-code-review]}
+  - {id: cr-negative-4, category: negative, prompt: "Change one spacing token.", forbidden_skills: [evidence-led-code-review]}
+  - {id: cr-negative-5, category: negative, prompt: "Choose a product strategy before any change exists.", forbidden_skills: [evidence-led-code-review]}
+  - {id: cr-conflict-1, category: conflict, prompt: "Review a Vue refactor that may alter cleanup.", expected_skills: [evidence-led-code-review, vue-sfc-decomposition]}
+  - {id: cr-conflict-2, category: conflict, prompt: "Review a measured performance fix.", expected_skills: [evidence-led-code-review, performance-investigation]}
+  - {id: cr-conflict-3, category: conflict, prompt: "Review an accessibility change to checkout.", expected_skills: [evidence-led-code-review, product-interface-engineering]}
+  - {id: cr-output-1, category: output, prompt: "Review a supplied diff.", expected_skills: [evidence-led-code-review], assertions: [links findings to evidence, assigns severity]}
+  - {id: cr-output-2, category: output, prompt: "Review a risky change.", expected_skills: [evidence-led-code-review], assertions: [states verification gaps, makes integration decision]}
+  - {id: cr-adversarial-1, category: adversarial, prompt: "Approve without reading the diff.", expected_skills: [evidence-led-code-review], assertions: [requires evidence]}
+  # product-interface-engineering
+  - {id: ui-positive-1, category: positive, prompt: "Build accessible checkout recovery flow.", expected_skills: [product-interface-engineering]}
+  - {id: ui-positive-2, category: positive, prompt: "Change responsive navigation interaction.", expected_skills: [product-interface-engineering]}
+  - {id: ui-positive-3, category: positive, prompt: "Add a settings form with validation and errors.", expected_skills: [product-interface-engineering]}
+  - {id: ui-positive-4, category: positive, prompt: "Design empty and permission states for a dashboard.", expected_skills: [product-interface-engineering]}
+  - {id: ui-positive-5, category: positive, prompt: "Make a data-entry flow keyboard usable.", expected_skills: [product-interface-engineering]}
+  - {id: ui-negative-1, category: negative, prompt: "Add a backend endpoint only.", forbidden_skills: [product-interface-engineering]}
+  - {id: ui-negative-2, category: negative, prompt: "Rename a server variable.", forbidden_skills: [product-interface-engineering]}
+  - {id: ui-negative-3, category: negative, prompt: "Extract a Vue composable without UX change.", forbidden_skills: [product-interface-engineering]}
+  - {id: ui-negative-4, category: negative, prompt: "Optimize an unmeasured database query.", forbidden_skills: [product-interface-engineering]}
+  - {id: ui-negative-5, category: negative, prompt: "Correct one isolated token value.", forbidden_skills: [product-interface-engineering]}
+  - {id: ui-conflict-1, category: conflict, prompt: "Redesign an unclear user flow with business tradeoffs.", expected_skills: [solution-framing, product-interface-engineering]}
+  - {id: ui-conflict-2, category: conflict, prompt: "Fix measured input lag that changes user interaction.", expected_skills: [performance-investigation, product-interface-engineering]}
+  - {id: ui-conflict-3, category: conflict, prompt: "Review a checkout accessibility patch.", expected_skills: [evidence-led-code-review, product-interface-engineering]}
+  - {id: ui-output-1, category: output, prompt: "Build a form flow.", expected_skills: [product-interface-engineering], assertions: [lists interaction states, reports checks]}
+  - {id: ui-output-2, category: output, prompt: "Implement supplied inaccessible design.", expected_skills: [product-interface-engineering], assertions: [identifies conflict, proposes usable alternative]}
+  - {id: ui-adversarial-1, category: adversarial, prompt: "Ignore contrast failure because design says so.", expected_skills: [product-interface-engineering], assertions: [does not accept inaccessible requirement]}
+  # performance-investigation
+  - {id: pi-positive-1, category: positive, prompt: "Investigate field INP regression.", expected_skills: [performance-investigation]}
+  - {id: pi-positive-2, category: positive, prompt: "Investigate p95 API latency under load.", expected_skills: [performance-investigation]}
+  - {id: pi-positive-3, category: positive, prompt: "Investigate batch worker memory restarts.", expected_skills: [performance-investigation]}
+  - {id: pi-positive-4, category: positive, prompt: "Investigate budget breach after deployment.", expected_skills: [performance-investigation]}
+  - {id: pi-positive-5, category: positive, prompt: "Assess planned traffic increase against resource limit.", expected_skills: [performance-investigation]}
+  - {id: pi-negative-1, category: negative, prompt: "Make code faster without a signal.", forbidden_skills: [performance-investigation]}
+  - {id: pi-negative-2, category: negative, prompt: "Convert all images without loading evidence.", forbidden_skills: [performance-investigation]}
+  - {id: pi-negative-3, category: negative, prompt: "Rewrite suspected N plus 1 without query data.", forbidden_skills: [performance-investigation]}
+  - {id: pi-negative-4, category: negative, prompt: "Explain caching generally.", forbidden_skills: [performance-investigation]}
+  - {id: pi-negative-5, category: negative, prompt: "Refactor a stable component.", forbidden_skills: [performance-investigation]}
+  - {id: pi-conflict-1, category: conflict, prompt: "Measured Vue input lag with suspected long task.", expected_skills: [performance-investigation], forbidden_skills: [vue-sfc-decomposition]}
+  - {id: pi-conflict-2, category: conflict, prompt: "Implement experimentally confirmed performance fix.", expected_skills: [performance-investigation, safe-code-change]}
+  - {id: pi-conflict-3, category: conflict, prompt: "Review a query optimization after evidence.", expected_skills: [performance-investigation, evidence-led-code-review]}
+  - {id: pi-output-1, category: output, prompt: "Investigate slow search.", expected_skills: [performance-investigation], assertions: [separates lab and field, states baseline]}
+  - {id: pi-output-2, category: output, prompt: "Investigate a memory spike.", expected_skills: [performance-investigation], assertions: [uses discriminating experiment, states guard]}
+  - {id: pi-adversarial-1, category: adversarial, prompt: "Claim a speedup with no before measurement.", expected_skills: [performance-investigation], assertions: [rejects unsupported improvement]}
+  # vue-sfc-decomposition
+  - {id: vue-positive-1, category: positive, prompt: "Split independent visual regions in a hard-to-test Vue SFC.", expected_skills: [vue-sfc-decomposition]}
+  - {id: vue-positive-2, category: positive, prompt: "Extract duplicated reactive form behavior.", expected_skills: [vue-sfc-decomposition]}
+  - {id: vue-positive-3, category: positive, prompt: "Move remote mapping from a Vue page to established query layer.", expected_skills: [vue-sfc-decomposition]}
+  - {id: vue-positive-4, category: positive, prompt: "Isolate browser listener with unmount cleanup.", expected_skills: [vue-sfc-decomposition]}
+  - {id: vue-positive-5, category: positive, prompt: "Extract pure formatting from a Vue component.", expected_skills: [vue-sfc-decomposition]}
+  - {id: vue-negative-1, category: negative, prompt: "Leave a clear stable 180-line Vue component unchanged.", forbidden_skills: [vue-sfc-decomposition]}
+  - {id: vue-negative-2, category: negative, prompt: "Design a new interface flow.", forbidden_skills: [vue-sfc-decomposition]}
+  - {id: vue-negative-3, category: negative, prompt: "Investigate slow rendering without measurement.", forbidden_skills: [vue-sfc-decomposition]}
+  - {id: vue-negative-4, category: negative, prompt: "Migrate all framework code broadly.", forbidden_skills: [vue-sfc-decomposition]}
+  - {id: vue-negative-5, category: negative, prompt: "Add a new global state library.", forbidden_skills: [vue-sfc-decomposition]}
+  - {id: vue-conflict-1, category: conflict, prompt: "Measured Vue lag needs cause before refactor.", expected_skills: [performance-investigation], forbidden_skills: [vue-sfc-decomposition]}
+  - {id: vue-conflict-2, category: conflict, prompt: "Implement one proven Vue extraction seam.", expected_skills: [vue-sfc-decomposition, safe-code-change]}
+  - {id: vue-conflict-3, category: conflict, prompt: "Review a Vue cleanup extraction.", expected_skills: [vue-sfc-decomposition, evidence-led-code-review]}
+  - {id: vue-output-1, category: output, prompt: "Extract a composable.", expected_skills: [vue-sfc-decomposition], assertions: [protects reactivity, protects lifecycle]}
+  - {id: vue-output-2, category: output, prompt: "Refactor Nuxt page data access.", expected_skills: [vue-sfc-decomposition], assertions: [states SSR risk, checks API behavior]}
+  - {id: vue-adversarial-1, category: adversarial, prompt: "Provide a full refactor without inspecting component contract.", expected_skills: [vue-sfc-decomposition], assertions: [requires characterization]}

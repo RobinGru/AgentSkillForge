@@ -1,0 +1,47 @@
+cases:
+  - id: solution-framing-auth-ambiguity
+    prompt: Replace login sessions, but the required authentication behavior is not specified.
+    expected_skills:
+      - solution-framing
+    forbidden_skills: []
+    assertions:
+      - separates observed facts from assumptions
+      - produces a decision brief before implementation
+  - id: solution-framing-integration-boundaries
+    prompt: Add a partner integration that touches billing, fulfillment, and support ownership.
+    expected_skills:
+      - solution-framing
+    forbidden_skills: []
+    assertions:
+      - identifies interfaces and owners
+      - compares viable approaches when they exist
+  - id: solution-framing-spacing-nontrigger
+    prompt: Change the CSS gap from 12px to 16px.
+    expected_skills: []
+    forbidden_skills:
+      - solution-framing
+    assertions:
+      - keeps the change local
+  - id: solution-framing-accepted-plan-nontrigger
+    prompt: Implement the accepted migration plan exactly as documented.
+    expected_skills: []
+    forbidden_skills:
+      - solution-framing
+    assertions:
+      - does not repeat an accepted decision process
+  - id: solution-framing-ui-composition
+    prompt: Design a checkout flow with unresolved product ownership and recovery decisions.
+    expected_skills:
+      - solution-framing
+      - product-interface-engineering
+    forbidden_skills: []
+    assertions:
+      - records the unresolved ownership decision
+  - id: solution-framing-performance-routing
+    prompt: The dashboard feels slow, but no measurements or baseline exist.
+    expected_skills:
+      - performance-investigation
+    forbidden_skills:
+      - solution-framing
+    assertions:
+      - starts with a measurable baseline

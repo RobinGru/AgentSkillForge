@@ -1,0 +1,6 @@
+include README.md
+include NOTICE
+include THIRD_PARTY_NOTICES.md
+include docs/clients/zed.md
+include scripts/install_zed_skills.py
+recursive-include skills *.md

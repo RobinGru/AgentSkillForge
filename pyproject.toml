@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-skill-forge"
+version = "0.2.0b1"
+description = "Portable, independently authored agent skills"
+license = {text = "Apache-2.0"}
+readme = "README.md"
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+dev = [
+  "PyYAML>=6.0",
+  "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["evals"]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.setuptools.data-files]
+"share/agent-skill-forge" = ["README.md", "THIRD_PARTY_NOTICES.md"]
+"share/agent-skill-forge/clients/zed" = ["docs/clients/zed.md"]
+"share/agent-skill-forge/scripts" = ["scripts/install_zed_skills.py"]
+"share/agent-skill-forge/skills/evidence-led-code-review" = ["skills/evidence-led-code-review/SKILL.md"]
+"share/agent-skill-forge/skills/performance-investigation" = [
+  "skills/performance-investigation/SKILL.md",
+]
+"share/agent-skill-forge/skills/performance-investigation/references" = [
+  "skills/performance-investigation/references/backend-signals.md",
+  "skills/performance-investigation/references/example-budgets.md",
+  "skills/performance-investigation/references/experiment-design.md",
+  "skills/performance-investigation/references/investigation-examples.md",
+  "skills/performance-investigation/references/web-signals.md",
+]
+"share/agent-skill-forge/skills/product-interface-engineering" = [
+  "skills/product-interface-engineering/SKILL.md",
+]
+"share/agent-skill-forge/skills/product-interface-engineering/references" = [
+  "skills/product-interface-engineering/references/accessibility-baseline.md",
+  "skills/product-interface-engineering/references/verification-matrix.md",
+  "skills/product-interface-engineering/references/visual-system-decisions.md",
+]
+"share/agent-skill-forge/skills/safe-code-change" = ["skills/safe-code-change/SKILL.md"]
+"share/agent-skill-forge/skills/solution-framing" = ["skills/solution-framing/SKILL.md"]
+"share/agent-skill-forge/skills/solution-framing/assets" = [
+  "skills/solution-framing/assets/solution-brief-template.md",
+]
+"share/agent-skill-forge/skills/solution-framing/references" = [
+  "skills/solution-framing/references/decision-record.md",
+  "skills/solution-framing/references/risk-and-reversibility.md",
+]
+"share/agent-skill-forge/skills/vue-sfc-decomposition" = ["skills/vue-sfc-decomposition/SKILL.md"]
+"share/agent-skill-forge/skills/vue-sfc-decomposition/references" = [
+  "skills/vue-sfc-decomposition/references/nuxt-boundaries.md",
+]

@@ -1,0 +1,21 @@
+cases:
+  - id: performance-inp-regression
+    prompt: Field telemetry shows a measured INP regression for mobile search after release 42.
+    expected_skills: [performance-investigation]
+    assertions: [separates field and lab data, records comparable baseline, proposes discriminating experiment]
+  - id: performance-no-signal
+    prompt: Make this code faster.
+    expected_skills: [performance-investigation]
+    assertions: [requests signal and affected journey, creates measurement plan, does not prescribe optimization]
+  - id: performance-n-plus-one-suspicion
+    prompt: This endpoint may have an N+1 query. Rewrite it now.
+    expected_skills: [performance-investigation]
+    assertions: [requests query measurement, proposes experiment before rewrite]
+  - id: performance-image-optimization-nontrigger
+    prompt: Convert every image to a smaller format without a reported loading problem.
+    forbidden_skills: [performance-investigation]
+  - id: performance-vue-input-lag
+    prompt: Vue inputs lag on a measured low-end-device journey with a long main-thread task.
+    expected_skills: [performance-investigation]
+    forbidden_skills: [vue-sfc-decomposition]
+    assertions: [investigates main-thread evidence before structural change]
