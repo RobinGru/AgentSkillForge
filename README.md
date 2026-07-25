@@ -7,7 +7,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
 
-Portable instruction packages that help AI coding assistants make careful changes and explain their work clearly.
+Reusable Agent Skills that help AI coding assistants make careful changes and explain their work clearly.
 
 [Explore skills](#skill-catalog) · [Install with Zed](#quick-start) · [Contribute](CONTRIBUTING.md)
 
@@ -16,15 +16,15 @@ Portable instruction packages that help AI coding assistants make careful change
 
 ## What is AgentSkillForge?
 
-AgentSkillForge is a collection of small, reusable instruction packages for AI coding assistants. Each package describes a task type, the evidence to gather, the decisions to make, and how to report the result.
+AgentSkillForge is a collection of small, reusable Agent Skills for AI coding assistants. Each skill describes a task type, the evidence to gather, the decisions to make, and how to report the result.
 
-Packages are plain Markdown directories centred on `SKILL.md`, so they are not tied to a single client. This repository documents installation for Zed; other clients need their own documented way to load compatible skill directories.
+Agent Skills are plain Markdown directories centred on `SKILL.md`, so they are not tied to a single client. This repository documents installation for Zed; other clients need their own documented way to load compatible skill directories.
 
 ## Why use it?
 
 - **Focused guidance:** Choose a skill for the task instead of using one generic workflow.
 - **Evidence before assumptions:** Skills distinguish observed facts, inferences, and checks that were not run.
-- **Portable packages:** Copy a complete skill directory to a compatible client without a required Python runtime.
+- **Portable Agent Skills:** Copy a complete skill directory to a compatible client without a required Python runtime.
 - **Checked distribution:** Repository automation validates structure, links, tests, static eval cases, and package contents.
 
 ## Skill Catalog
@@ -40,7 +40,7 @@ Choose the skill that matches the task—not merely a word in the prompt.
 | [`skills/performance-investigation/`](skills/performance-investigation/) | You have a measured latency, throughput, or memory problem to investigate. | “Why did this endpoint become slower?” |
 | [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | A Vue or Nuxt component needs to be split without changing behavior. | “Separate this large Vue SFC into maintainable parts.” |
 
-Read a package’s `SKILL.md` before using it. Keep its complete directory, including any `references/` and `assets/`, because the package may link to them.
+Read a skill’s `SKILL.md` before using it. Keep its complete directory, including any `references/` and `assets/`, because the skill may link to them.
 
 ## Quick Start
 
@@ -84,7 +84,7 @@ Install only one skill when you do not need the full catalog:
 python3 scripts/install_zed_skills.py --skill performance-investigation
 ```
 
-Repeat `--skill` to install several packages. Use `--target` when Zed uses a different skill directory.
+Repeat `--skill` to install several skills. Use `--target` when Zed uses a different skill directory.
 
 > [!CAUTION]
 > `--force` deletes and recreates every selected target directory. Review local edits first; the installer does not merge files.
@@ -100,17 +100,17 @@ A common sequence is:
 3. Use `safe-code-change` to make a focused change.
 4. Use `evidence-led-code-review` to review the completed change.
 
-Your AI client decides when to load an installed skill. Each package also defines the type of response the assistant should produce.
+Your AI client decides when to load an installed skill. Each skill also defines the type of response the assistant should produce.
 
 ## Compatibility
 
 | Area | Supported or required |
 |---|---|
-| Skill format | Markdown `SKILL.md` packages with relative local references |
+| Agent Skill format | Markdown `SKILL.md` directories with relative local references |
 | Agent clients | Clients that can load compatible skill directories; exact support depends on client configuration |
 | Documented integration | Zed with agent skills enabled |
 | Python | 3.11 or newer for the Zed installer, packaging, and repository checks |
-| Package runtime | No importable Python module; the wheel distributes skills and support files as data |
+| Package runtime | No importable Python module; the wheel distributes Agent Skills and support files as data |
 
 The skill documents themselves do not require Python. Python is used by the installer and repository tooling.
 
@@ -137,7 +137,7 @@ These commands validate skill metadata and layout, local Markdown links, install
 
 ```text
 .
-├── skills/                     # Portable skill packages
+├── skills/                     # Portable Agent Skills
 ├── evals/                      # Static cases and repository tests
 ├── scripts/                    # Validation, packaging, and Zed installer tools
 ├── docs/clients/zed.md         # Zed integration guide
@@ -149,7 +149,7 @@ These commands validate skill metadata and layout, local Markdown links, install
 └── LICENSE                     # Apache License 2.0
 ```
 
-The Python wheel is a data distribution, not an application or importable SDK. It places the README, skill packages, references, Zed guide, and installer below `share/agent-skill-forge/`.
+The Python wheel is a data distribution, not an application or importable SDK. It places the README, Agent Skills, references, Zed guide, and installer below `share/agent-skill-forge/`.
 
 </details>
 

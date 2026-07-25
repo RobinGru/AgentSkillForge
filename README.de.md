@@ -16,15 +16,15 @@ Wiederverwendbare Agent Skills, die KI-Coding-Assistenten zu sorgfältigen Ände
 
 ## Was ist AgentSkillForge?
 
-AgentSkillForge ist eine Sammlung kleiner, wiederverwendbarer Anleitungspakete für KI-Coding-Assistenten. Jedes Paket beschreibt einen Aufgabentyp, die zu sammelnden Belege, nötige Entscheidungen und die Form des Ergebnisses.
+AgentSkillForge ist eine Sammlung kleiner, wiederverwendbarer Agent Skills für KI-Coding-Assistenten. Jeder Skill beschreibt einen Aufgabentyp, die zu sammelnden Belege, nötige Entscheidungen und die Form des Ergebnisses.
 
-Die Pakete sind einfache Markdown-Verzeichnisse mit einer zentralen `SKILL.md`. Sie sind damit nicht an einen bestimmten Client gebunden. Dieses Repository dokumentiert die Installation für Zed; andere Clients benötigen ihren eigenen dokumentierten Mechanismus zum Laden kompatibler Skill-Verzeichnisse.
+Agent Skills sind einfache Markdown-Verzeichnisse mit einer zentralen `SKILL.md`. Sie sind damit nicht an einen bestimmten Client gebunden. Dieses Repository dokumentiert die Installation für Zed; andere Clients benötigen ihren eigenen dokumentierten Mechanismus zum Laden kompatibler Skill-Verzeichnisse.
 
 ## Warum verwenden?
 
 - **Gezielte Anleitung:** Wähle einen Skill für die konkrete Aufgabe statt eines allgemeinen Workflows.
 - **Belege vor Annahmen:** Skills unterscheiden Beobachtungen, Schlussfolgerungen und nicht ausgeführte Prüfungen.
-- **Portable Pakete:** Kopiere ein vollständiges Skill-Verzeichnis in einen kompatiblen Client – ohne Python-Laufzeit für die Skill-Dokumente.
+- **Portable Agent Skills:** Kopiere ein vollständiges Skill-Verzeichnis in einen kompatiblen Client – ohne Python-Laufzeit für die Skill-Dokumente.
 - **Geprüfte Distribution:** Die Repository-Automatisierung prüft Struktur, Links, Tests, statische Eval-Fälle und Paketinhalt.
 
 ## Skill-Katalog
@@ -40,7 +40,7 @@ Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelne
 | [`skills/performance-investigation/`](skills/performance-investigation/) | Du untersuchst ein gemessenes Latenz-, Durchsatz- oder Speicherproblem. | „Warum ist dieser Endpunkt langsamer geworden?“ |
 | [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente soll ohne Verhaltensänderung aufgeteilt werden. | „Teile diese große Vue-SFC in wartbare Teile auf.“ |
 
-Lies vor der Verwendung die `SKILL.md` eines Pakets. Bewahre das vollständige Verzeichnis einschließlich vorhandener `references/` und `assets/` auf, weil das Paket darauf verweisen kann.
+Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre das vollständige Verzeichnis einschließlich vorhandener `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
 
 ## Schnellstart
 
@@ -84,7 +84,7 @@ Installiere nur einen Skill, wenn du nicht den gesamten Katalog benötigst:
 python3 scripts/install_zed_skills.py --skill performance-investigation
 ```
 
-Wiederhole `--skill`, um mehrere Pakete zu installieren. Verwende `--target`, wenn Zed ein anderes Skill-Verzeichnis verwendet.
+Wiederhole `--skill`, um mehrere Skills zu installieren. Verwende `--target`, wenn Zed ein anderes Skill-Verzeichnis verwendet.
 
 > [!CAUTION]
 > `--force` löscht jedes ausgewählte Zielverzeichnis und erstellt es neu. Prüfe lokale Änderungen vorher; der Installer führt Dateien nicht zusammen.
@@ -100,17 +100,17 @@ Eine häufige Reihenfolge ist:
 3. Verwende `safe-code-change` für eine gezielte Änderung.
 4. Verwende `evidence-led-code-review`, um die fertige Änderung zu prüfen.
 
-Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Jedes Paket definiert außerdem, welche Art Antwort der Assistent erzeugen soll.
+Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Jeder Skill definiert außerdem, welche Art Antwort der Assistent erzeugen soll.
 
 ## Kompatibilität
 
 | Bereich | Unterstützt oder erforderlich |
 |---|---|
-| Skill-Format | Markdown-Pakete mit `SKILL.md` und relativen lokalen Referenzen |
+| Agent-Skill-Format | Markdown-Verzeichnisse mit `SKILL.md` und relativen lokalen Referenzen |
 | Agent-Clients | Clients, die kompatible Skill-Verzeichnisse laden können; die genaue Unterstützung hängt von der Client-Konfiguration ab |
 | Dokumentierte Integration | Zed mit aktivierten Agent Skills |
 | Python | 3.11 oder neuer für Zed-Installer, Paketierung und Repository-Prüfungen |
-| Paket-Runtime | Kein importierbares Python-Modul; das Wheel verteilt Skills und Hilfsdateien als Daten |
+| Paket-Runtime | Kein importierbares Python-Modul; das Wheel verteilt Agent Skills und Hilfsdateien als Daten |
 
 Die Skill-Dokumente selbst benötigen kein Python. Python wird vom Installer und den Repository-Werkzeugen verwendet.
 
@@ -137,7 +137,7 @@ Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verh
 
 ```text
 .
-├── skills/                     # Portable Skill-Pakete
+├── skills/                     # Portable Agent Skills
 ├── evals/                      # Statische Fälle und Repository-Tests
 ├── scripts/                    # Validierung, Paketierung und Zed-Installer
 ├── docs/clients/zed.md         # Zed-Integrationsanleitung
@@ -149,7 +149,7 @@ Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verh
 └── LICENSE                     # Apache License 2.0
 ```
 
-Das Python-Wheel ist eine Datendistribution, keine Anwendung und kein importierbares SDK. Es legt README, Skill-Pakete, Referenzen, Zed-Anleitung und Installer unter `share/agent-skill-forge/` ab.
+Das Python-Wheel ist eine Datendistribution, keine Anwendung und kein importierbares SDK. Es legt README, Agent Skills, Referenzen, Zed-Anleitung und Installer unter `share/agent-skill-forge/` ab.
 
 </details>
 
