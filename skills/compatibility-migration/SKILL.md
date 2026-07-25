@@ -4,7 +4,7 @@ description: Plan and coordinate a selected migration when old and new schemas, 
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.3.0-beta.1
+  version: 0.4.0
 ---
 
 # Compatibility migration

@@ -80,9 +80,7 @@ such as `~/.agents/skills/failure-investigation`,
 its `SKILL.md` and any `references/` or `assets/` files.
 
 Visibility verifies installation only. It does not prove which skill Zed or its
-configured model will load for a prompt. Runtime routing for `0.3.0-beta.1` is
-tracked separately in [the reproducible routing matrix](../evaluation/runtime-routing-0.3.0-beta.1.md)
-and remains `NOT RUN` until observed.
+configured model will load for a prompt.
 
 ## Uninstall
 

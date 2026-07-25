@@ -12,7 +12,7 @@ Wiederverwendbare Agent Skills, die KI-Coding-Assistenten zu sorgfältigen Ände
 [Skills entdecken](#skill-katalog) · [Mit Zed installieren](#schnellstart) · [Mitwirken](CONTRIBUTING.md)
 
 > [!WARNING]
-> AgentSkillForge befindet sich in der Beta-Phase. Die Paketversion ist `0.3.0b1`; alle neun Skill-Dokumente verwenden `0.3.0-beta.1`. Repository-Prüfungen decken Struktur, lokale Links, Paketierung und statische Aktivierungsfälle ab. Sie führen keine Agentenmodelle aus und belegen keine Kompatibilität mit jedem Client. Das Runtime-Routing der drei neuen Skills wurde noch nicht beobachtet; das Beta-Release bleibt blockiert, bis die [Runtime-Routing-Matrix](docs/evaluation/runtime-routing-0.3.0-beta.1.md) ausgeführt wurde und sowohl ihr Runtime- als auch ihr `gh skill`-Provenienz-Gate bestehen. Eine formale Wartungsrichtlinie oder ein Release-Rhythmus sind nicht dokumentiert.
+Repository-Prüfungen decken Struktur, lokale Links, Paketierung, statische Aktivierungsfälle und die Skill-Validierung mit der GitHub CLI ab. Sie führen keine Agentenmodelle aus und belegen keine Kompatibilität mit jedem Client. Eine formale Wartungsrichtlinie oder ein Release-Rhythmus sind nicht dokumentiert.
 
 ## Was ist AgentSkillForge?
 
@@ -103,7 +103,7 @@ Häufige Reihenfolgen sind:
 - Mehrstufige Migration: `solution-framing` wählt die Richtung nur, wenn sie noch offen ist, `compatibility-migration` definiert sichere Koexistenz- und Stilllegungszustände und `safe-code-change` implementiert jeden lokalen Schritt.
 - Explizites Threat Model: `security-boundary-analysis` definiert Vertrauensübergänge, Missbrauchspfade und Kontrollpflichten. Danach übernimmt `solution-framing` Architekturentscheidungen, `product-interface-engineering` sichtbare Berechtigungs- oder Recovery-Interaktionen oder `compatibility-migration` die gestufte Koexistenz; die Outputs bleiben getrennt.
 
-Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Die Repository-Evals sind statisch und die Runtime-Matrix für `0.3.0-beta.1` steht derzeit auf `NOT RUN`; aus der Installation allein folgt weder Runtime-Portabilität noch zuverlässige Aktivierung.
+Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Die Repository-Evals sind statisch; aus der Installation allein folgt weder Runtime-Portabilität noch zuverlässige Aktivierung.
 
 ## Kompatibilität
 
