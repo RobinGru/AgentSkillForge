@@ -3,7 +3,6 @@ from pathlib import Path
 
 import yaml
 
-
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "evals" / "manifest.yaml"
 SKILLS = {

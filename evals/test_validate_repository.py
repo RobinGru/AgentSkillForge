@@ -1,6 +1,10 @@
 from pathlib import Path
 
-from scripts.validate_repository import TARGET_SKILLS, validate_repository, validate_skill
+from scripts.validate_repository import (
+    TARGET_SKILLS,
+    validate_repository,
+    validate_skill,
+)
 
 
 def write_skill(root: Path, name: str, body: str) -> None:

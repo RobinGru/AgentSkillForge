@@ -1,7 +1,10 @@
 from pathlib import Path
 
-from scripts.check_distribution import expected_skill_files, missing_skill_files, missing_zed_support_files
-
+from scripts.check_distribution import (
+    expected_skill_files,
+    missing_skill_files,
+    missing_zed_support_files,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 

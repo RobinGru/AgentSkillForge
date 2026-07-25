@@ -211,7 +211,7 @@ def main() -> int:
 
     try:
         findings = validate_repository(args.root.resolve(), args.skills_dir)
-    except Exception as error:  # pragma: no cover - protects the documented exit contract
+    except Exception as error:  # noqa: BLE001  # pragma: no cover - preserves the documented exit contract
         print(f"internal validator error: {error}", file=sys.stderr)
         return 2
 

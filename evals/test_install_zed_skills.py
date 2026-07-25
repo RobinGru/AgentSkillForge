@@ -4,7 +4,6 @@ import pytest
 
 from scripts.install_zed_skills import available_skills, install_skills
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "skills"
 

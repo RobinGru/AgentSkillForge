@@ -4,7 +4,6 @@ import yaml
 
 from scripts.validate_repository import validate_skill
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "skills" / "safe-code-change" / "SKILL.md"
 EVALS = ROOT / "evals" / "safe-code-change.yaml"
