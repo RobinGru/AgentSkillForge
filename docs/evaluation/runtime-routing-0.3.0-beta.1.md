@@ -153,23 +153,22 @@ observable results.
 
 ## GitHub CLI and provenance gate
 
-**Status: PARTIAL.** GitHub CLI `2.96.0` was used on 2026-07-25.
+**Status: PASS.** GitHub CLI `2.96.0` was used on 2026-07-25 against commit `84761d19f3c9fe4a84a288b5d98ed3e72dac6e85`.
 
 | Check | Result | Evidence |
 |---|---|---|
 | `gh skill publish --dry-run` | PASS | Completed successfully from the repository root. |
 | Tag protection | WARNING | CLI reported no active tag-protection rulesets. |
-| Preview each new skill at the release tag | NOT RUN | The candidate files do not yet exist at a published tag or commit. |
+| Preview each new skill at the pinned commit | PASS | All three skills and their references rendered successfully from `RobinGru/AgentSkillForge@84761d1`. |
 | Local installation of all nine skills | PASS | `gh skill install . --from-local --all --dir build/gh-skill-local` copied every skill and reference file. |
 | Local installed-copy provenance | PASS | Every installed `SKILL.md` received the expected `metadata.github.local-path` value. |
-| Pinned installation by tag or SHA | NOT RUN | The candidate files do not yet exist at a published tag or commit. |
+| Pinned installation by tag or SHA | PASS | All nine skills were installed from commit `84761d19f3c9fe4a84a288b5d98ed3e72dac6e85` with `--pin`. |
 | Source provenance fields | PASS | Repository search found no installation-injected `metadata.github-*` fields. |
-| Remote installed-copy provenance | NOT RUN | Requires the pinned installation above. |
+| Remote installed-copy provenance | PASS | Every installed skill records the expected `github-repo` and full-SHA `github-ref`. |
 
-Before release, complete `gh skill preview` for each new skill, perform a pinned
-`gh skill install`, and verify the installed provenance. A changed preview
-interface or external CLI failure must be recorded with exact version and output;
-it does not count as a successful gate.
+The CLI and provenance checks are complete for the pinned candidate commit. The
+tag-protection warning remains a repository-hardening recommendation and does not
+invalidate skill validation.
 
 ## Release gate
 
