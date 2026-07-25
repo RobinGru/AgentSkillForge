@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-skill-forge"
-version = "0.2.0b1"
+version = "0.3.0b1"
 description = "Portable, independently authored agent skills"
 license = {text = "Apache-2.0"}
 readme = "README.md"
@@ -26,7 +26,21 @@ py-modules = []
 "share/agent-skill-forge" = ["README.md", "THIRD_PARTY_NOTICES.md"]
 "share/agent-skill-forge/clients/zed" = ["docs/clients/zed.md"]
 "share/agent-skill-forge/scripts" = ["scripts/install_zed_skills.py"]
+"share/agent-skill-forge/skills/compatibility-migration" = [
+  "skills/compatibility-migration/SKILL.md",
+]
+"share/agent-skill-forge/skills/compatibility-migration/references" = [
+  "skills/compatibility-migration/references/compatibility-envelope.md",
+  "skills/compatibility-migration/references/data-transition-checks.md",
+]
 "share/agent-skill-forge/skills/fact-based-code-review" = ["skills/fact-based-code-review/SKILL.md"]
+"share/agent-skill-forge/skills/failure-investigation" = [
+  "skills/failure-investigation/SKILL.md",
+]
+"share/agent-skill-forge/skills/failure-investigation/references" = [
+  "skills/failure-investigation/references/evidence-strength.md",
+  "skills/failure-investigation/references/intermittent-failures.md",
+]
 "share/agent-skill-forge/skills/performance-investigation" = [
   "skills/performance-investigation/SKILL.md",
 ]
@@ -46,6 +60,13 @@ py-modules = []
   "skills/product-interface-engineering/references/visual-system-decisions.md",
 ]
 "share/agent-skill-forge/skills/safe-code-change" = ["skills/safe-code-change/SKILL.md"]
+"share/agent-skill-forge/skills/security-boundary-analysis" = [
+  "skills/security-boundary-analysis/SKILL.md",
+]
+"share/agent-skill-forge/skills/security-boundary-analysis/references" = [
+  "skills/security-boundary-analysis/references/agentic-boundaries.md",
+  "skills/security-boundary-analysis/references/risk-reasoning.md",
+]
 "share/agent-skill-forge/skills/solution-framing" = ["skills/solution-framing/SKILL.md"]
 "share/agent-skill-forge/skills/solution-framing/assets" = [
   "skills/solution-framing/assets/solution-brief-template.md",

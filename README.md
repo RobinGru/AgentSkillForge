@@ -12,7 +12,7 @@ Reusable Agent Skills that help AI coding assistants make careful changes and ex
 [Explore skills](#skill-catalog) · [Install with Zed](#quick-start) · [Contribute](CONTRIBUTING.md)
 
 > [!WARNING]
-> AgentSkillForge is in beta. The package version is `0.2.0b1`; all six skill documents use `0.2.0-beta.1`. Repository checks cover structure, local links, packaging, and static activation cases. They do not execute agent models or prove compatibility with every client. A formal maintenance policy and release cadence are not documented.
+> AgentSkillForge is in beta. The package version is `0.3.0b1`; all nine skill documents use `0.3.0-beta.1`. Repository checks cover structure, local links, packaging, and static activation cases. They do not execute agent models or prove compatibility with every client. Runtime routing for the three new skills is not yet observed; the beta release remains blocked until the [runtime routing matrix](docs/evaluation/runtime-routing-0.3.0-beta.1.md) is executed and both its runtime and `gh skill` provenance gates pass. A formal maintenance policy and release cadence are not documented.
 
 ## What is AgentSkillForge?
 
@@ -39,6 +39,9 @@ Choose the skill that matches the task—not merely a word in the prompt.
 | [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | A screen, form, interaction, accessibility, or responsive behavior needs work. | “Make this checkout form usable on mobile.” |
 | [`skills/performance-investigation/`](skills/performance-investigation/) | You have a measured latency, throughput, or memory problem to investigate. | “Why did this endpoint become slower?” |
 | [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | A Vue or Nuxt component needs to be split without changing behavior. | “Separate this large Vue SFC into maintainable parts.” |
+| [`skills/failure-investigation/`](skills/failure-investigation/) | A non-performance test, build, runtime, integration, or data failure has an unknown cause or safe change boundary. | “Find why this integration fails before proposing a fix.” |
+| [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | An explicit security or threat-modeling task needs trust transitions, abuse paths, controls, and residual uncertainty. | “Threat-model this webhook ingestion boundary.” |
+| [`skills/compatibility-migration/`](skills/compatibility-migration/) | An agreed direction requires old and new behavior to coexist safely across multiple steps or consumers. | “Plan a compatible multi-release API migration.” |
 
 Read a skill’s `SKILL.md` before using it. Keep its complete directory, including any `references/` and `assets/`, because the skill may link to them.
 
@@ -93,14 +96,14 @@ See the [complete Zed installation guide](docs/clients/zed.md) for selected skil
 
 ## Using skills together
 
-A common sequence is:
+Common sequences are:
 
-1. Use `solution-framing` when an important direction is still unclear.
-2. Use `performance-investigation` when you have a measured performance problem.
-3. Use `safe-code-change` to make a focused change.
-4. Use `fact-based-code-review` to review the completed change.
+- Unknown non-performance failure: `failure-investigation` establishes a supported cause and safe change boundary, then `safe-code-change` implements the fix, and `fact-based-code-review` reviews it.
+- Measured latency, throughput, memory, or resource problem: use `performance-investigation`, not `failure-investigation`; hand an understood change to `safe-code-change`, then use `fact-based-code-review`.
+- Multi-step migration: `solution-framing` chooses the direction only when it is still open, `compatibility-migration` defines safe coexistence and retirement states, and `safe-code-change` implements each local step.
+- Explicit threat model: `security-boundary-analysis` defines trust transitions, abuse paths, and control obligations. Follow with `solution-framing` for architecture choices, `product-interface-engineering` for visible permission or recovery interactions, or `compatibility-migration` for staged coexistence; keep each output separate.
 
-Your AI client decides when to load an installed skill. Each skill also defines the type of response the assistant should produce.
+Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. The repository's evals are static, and the `0.3.0-beta.1` runtime matrix is currently `NOT RUN`; do not infer runtime portability or reliable activation from installation alone.
 
 ## Compatibility
 
