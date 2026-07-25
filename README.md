@@ -3,7 +3,7 @@
 # AgentSkillForge
 
 [![Validate](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/RobinGru/AgentSkillForge/badge)](https://scorecard.dev/viewer/?uri=github.com/RobinGru/AgentSkillForge)
+
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
 
