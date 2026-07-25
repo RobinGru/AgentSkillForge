@@ -3,6 +3,7 @@
 # AgentSkillForge
 
 [![Validate](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/RobinGru/AgentSkillForge/badge)](https://scorecard.dev/viewer/?uri=github.com/RobinGru/AgentSkillForge)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
 
@@ -164,11 +165,11 @@ Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before openin
 
 Treat all third-party skills as untrusted instructions. Inspect their content, provenance, links, and dependencies before installation. Do not grant tools, credentials, or filesystem access solely because a skill document requests them.
 
-This repository currently has no `SECURITY.md` or documented private vulnerability-reporting channel. Do not publish sensitive vulnerability details in a public issue.
+This repository does not provide a `SECURITY.md`. Report potential security vulnerabilities through GitHub's private vulnerability reporting; do not publish sensitive details in a public issue.
 
 ## Support
 
-No public support or bug-reporting channel is currently documented. GitHub Issue creation is restricted for this repository. Do not invent or use an unofficial contact; consult the repository page for any future maintainer-provided channel.
+Use GitHub Issues for public bug reports and questions. Do not include sensitive security details in an issue; use private vulnerability reporting instead.
 
 ## License and Notices
 

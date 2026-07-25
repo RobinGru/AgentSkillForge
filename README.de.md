@@ -3,6 +3,7 @@
 # AgentSkillForge
 
 [![Validate](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/RobinGru/AgentSkillForge/badge)](https://scorecard.dev/viewer/?uri=github.com/RobinGru/AgentSkillForge)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
 
@@ -164,11 +165,11 @@ Beiträge sind willkommen. Lies vor dem Erstellen eines Pull Requests [CONTRIBUT
 
 Behandle alle Skills von Drittanbietern als nicht vertrauenswürdige Anweisungen. Prüfe vor der Installation Inhalt, Herkunft, Links und Abhängigkeiten. Gewähre nicht allein deshalb Zugriff auf Tools, Zugangsdaten oder das Dateisystem, weil ein Skill-Dokument ihn verlangt.
 
-Dieses Repository besitzt derzeit weder eine `SECURITY.md` noch einen dokumentierten privaten Meldeweg für Sicherheitslücken. Veröffentliche keine sensiblen Details zu Sicherheitslücken in einem öffentlichen Issue.
+Dieses Repository stellt keine `SECURITY.md` bereit. Melde mögliche Sicherheitslücken über die private Sicherheitsmeldung von GitHub; veröffentliche keine sensiblen Details in einem öffentlichen Issue.
 
 ## Support
 
-Derzeit ist kein öffentlicher Support- oder Fehlermeldekanal dokumentiert. Das Erstellen von GitHub Issues ist für dieses Repository eingeschränkt. Erfinde und verwende keinen inoffiziellen Kontakt; prüfe die Repository-Seite auf einen künftig von den Maintainern bereitgestellten Kanal.
+Verwende GitHub Issues für öffentliche Fehlermeldungen und Fragen. Füge keine sensiblen Sicherheitsdetails zu einem Issue hinzu; nutze stattdessen die private Sicherheitsmeldung.
 
 ## Lizenz und Hinweise
 
