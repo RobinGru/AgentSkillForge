@@ -1,6 +1,6 @@
 ---
 name: safe-code-change
-description: Make a bounded code change with an explicit behavior contract and proportionate verification. Use for localized fixes or behavior-preserving refactors, not for broad design, review, or investigation work.
+description: Make a bounded code change with an explicit behavior specification and proportionate verification. Use for localized fixes or behavior-preserving refactors, not for broad design, review, or investigation work.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -10,7 +10,7 @@ metadata:
 # Safe code change
 
 Use this workflow for a small, understood change where safety comes from a
-clear contract and direct proof, not from expanding the task into a broad
+clear specification and direct proof, not from expanding the task into a broad
 refactor.
 
 ## Use this skill when
@@ -35,7 +35,7 @@ Read the affected code, its nearest tests, and the closest existing pattern.
 Identify the narrowest change boundary and expand the inspection only when a
 real dependency requires it.
 
-### 2. Contract
+### 2. Specification
 
 Before editing, record:
 
@@ -44,7 +44,7 @@ Before editing, record:
 - public interfaces, data formats, or callers at risk;
 - the smallest signal that will demonstrate success.
 
-If the contract cannot be stated, stop and obtain the missing decision.
+If the specification cannot be stated, stop and obtain the missing decision.
 
 ### 3. Patch
 
@@ -70,14 +70,14 @@ the direct behavior signal when one is available.
 Report the completed change, the proof obtained, unrun checks, remaining
 risks, and deliberately untouched areas. Do not claim checks that did not run.
 
-## Output contract
+## Output specification
 
 Use this format after the change:
 
 ```markdown
 ## Change
 
-## Contract preserved
+## Specification preserved
 
 ## Facts
 
