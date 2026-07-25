@@ -79,7 +79,7 @@ Use this format after the change:
 
 ## Contract preserved
 
-## Evidence
+## Facts
 
 ## Checks not run
 

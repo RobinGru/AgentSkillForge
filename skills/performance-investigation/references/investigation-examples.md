@@ -1,6 +1,6 @@
 # Investigation examples
 
-These examples demonstrate evidence gathering. They are not prescribed fixes.
+These examples demonstrate collecting facts. They are not prescribed fixes.
 
 ## API latency with queueing
 

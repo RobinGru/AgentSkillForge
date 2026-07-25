@@ -1,6 +1,6 @@
 ---
 name: vue-sfc-decomposition
-description: Refactor a Vue single-file component by characterizing behavior, selecting one evidence-based responsibility seam, preserving reactive and lifecycle semantics, and verifying the bounded extraction. Use for an observed Vue or Nuxt component decomposition problem.
+description: Refactor a Vue single-file component by characterizing behavior, selecting one fact-based responsibility seam, preserving reactive and lifecycle semantics, and verifying the bounded extraction. Use for an observed Vue or Nuxt component decomposition problem.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -47,7 +47,7 @@ add a characterization test or reproducible manual check before the extraction.
 
 ### 3. Choose one seam
 
-Choose the smallest responsibility boundary supported by evidence:
+Choose the smallest responsibility boundary supported by facts:
 
 | Observed responsibility | Preferred boundary |
 | --- | --- |
@@ -82,12 +82,12 @@ not run and why.
 ### 6. Continue deliberately
 
 After a verified extraction, select the next seam from the remaining observed
-problem. Stop only when an architectural decision, missing evidence, or user
+problem. Stop only when an architectural decision, missing information, or user
 approval is needed; do not stop merely because one seam was extracted.
 
 ## Output contract
 
 Report `Characterization`, `Protected behavior`, `Selected seam`, `Patch`,
-`Evidence`, `Remaining risks`, and `Next seam`. State unknown framework or
+`Facts`, `Remaining risks`, and `Next seam`. State unknown framework or
 runtime facts. For each selected seam, explain why the responsibility belongs
 there and why alternatives were not chosen.

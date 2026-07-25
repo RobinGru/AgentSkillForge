@@ -26,7 +26,7 @@ TARGET_SKILLS = frozenset(
     {
         "solution-framing",
         "safe-code-change",
-        "evidence-led-code-review",
+        "fact-based-code-review",
         "product-interface-engineering",
         "performance-investigation",
         "vue-sfc-decomposition",

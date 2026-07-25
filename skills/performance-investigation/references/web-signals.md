@@ -3,7 +3,7 @@
 Use browser measurements to describe an observed user journey, not to assign
 blame to one subsystem.
 
-## Evidence to collect
+## Facts to collect
 
 - Route, action, device class, connection conditions, and release identifier.
 - Field telemetry when available: distribution, sample count, affected cohort,
@@ -30,5 +30,5 @@ use Time to Interactive as a current target metric.
 ## Question before changing code
 
 What trace difference would show that main-thread work, transfer size, server
-latency, or rendering is dominant for this journey? Collect that evidence before
+latency, or rendering is dominant for this journey? Collect those facts before
 choosing an optimization.

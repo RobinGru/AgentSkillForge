@@ -18,4 +18,4 @@ cases:
     prompt: Vue inputs lag on a measured low-end-device journey with a long main-thread task.
     expected_skills: [performance-investigation]
     forbidden_skills: [vue-sfc-decomposition]
-    assertions: [investigates main-thread evidence before structural change]
+    assertions: [investigates main-thread cause before structural change]

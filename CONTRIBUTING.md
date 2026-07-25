@@ -2,7 +2,7 @@
 
 ## Propose a skill from a problem
 
-Start with the user problem, inputs, decisions, risks, evidence, output, and
+Start with the user problem, inputs, decisions, risks, facts, output, and
 non-goals. Do not start from an imported skill, preferred workflow, or agent
 client feature.
 
@@ -47,7 +47,7 @@ Report commands actually run and their results. If a check cannot run, state why
 Update per-skill evals and `evals/manifest.yaml` for every trigger boundary,
 non-trigger, conflict, output contract, or adversarial behavior changed. Cover
 positive and negative activation cases; never encode claims that require runtime
-evidence unless that evidence is available.
+verification unless that verification is available.
 
 ## Review checklist
 

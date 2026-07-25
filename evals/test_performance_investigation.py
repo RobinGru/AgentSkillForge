@@ -18,7 +18,7 @@ def test_performance_skill_is_portable() -> None:
     assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 220
 
 
-def test_performance_references_cover_required_evidence() -> None:
+def test_performance_references_cover_required_facts() -> None:
     required = {
         "web-signals.md",
         "backend-signals.md",

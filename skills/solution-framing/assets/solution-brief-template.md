@@ -2,7 +2,7 @@
 
 State the decision question and the proposed result.
 
-## Evidence
+## Facts
 
 List observed and provided facts with their source or location.
 
@@ -26,7 +26,7 @@ List viable alternatives and why each was not selected.
 
 Name credible failure modes and corresponding safeguards.
 
-## Acceptance evidence
+## Acceptance checks
 
 List the checks or artifacts that will demonstrate the expected result.
 

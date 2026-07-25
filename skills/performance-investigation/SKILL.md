@@ -10,7 +10,7 @@ metadata:
 # Performance investigation
 
 Treat performance work as an investigation, not a list of optimizations. Change
-behavior only after evidence identifies a plausible bottleneck and an experiment
+behavior only after measurements identify a plausible bottleneck and an experiment
 can distinguish it from competing explanations.
 
 ## Use this skill when
@@ -26,7 +26,7 @@ can distinguish it from competing explanations.
 
 - Someone requests that code be faster but supplies no signal, affected journey,
   or target. Request those details and prepare a measurement plan instead.
-- An asset, query, cache, or framework change is proposed without evidence that
+- An asset, query, cache, or framework change is proposed without a measurement showing that
   it affects a measured problem.
 - A structural refactor is the primary task. Use this skill only if measurement
   establishes a performance cause that the refactor must address.
@@ -36,7 +36,7 @@ can distinguish it from competing explanations.
 ### 1. Signal
 
 Record the observed issue and its impact: affected journey or operation, users
-or systems affected, frequency, onset, and reason it matters. Classify evidence
+or systems affected, frequency, onset, and reason it matters. Classify the signal
 as user report, alert, regression, budget breach, reproducible slow journey,
 resource exhaustion, or planned demand. Do not infer a cause from the symptom.
 
@@ -70,7 +70,7 @@ measurement can distinguish it from alternatives.
 ### 5. Decide and guard
 
 Retain, revert, or continue investigating based on observed results, not
-expectation. Any retained performance change needs before-and-after evidence
+expectation. Any retained performance change needs before-and-after measurements
 for the primary metric plus relevant side effects. Choose proportionate
 protection: regression test, repository budget, telemetry, alert, load test, or
 documented manual check. [Example budgets](references/example-budgets.md) help
@@ -82,10 +82,10 @@ Report `Signal`, `Baseline`, `Partition`, `Hypotheses`, `Experiments`,
 `Decision`, `Before and after`, `Guard`, and `Limits`. For every experiment
 include:
 
-- hypothesis and evidence supporting it;
+- hypothesis and its supporting facts;
 - smallest discriminating experiment;
 - expected and actual result;
-- decision and next evidence needed, if inconclusive.
+- decision and next information needed, if inconclusive.
 
 Label claims as measured, observed, inferred, or unknown. State measurement
 limitations and unverified assumptions. Do not claim improvement without a

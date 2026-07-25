@@ -1,15 +1,15 @@
 ---
-name: evidence-led-code-review
-description: Review a concrete code change by tracing its relevant effects and separating observed defects, risks, missing evidence, and preferences. Use when a diff or changed files can be inspected.
+name: fact-based-code-review
+description: Review a concrete code change by tracing its relevant effects and separating observed defects, risks, missing facts, and preferences. Use when a diff or changed files can be inspected.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
   version: 0.2.0-beta.1
 ---
 
-# Evidence-led code review
+# Fact-based code review
 
-Review a proposed change against its intended behavior and evidence available
+Review a proposed change against its intended behavior and the facts available
 in the repository. Do not turn unknown context into a forced approval or
 rejection.
 
@@ -51,7 +51,7 @@ Follow only paths relevant to the change:
 
 Do not apply irrelevant lenses by default.
 
-### 4. Classify evidence
+### 4. Classify supporting details
 
 Label each claim with one status:
 
@@ -59,12 +59,12 @@ Label each claim with one status:
 - **Reproduced:** demonstrated by an executed test or controlled run.
 - **Required:** imposed by the stated contract or authoritative requirement.
 - **Inferred:** reasoned from available facts but not directly observed.
-- **Unverified:** cannot be confirmed with available evidence.
+- **Unverified:** cannot be confirmed with available information.
 
 ### 5. Write findings
 
 Use a finding only when it has a location or a precisely bounded missing
-context. Classify type as **Defect**, **Risk**, **Missing evidence**,
+context. Classify type as **Defect**, **Risk**, **Missing information**,
 **Maintainability concern**, or **Preference**. Use severity **Blocker**,
 **Major**, **Moderate**, or **Minor**. Preferences cannot block integration.
 
@@ -73,7 +73,7 @@ context. Classify type as **Defect**, **Risk**, **Missing evidence**,
 
 - Type:
 - Location:
-- Evidence:
+- Supporting details:
 - Affected behavior:
 - Impact:
 - Confidence:
@@ -87,13 +87,13 @@ Set confidence to High, Medium, or Low. Mark unexecuted checks as unverified.
 
 Choose one decision:
 
-- **APPROVE:** evidence supports integration and no blocking finding remains.
+- **APPROVE:** the facts support integration and no blocking finding remains.
 - **COMMENT:** observations or suggestions do not require a change.
-- **REQUEST CHANGES:** a supported defect, risk, or missing evidence requires action.
+- **REQUEST CHANGES:** a supported defect, risk, or missing information requires action.
 - **BLOCKED:** required intent or review context is unavailable.
 
 ## Output contract
 
-Return sections named `Scope`, `Intent`, `Evidence considered`, `Findings`,
+Return sections named `Scope`, `Intent`, `Facts considered`, `Findings`,
 `Checks not run`, and `Decision`. Every finding must include all template
-fields. The decision must name its evidence basis and remaining uncertainty.
+fields. The decision must name its factual basis and remaining uncertainty.

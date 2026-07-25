@@ -8,7 +8,7 @@ change and comparable measurement conditions.
 ```markdown
 ## Hypothesis
 
-## Supporting evidence
+## Supporting facts
 
 ## Smallest discriminating experiment
 
@@ -25,5 +25,5 @@ time. If production experimentation has user, reliability, privacy, or cost
 risk, prefer a safe representative environment or use explicit approval and
 rollback conditions.
 
-An inconclusive result is evidence: document it, retain the baseline, and choose
+An inconclusive result is still useful: document it, retain the baseline, and choose
 the next observation rather than broadening a change until a metric moves.

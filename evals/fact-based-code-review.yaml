@@ -1,21 +1,21 @@
 cases:
   - id: review-data-loss
     prompt: Review a change that deletes account rows before exporting them.
-    expected_skills: [evidence-led-code-review]
+    expected_skills: [fact-based-code-review]
     assertions: [uses REQUEST CHANGES, classifies a Defect]
   - id: review-small-correct-change
     prompt: Review this focused change with passing targeted tests and no contract violation.
-    expected_skills: [evidence-led-code-review]
+    expected_skills: [fact-based-code-review]
     assertions: [permits APPROVE]
   - id: review-api-break-without-spec
-    prompt: Review an API signature change; no specification or caller evidence is available.
-    expected_skills: [evidence-led-code-review]
-    assertions: [uses BLOCKED or REQUEST CHANGES with evidence status]
+    prompt: Review an API signature change; no specification or caller details are available.
+    expected_skills: [fact-based-code-review]
+    assertions: [uses BLOCKED or REQUEST CHANGES with fact status]
   - id: review-style-preference
     prompt: Review a naming style preference with no behavior impact.
-    expected_skills: [evidence-led-code-review]
+    expected_skills: [fact-based-code-review]
     assertions: [uses Minor Preference, does not block]
   - id: review-unverified-performance-claim
     prompt: Review a claim that an optimization is faster, but no measurement exists.
-    expected_skills: [evidence-led-code-review]
-    assertions: [classifies Missing evidence]
+    expected_skills: [fact-based-code-review]
+    assertions: [classifies Missing information]

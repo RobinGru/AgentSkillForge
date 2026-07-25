@@ -10,13 +10,13 @@ SKILL = ROOT / "skills" / "solution-framing" / "SKILL.md"
 EVALS = ROOT / "evals" / "solution-framing.yaml"
 REQUIRED_HEADINGS = [
     "## Decision",
-    "## Evidence",
+    "## Facts",
     "## Assumptions",
     "## Boundaries",
     "## Selected approach",
     "## Rejected approaches",
     "## Risks and mitigations",
-    "## Acceptance evidence",
+    "## Acceptance checks",
     "## Open blockers",
     "## Handoff state",
 ]

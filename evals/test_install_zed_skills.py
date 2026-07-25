@@ -35,7 +35,7 @@ def test_zed_installer_discovers_all_distributed_skills() -> None:
     assert set(available_skills(SOURCE)) == {
         "solution-framing",
         "safe-code-change",
-        "evidence-led-code-review",
+        "fact-based-code-review",
         "product-interface-engineering",
         "performance-investigation",
         "vue-sfc-decomposition",

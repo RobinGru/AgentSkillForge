@@ -3,7 +3,7 @@
 Map an operation from arrival through completion so latency, capacity, and
 resource use are distinguishable.
 
-## Evidence to collect
+## Facts to collect
 
 - Operation name, status outcome, request shape, tenant or cohort where safe,
   and time window.

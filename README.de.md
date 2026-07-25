@@ -35,7 +35,7 @@ Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelne
 |---|---|---|
 | [`skills/solution-framing/`](skills/solution-framing/) | Die Richtung ist unklar oder eine Entscheidung enthält wichtige Abwägungen. | „Welcher Migrationsansatz ist am sichersten?“ |
 | [`skills/safe-code-change/`](skills/safe-code-change/) | Du brauchst eine kleine, verstandene Änderung oder Fehlerbehebung. | „Behebe diesen reproduzierbaren Validierungsfehler.“ |
-| [`skills/evidence-led-code-review/`](skills/evidence-led-code-review/) | Eine Änderung ist bereit zur Prüfung und braucht eine evidenzbasierte Bewertung. | „Prüfe diesen Pull Request vor dem Merge.“ |
+| [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | Eine Änderung ist bereit zur Prüfung und braucht einen faktenbasierten Code-Review. | „Prüfe diesen Pull Request vor dem Merge.“ |
 | [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | Eine Seite, ein Formular, eine Interaktion, Accessibility oder responsives Verhalten braucht Arbeit. | „Mache dieses Checkout-Formular mobil nutzbar.“ |
 | [`skills/performance-investigation/`](skills/performance-investigation/) | Du untersuchst ein gemessenes Latenz-, Durchsatz- oder Speicherproblem. | „Warum ist dieser Endpunkt langsamer geworden?“ |
 | [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente soll ohne Verhaltensänderung aufgeteilt werden. | „Teile diese große Vue-SFC in wartbare Teile auf.“ |
@@ -98,7 +98,7 @@ Eine häufige Reihenfolge ist:
 1. Verwende `solution-framing`, wenn eine wichtige Richtung noch unklar ist.
 2. Verwende `performance-investigation`, wenn du ein gemessenes Performance-Problem hast.
 3. Verwende `safe-code-change` für eine gezielte Änderung.
-4. Verwende `evidence-led-code-review`, um die fertige Änderung zu prüfen.
+4. Verwende `fact-based-code-review`, um die fertige Änderung zu prüfen.
 
 Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Jeder Skill definiert außerdem, welche Art Antwort der Assistent erzeugen soll.
 

@@ -16,14 +16,14 @@ Reusable Agent Skills that help AI coding assistants make careful changes and ex
 
 ## What is AgentSkillForge?
 
-AgentSkillForge is a collection of small, reusable Agent Skills for AI coding assistants. Each skill describes a task type, the evidence to gather, the decisions to make, and how to report the result.
+AgentSkillForge is a collection of small, reusable Agent Skills for AI coding assistants. Each skill describes a task type, the facts to gather, the decisions to make, and how to report the result.
 
 Agent Skills are plain Markdown directories centred on `SKILL.md`, so they are not tied to a single client. This repository documents installation for Zed; other clients need their own documented way to load compatible skill directories.
 
 ## Why use it?
 
 - **Focused guidance:** Choose a skill for the task instead of using one generic workflow.
-- **Evidence before assumptions:** Skills distinguish observed facts, inferences, and checks that were not run.
+- **Facts before assumptions:** Skills distinguish observed facts, inferences, and checks that were not run.
 - **Portable Agent Skills:** Copy a complete skill directory to a compatible client without a required Python runtime.
 - **Checked distribution:** Repository automation validates structure, links, tests, static eval cases, and package contents.
 
@@ -35,7 +35,7 @@ Choose the skill that matches the task—not merely a word in the prompt.
 |---|---|---|
 | [`skills/solution-framing/`](skills/solution-framing/) | The direction is unclear or a decision has meaningful trade-offs. | “Which migration approach is safest?” |
 | [`skills/safe-code-change/`](skills/safe-code-change/) | You need a small, understood change or bug fix. | “Fix this reproducible validation error.” |
-| [`skills/evidence-led-code-review/`](skills/evidence-led-code-review/) | A change is ready for review and needs an evidence-based assessment. | “Review this pull request before merging.” |
+| [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | A change is ready for review and needs a fact-based assessment. | “Review this pull request before merging.” |
 | [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | A screen, form, interaction, accessibility, or responsive behavior needs work. | “Make this checkout form usable on mobile.” |
 | [`skills/performance-investigation/`](skills/performance-investigation/) | You have a measured latency, throughput, or memory problem to investigate. | “Why did this endpoint become slower?” |
 | [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | A Vue or Nuxt component needs to be split without changing behavior. | “Separate this large Vue SFC into maintainable parts.” |
@@ -98,7 +98,7 @@ A common sequence is:
 1. Use `solution-framing` when an important direction is still unclear.
 2. Use `performance-investigation` when you have a measured performance problem.
 3. Use `safe-code-change` to make a focused change.
-4. Use `evidence-led-code-review` to review the completed change.
+4. Use `fact-based-code-review` to review the completed change.
 
 Your AI client decides when to load an installed skill. Each skill also defines the type of response the assistant should produce.
 

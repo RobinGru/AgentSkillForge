@@ -1,6 +1,6 @@
 ---
 name: product-interface-engineering
-description: Engineer user-facing interface changes around a concrete user job, existing product patterns, complete interaction states, and proportionate evidence. Use for UI flows, components, accessibility, or responsive behavior.
+description: Engineer user-facing interface changes around a concrete user job, existing product patterns, complete interaction states, and proportionate verification. Use for UI flows, components, accessibility, or responsive behavior.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -27,7 +27,7 @@ visual pattern.
 ## Scope
 
 Choose `local` for isolated adjustment, `flow` for bounded journey, or
-`systemic` for reusable or cross-screen change. Increase evidence depth only
+`systemic` for reusable or cross-screen change. Increase verification depth only
 when scope or risk requires it.
 
 ## Workflow
@@ -61,7 +61,7 @@ Use semantic elements and existing primitives. Keep component APIs minimal.
 Support keyboard, touch, and assistive technology; account for responsive text,
 layout, and localization. Do not invent production content or measurements.
 
-### 6. Evidence
+### 6. Verification
 
 Use [verification matrix](references/verification-matrix.md) to report checks.
 Load [accessibility baseline](references/accessibility-baseline.md) and
@@ -69,7 +69,7 @@ Load [accessibility baseline](references/accessibility-baseline.md) and
 
 ## Output contract
 
-Report `Scope`, `User job`, `System evidence`, `Interaction contract`, `State
+Report `Scope`, `User job`, `System facts`, `Interaction contract`, `State
 model`, `Implementation`, `Checks`, and `Remaining risks`. Each check uses
 Passed, Failed, Not run, or Not applicable. State unverified assumptions and
 accessibility conflicts with closest usable alternative.

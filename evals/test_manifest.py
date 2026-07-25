@@ -9,7 +9,7 @@ MANIFEST = ROOT / "evals" / "manifest.yaml"
 SKILLS = {
     "sf": "solution-framing",
     "sc": "safe-code-change",
-    "cr": "evidence-led-code-review",
+    "cr": "fact-based-code-review",
     "ui": "product-interface-engineering",
     "pi": "performance-investigation",
     "vue": "vue-sfc-decomposition",
