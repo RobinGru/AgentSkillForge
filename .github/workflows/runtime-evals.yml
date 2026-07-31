@@ -1,0 +1,70 @@
+name: runtime evals
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_codex:
+        description: Run authenticated Codex CLI smoke evaluations
+        required: true
+        default: false
+        type: boolean
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-contracts:
+    name: Deterministic runtime-contract runner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -e ".[dev]"
+      - run: >-
+          python scripts/run_runtime_evals.py --client fixture
+          --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat."
+          --output artifacts/runtime-evals/fixture.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixture-runtime-evals
+          path: artifacts/runtime-evals/fixture.json
+
+  codex-smoke:
+    name: Codex CLI smoke evaluations
+    needs: deterministic-contracts
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      inputs.run_codex &&
+      vars.AGENT_SKILLS_RUNTIME_EVALS == '1' &&
+      vars.CODEX_EVAL_MODEL != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -e ".[dev]"
+      - name: Install configured Codex CLI
+        run: npm install --global @openai/codex
+      - name: Execute recorded smoke contracts
+        env:
+          AGENT_SKILLS_RUNTIME_EVALS: "1"
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: >-
+          python scripts/run_runtime_evals.py --client codex-cli
+          --client-version "$(codex --version)" --model "${{ vars.CODEX_EVAL_MODEL }}"
+          --output artifacts/runtime-evals/codex-cli.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: codex-runtime-evals
+          path: artifacts/runtime-evals/
+          if-no-files-found: ignore

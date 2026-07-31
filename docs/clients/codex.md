@@ -80,7 +80,9 @@ inspect or explicitly invoke a skill. Confirm that the installed directory
 contains `SKILL.md` and any `references/` or `assets/` files.
 
 Visibility verifies installation only. It does not prove which skill Codex will
-choose for a prompt.
+choose for a prompt. When an authenticated CLI environment is available, run the
+[Codex command smoke suite](../compatibility.md#run-the-command-smoke-suite) and
+retain its JSON report with the release evidence.
 
 ## Uninstall
 

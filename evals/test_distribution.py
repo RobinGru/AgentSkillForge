@@ -39,6 +39,7 @@ def test_distribution_metadata_lists_every_skill_document() -> None:
     groups = metadata["tool"]["setuptools"]["data-files"]
     listed = {Path(item) for files in groups.values() for item in files if item.startswith("skills/")}
     assert listed == expected_skill_files(ROOT)
+    assert groups["share/agent-skill-forge"] == ["README.md", "THIRD_PARTY_NOTICES.md", "docs/compatibility.md"]
     assert groups["share/agent-skill-forge/clients/codex"] == ["docs/clients/codex.md"]
     assert groups["share/agent-skill-forge/clients/zed"] == ["docs/clients/zed.md"]
     assert groups["share/agent-skill-forge/scripts"] == [
@@ -57,6 +58,7 @@ def test_missing_skill_files_reports_missing_wheel_members(tmp_path: Path) -> No
         pass
     assert missing_skill_files(ROOT, wheel) == expected_skill_files(ROOT)
     assert missing_support_files(wheel) == {
+        "share/agent-skill-forge/compatibility.md",
         "share/agent-skill-forge/clients/codex/codex.md",
         "share/agent-skill-forge/clients/zed/zed.md",
         "share/agent-skill-forge/scripts/install_skills.py",

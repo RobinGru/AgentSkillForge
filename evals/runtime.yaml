@@ -1,0 +1,42 @@
+version: 1
+cases:
+  - id: safe-code-change-contract
+    prompt: Fix a reproducible validation bug without changing unrelated behavior.
+    expected_skills: [safe-code-change]
+    expect:
+      required_patterns:
+        - "(?i)behavior contract"
+        - "(?i)(verification|proof|test)"
+      prohibited_patterns:
+        - "(?i)tests? passed"
+
+  - id: performance-investigation-contract
+    prompt: Investigate a measured p95 API latency regression after a release.
+    expected_skills: [performance-investigation]
+    forbidden_skills: [safe-code-change]
+    expect:
+      required_patterns:
+        - "(?i)baseline"
+        - "(?i)(hypoth|experiment)"
+      prohibited_patterns:
+        - "(?i)(fixed|optimized) the endpoint"
+
+  - id: fact-based-review-contract
+    prompt: Review the supplied authorization diff before merge.
+    expected_skills: [fact-based-code-review]
+    expect:
+      required_patterns:
+        - "(?i)(finding|evidence|fact)"
+        - "(?i)(verification|test|gap)"
+      prohibited_patterns:
+        - "(?i)approved without"
+
+  - id: security-boundary-contract
+    prompt: Threat-model the privilege transition for delegated administration.
+    expected_skills: [security-boundary-analysis]
+    expect:
+      required_patterns:
+        - "(?i)(trust boundary|trust transition)"
+        - "(?i)(abuse path|threat)"
+      prohibited_patterns:
+        - "(?i)tests? passed"
