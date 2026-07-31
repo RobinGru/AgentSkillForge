@@ -46,6 +46,7 @@ Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelne
 | [`skills/failure-investigation/`](skills/failure-investigation/) | Ein technischer Fehler außerhalb der Performance-Domäne hat eine unbekannte Ursache oder sichere Änderungsgrenze. | „Ermittle vor einem Fix, warum diese Integration fehlschlägt.“ |
 | [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | Eine explizite Security- oder Threat-Modeling-Aufgabe benötigt Vertrauensübergänge, Missbrauchspfade, Kontrollen und Restunsicherheit. | „Erstelle ein Threat Model für diese Webhook-Grenze.“ |
 | [`skills/compatibility-migration/`](skills/compatibility-migration/) | Eine festgelegte Richtung erfordert sichere Koexistenz von altem und neuem Verhalten über mehrere Schritte oder Konsumenten. | „Plane eine kompatible API-Migration über mehrere Releases.“ |
+| [`skills/session-handoff/`](skills/session-handoff/) | Unfertige Repository-Arbeit muss von einer anderen Sitzung oder Person anhand verifizierter Zustände fortgesetzt werden. | „Halte Worktree und die eine sichere nächste Aktion fest.“ |
 
 Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre das vollständige Verzeichnis einschließlich vorhandener `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
 

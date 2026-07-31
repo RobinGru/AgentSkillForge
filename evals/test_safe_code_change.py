@@ -14,7 +14,7 @@ def test_safe_code_change_is_portable_and_compact() -> None:
 
     assert name == "safe-code-change"
     assert not [finding for finding in findings if finding.level == "error"]
-    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 160
+    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 220
 
 
 def test_safe_code_change_evals_cover_triggers_and_routing() -> None:

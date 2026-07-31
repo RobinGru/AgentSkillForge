@@ -82,3 +82,4 @@ py-modules = []
 "share/agent-skill-forge/skills/vue-sfc-decomposition/references" = [
   "skills/vue-sfc-decomposition/references/nuxt-boundaries.md",
 ]
+"share/agent-skill-forge/skills/session-handoff" = ["skills/session-handoff/SKILL.md"]

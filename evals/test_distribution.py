@@ -24,6 +24,7 @@ def test_repository_agents_template_has_the_compact_routing_contract() -> None:
         "compatibility-migration",
         "security-boundary-analysis",
         "vue-sfc-decomposition",
+        "session-handoff",
     }
     assert all(f"`{skill}`" in text for skill in skills)
     assert "workflow-navigator" not in text

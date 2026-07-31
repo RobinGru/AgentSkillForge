@@ -46,6 +46,7 @@ Choose the skill that matches the task—not merely a word in the prompt.
 | [`skills/failure-investigation/`](skills/failure-investigation/) | A non-performance test, build, runtime, integration, or data failure has an unknown cause or safe change boundary. | “Find why this integration fails before proposing a fix.” |
 | [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | An explicit security or threat-modeling task needs trust transitions, abuse paths, controls, and residual uncertainty. | “Threat-model this webhook ingestion boundary.” |
 | [`skills/compatibility-migration/`](skills/compatibility-migration/) | An agreed direction requires old and new behavior to coexist safely across multiple steps or consumers. | “Plan a compatible multi-release API migration.” |
+| [`skills/session-handoff/`](skills/session-handoff/) | Unfinished repository work must be resumed by another session or developer from verified local state. | “Record the current worktree and the one safe next action.” |
 
 Read a skill’s `SKILL.md` before using it. Keep its complete directory, including any `references/` and `assets/`, because the skill may link to them.
 

@@ -35,6 +35,7 @@ TARGET_SKILLS = frozenset(
         "compatibility-migration",
         "project-discovery",
         "feature-specification",
+        "session-handoff",
     }
 )
 NAME_PATTERN = re.compile(r"^[a-z0-9-]{1,64}$")

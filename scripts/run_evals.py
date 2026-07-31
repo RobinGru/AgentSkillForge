@@ -34,6 +34,7 @@ SKILL_EVAL_SPECS = {
     "compatibility-migration": SkillEvalSpec("cm", 18),
     "project-discovery": SkillEvalSpec("pd", 18),
     "feature-specification": SkillEvalSpec("fs", 18),
+    "session-handoff": SkillEvalSpec("sh", 18),
 }
 LEGACY_MANIFEST_REQUIRED = {
     "positive": 5,

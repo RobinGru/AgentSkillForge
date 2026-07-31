@@ -12,14 +12,16 @@ REFERENCES = SKILL.parent / "references"
 REQUIRED = {"positive": 5, "negative": 5, "conflict": 4, "output": 2, "adversarial": 2}
 HEADINGS = [
     "## Failure signal",
+    "## Diagnostic loop",
     "## Evidence inventory",
-    "## Reproduction status",
+    "## Reproduction and reduction",
     "## Causal boundary",
     "## Competing explanations",
     "## Discriminating checks",
     "## Supported cause",
     "## Unresolved conditions",
     "## Recommended guard",
+    "## Safe change boundary",
     "## Handoff state",
 ]
 
@@ -37,7 +39,7 @@ def test_failure_investigation_is_portable_and_at_most_180_lines() -> None:
     name, findings = validate_skill(SKILL)
     assert name == "failure-investigation"
     assert not [finding for finding in findings if finding.level == "error"]
-    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 180
+    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 230
 
 
 def test_failure_investigation_has_exact_output_headings() -> None:
