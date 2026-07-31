@@ -4,7 +4,7 @@ description: Investigate an unexpected non-performance failure when its cause or
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.5.0
+  version: 0.6.0
 ---
 
 # Failure investigation
