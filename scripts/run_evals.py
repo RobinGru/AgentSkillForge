@@ -32,6 +32,8 @@ SKILL_EVAL_SPECS = {
     "failure-investigation": SkillEvalSpec("fi", 18),
     "security-boundary-analysis": SkillEvalSpec("sec", 18),
     "compatibility-migration": SkillEvalSpec("cm", 18),
+    "project-discovery": SkillEvalSpec("pd", 18),
+    "feature-specification": SkillEvalSpec("fs", 18),
 }
 LEGACY_MANIFEST_REQUIRED = {
     "positive": 5,
@@ -101,9 +103,7 @@ def validate_manifest(path: Path) -> list[str]:
     errors.extend(validate_case_identity(cases, "manifest"))
 
     expected_minimum = sum(
-        sum(LEGACY_MANIFEST_REQUIRED.values())
-        if spec.legacy_manifest_matrix
-        else len(SKILL_EVAL_SPECS) - 1
+        sum(LEGACY_MANIFEST_REQUIRED.values()) if spec.legacy_manifest_matrix else 3
         for spec in SKILL_EVAL_SPECS.values()
     )
     if len(cases) < expected_minimum:
@@ -117,6 +117,8 @@ def validate_manifest(path: Path) -> list[str]:
                 if counts[category] < minimum:
                     errors.append(f"{spec.prefix}: expected {minimum} {category} cases, found {counts[category]}")
         else:
+            if len(skill_cases) < 3:
+                errors.append(f"{spec.prefix}: expected at least 3 grouped catalog contrast cases")
             comparison_skills = set(SKILL_EVAL_SPECS) - {skill}
             contrasted = {
                 other

@@ -26,6 +26,7 @@ py-modules = []
 "share/agent-skill-forge" = ["README.md", "THIRD_PARTY_NOTICES.md"]
 "share/agent-skill-forge/clients/zed" = ["docs/clients/zed.md"]
 "share/agent-skill-forge/scripts" = ["scripts/install_zed_skills.py"]
+"share/agent-skill-forge/templates" = ["templates/AGENTS.md"]
 "share/agent-skill-forge/skills/compatibility-migration" = [
   "skills/compatibility-migration/SKILL.md",
 ]
@@ -34,6 +35,7 @@ py-modules = []
   "skills/compatibility-migration/references/data-transition-checks.md",
 ]
 "share/agent-skill-forge/skills/fact-based-code-review" = ["skills/fact-based-code-review/SKILL.md"]
+"share/agent-skill-forge/skills/feature-specification" = ["skills/feature-specification/SKILL.md"]
 "share/agent-skill-forge/skills/failure-investigation" = [
   "skills/failure-investigation/SKILL.md",
 ]
@@ -54,6 +56,7 @@ py-modules = []
 "share/agent-skill-forge/skills/product-interface-engineering" = [
   "skills/product-interface-engineering/SKILL.md",
 ]
+"share/agent-skill-forge/skills/project-discovery" = ["skills/project-discovery/SKILL.md"]
 "share/agent-skill-forge/skills/product-interface-engineering/references" = [
   "skills/product-interface-engineering/references/accessibility-baseline.md",
   "skills/product-interface-engineering/references/verification-matrix.md",

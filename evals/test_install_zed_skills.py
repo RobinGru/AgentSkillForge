@@ -73,4 +73,6 @@ def test_zed_installer_discovers_all_distributed_skills() -> None:
         "failure-investigation",
         "security-boundary-analysis",
         "compatibility-migration",
+        "project-discovery",
+        "feature-specification",
     }

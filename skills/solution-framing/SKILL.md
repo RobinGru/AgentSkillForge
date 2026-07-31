@@ -1,6 +1,6 @@
 ---
 name: solution-framing
-description: Establish a defensible direction for an unclear or consequential software decision before implementation. Use when goals, boundaries, interfaces, ownership, risks, or non-goals need an explicit decision record.
+description: Choose a defensible technical or delivery direction for a consequential software decision after product intent and observable behavior are sufficiently known. Use when approaches, interfaces, ownership, risks, or reversibility need an explicit decision record.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -17,7 +17,7 @@ implementation plan disguised as discovery.
 
 Use this skill when one or more of these conditions apply:
 
-- The requested outcome or expected behavior is ambiguous.
+- The implementation or delivery approach remains ambiguous.
 - The work crosses system boundaries, interfaces, or ownership lines.
 - Several feasible directions have materially different costs or risks.
 - Choosing the wrong direction would make later work expensive to undo.
@@ -25,10 +25,11 @@ Use this skill when one or more of these conditions apply:
 
 ## Do not use this skill when
 
-Do not use this skill for a fully specified local change, a typo or isolated
-configuration value, a request with an accepted decision brief, or a code
-review with a known change set. Route a performance symptom without a baseline
-to a performance investigation instead.
+Do not use this skill to establish initial product direction or define the
+observable contract for one capability. Also do not use it for a fully specified
+local change, an accepted decision brief, or a code review with a known change
+set. Route a performance symptom without a baseline to a performance
+investigation instead.
 
 ## Operating rules
 

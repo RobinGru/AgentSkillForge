@@ -2,11 +2,19 @@ cases:
   - id: solution-framing-auth-ambiguity
     prompt: Replace login sessions, but the required authentication behavior is not specified.
     expected_skills:
+      - feature-specification
+    forbidden_skills:
+      - solution-framing
+    assertions:
+      - defines observable authentication behavior before selecting an approach
+  - id: solution-framing-technical-options
+    prompt: Authentication behavior is approved; choose between server sessions and signed tokens for its implementation.
+    expected_skills:
       - solution-framing
     forbidden_skills: []
     assertions:
-      - separates observed facts from assumptions
-      - produces a decision brief before implementation
+      - compares viable technical approaches
+      - records risks and reversibility
   - id: solution-framing-integration-boundaries
     prompt: Add a partner integration that touches billing, fulfillment, and support ownership.
     expected_skills:
@@ -45,3 +53,11 @@ cases:
       - solution-framing
     assertions:
       - starts with a measurable baseline
+  - id: solution-framing-product-discovery-routing
+    prompt: Establish the users, outcomes, scope, and first capability map for a repository with no trusted product direction.
+    expected_skills:
+      - project-discovery
+    forbidden_skills:
+      - solution-framing
+    assertions:
+      - establishes product direction before technical decisions

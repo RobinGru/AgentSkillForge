@@ -37,10 +37,11 @@ def missing_skill_files(root: Path, wheel: Path) -> set[Path]:
     }
 
 
-def missing_zed_support_files(wheel: Path) -> set[str]:
+def missing_support_files(wheel: Path) -> set[str]:
     required = {
         "share/agent-skill-forge/clients/zed/zed.md",
         "share/agent-skill-forge/scripts/install_zed_skills.py",
+        "share/agent-skill-forge/templates/AGENTS.md",
     }
     members = wheel_members(wheel)
     return {path for path in required if not any(member.endswith(path) for member in members)}
@@ -62,12 +63,12 @@ def main() -> int:
             return result.returncode
         wheel = wheel_path(Path(output))
         missing = missing_skill_files(root, wheel)
-        missing_zed = missing_zed_support_files(wheel)
+        missing_support = missing_support_files(wheel)
 
-    if missing or missing_zed:
+    if missing or missing_support:
         for path in sorted(missing):
             print(f"ERROR: wheel is missing {path}")
-        for path in sorted(missing_zed):
+        for path in sorted(missing_support):
             print(f"ERROR: wheel is missing {path}")
         return 1
     print("Wheel contains every distributed skill document and Zed support file.")

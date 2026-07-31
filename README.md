@@ -33,6 +33,8 @@ Choose the skill that matches the task—not merely a word in the prompt.
 
 | Skill | When to use it | Example |
 |---|---|---|
+| [`skills/project-discovery/`](skills/project-discovery/) | A new or unclear product needs users, outcomes, boundaries, and an initial capability map. | “Define the smallest useful first release for this product.” |
+| [`skills/feature-specification/`](skills/feature-specification/) | One substantial capability needs observable rules, states, permissions, and acceptance criteria. | “Specify retry and denial behavior for file import.” |
 | [`skills/solution-framing/`](skills/solution-framing/) | The direction is unclear or a decision has meaningful trade-offs. | “Which migration approach is safest?” |
 | [`skills/safe-code-change/`](skills/safe-code-change/) | You need a small, understood change or bug fix. | “Fix this reproducible validation error.” |
 | [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | A change is ready for review and needs a fact-based assessment. | “Review this pull request before merging.” |
@@ -98,12 +100,18 @@ See the [complete Zed installation guide](docs/clients/zed.md) for selected skil
 
 Common sequences are:
 
+- New product: `project-discovery` establishes the product boundary and capability map, then `feature-specification` defines one capability before technical planning or implementation.
+
 - Unknown non-performance failure: `failure-investigation` establishes a supported cause and safe change boundary, then `safe-code-change` implements the fix, and `fact-based-code-review` reviews it.
 - Measured latency, throughput, memory, or resource problem: use `performance-investigation`, not `failure-investigation`; hand an understood change to `safe-code-change`, then use `fact-based-code-review`.
 - Multi-step migration: `solution-framing` chooses the direction only when it is still open, `compatibility-migration` defines safe coexistence and retirement states, and `safe-code-change` implements each local step.
 - Explicit threat model: `security-boundary-analysis` defines trust transitions, abuse paths, and control obligations. Follow with `solution-framing` for architecture choices, `product-interface-engineering` for visible permission or recovery interactions, or `compatibility-migration` for staged coexistence; keep each output separate.
 
 Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. The repository's evals are static; do not infer runtime portability or reliable activation from installation alone.
+
+## Optional repository instructions
+
+[`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated repository-root template that routes work across this catalog and defines a compact write-then-verify rule. Copy it to a target repository only when German responses and `codebase-memory-mcp` are intended; otherwise adapt or remove those requirements first. Project-specific rules should be added in the copied file, not in the distributed skills.
 
 ## Compatibility
 
@@ -144,6 +152,7 @@ These commands validate skill metadata and layout, local Markdown links, install
 ├── evals/                      # Static cases and repository tests
 ├── scripts/                    # Validation, packaging, and Zed installer tools
 ├── docs/clients/zed.md         # Zed integration guide
+├── templates/AGENTS.md         # Optional repository instructions
 ├── .github/workflows/          # Automation workflows
 ├── CONTRIBUTING.md             # Contribution and clean-room rules
 ├── pyproject.toml              # Python tooling and package metadata

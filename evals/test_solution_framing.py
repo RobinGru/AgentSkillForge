@@ -39,8 +39,12 @@ def test_solution_framing_eval_manifest_covers_required_boundaries() -> None:
     data = yaml.safe_load(EVALS.read_text(encoding="utf-8"))
     cases = {case["id"]: case for case in data["cases"]}
 
-    assert len(cases) == 6
-    assert "solution-framing" in cases["solution-framing-auth-ambiguity"]["expected_skills"]
+    assert len(cases) == 8
+    assert cases["solution-framing-auth-ambiguity"]["expected_skills"] == [
+        "feature-specification"
+    ]
+    assert "solution-framing" in cases["solution-framing-auth-ambiguity"]["forbidden_skills"]
+    assert "solution-framing" in cases["solution-framing-technical-options"]["expected_skills"]
     assert "solution-framing" in cases["solution-framing-integration-boundaries"]["expected_skills"]
     assert "solution-framing" in cases["solution-framing-spacing-nontrigger"]["forbidden_skills"]
     assert "solution-framing" in cases["solution-framing-accepted-plan-nontrigger"]["forbidden_skills"]
@@ -50,4 +54,7 @@ def test_solution_framing_eval_manifest_covers_required_boundaries() -> None:
     ]
     assert cases["solution-framing-performance-routing"]["expected_skills"] == [
         "performance-investigation"
+    ]
+    assert cases["solution-framing-product-discovery-routing"]["expected_skills"] == [
+        "project-discovery"
     ]

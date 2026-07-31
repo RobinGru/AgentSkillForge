@@ -33,6 +33,8 @@ Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelne
 
 | Skill | Wann verwenden? | Beispiel |
 |---|---|---|
+| [`skills/project-discovery/`](skills/project-discovery/) | Ein neues oder unklares Produkt benötigt Nutzer, Ziele, Grenzen und eine erste Capability-Map. | „Definiere das kleinste nützliche erste Release.“ |
+| [`skills/feature-specification/`](skills/feature-specification/) | Eine größere Capability benötigt beobachtbare Regeln, Zustände, Berechtigungen und Akzeptanzkriterien. | „Spezifiziere Retry- und Ablehnungsverhalten für den Dateiimport.“ |
 | [`skills/solution-framing/`](skills/solution-framing/) | Die Richtung ist unklar oder eine Entscheidung enthält wichtige Abwägungen. | „Welcher Migrationsansatz ist am sichersten?“ |
 | [`skills/safe-code-change/`](skills/safe-code-change/) | Du brauchst eine kleine, verstandene Änderung oder Fehlerbehebung. | „Behebe diesen reproduzierbaren Validierungsfehler.“ |
 | [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | Eine Änderung ist bereit zur Prüfung und braucht einen faktenbasierten Code-Review. | „Prüfe diesen Pull Request vor dem Merge.“ |
@@ -98,12 +100,18 @@ Die [vollständige Zed-Installationsanleitung](docs/clients/zed.md) beschreibt a
 
 Häufige Reihenfolgen sind:
 
+- Neues Produkt: `project-discovery` legt Produktgrenze und Capability-Map fest; anschließend definiert `feature-specification` eine Capability vor technischer Planung oder Implementierung.
+
 - Unbekannter technischer Fehler außerhalb der Performance-Domäne: `failure-investigation` belegt Ursache und sichere Änderungsgrenze, danach implementiert `safe-code-change` den Fix und `fact-based-code-review` prüft ihn.
 - Gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem: Verwende `performance-investigation`, nicht `failure-investigation`; übergib eine verstandene Änderung an `safe-code-change` und prüfe sie anschließend mit `fact-based-code-review`.
 - Mehrstufige Migration: `solution-framing` wählt die Richtung nur, wenn sie noch offen ist, `compatibility-migration` definiert sichere Koexistenz- und Stilllegungszustände und `safe-code-change` implementiert jeden lokalen Schritt.
 - Explizites Threat Model: `security-boundary-analysis` definiert Vertrauensübergänge, Missbrauchspfade und Kontrollpflichten. Danach übernimmt `solution-framing` Architekturentscheidungen, `product-interface-engineering` sichtbare Berechtigungs- oder Recovery-Interaktionen oder `compatibility-migration` die gestufte Koexistenz; die Outputs bleiben getrennt.
 
 Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Die Repository-Evals sind statisch; aus der Installation allein folgt weder Runtime-Portabilität noch zuverlässige Aktivierung.
+
+## Optionale Repository-Anweisungen
+
+[`templates/AGENTS.md`](templates/AGENTS.md) ist eine bewusst meinungsstarke Vorlage für die Repository-Wurzel. Sie übernimmt das Routing zwischen den Skills und definiert eine kompakte Write-Then-Verify-Regel. Kopiere sie nur in ein Ziel-Repository, wenn deutsche Antworten und `codebase-memory-mcp` gewünscht sind; passe diese Anforderungen andernfalls vorher an oder entferne sie. Projektspezifische Regeln gehören in die kopierte Datei, nicht in die verteilten Skills.
 
 ## Kompatibilität
 
@@ -144,6 +152,7 @@ Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verh
 ├── evals/                      # Statische Fälle und Repository-Tests
 ├── scripts/                    # Validierung, Paketierung und Zed-Installer
 ├── docs/clients/zed.md         # Zed-Integrationsanleitung
+├── templates/AGENTS.md         # Optionale Repository-Anweisungen
 ├── .github/workflows/          # Automatisierungs-Workflows
 ├── CONTRIBUTING.md             # Regeln zum Mitwirken und Clean-Room-Prozess
 ├── pyproject.toml              # Python-Werkzeuge und Paketmetadaten

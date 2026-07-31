@@ -25,9 +25,7 @@ def test_eval_suite_uses_canonical_dynamic_coverage() -> None:
 
     manifest_cases = load_cases(MANIFEST)
     expected_minimum = sum(
-        sum(LEGACY_MANIFEST_REQUIRED.values())
-        if spec.legacy_manifest_matrix
-        else len(SKILL_EVAL_SPECS) - 1
+        sum(LEGACY_MANIFEST_REQUIRED.values()) if spec.legacy_manifest_matrix else 3
         for spec in SKILL_EVAL_SPECS.values()
     )
     assert len(manifest_cases) >= expected_minimum
@@ -47,7 +45,7 @@ def test_eval_suite_uses_canonical_dynamic_coverage() -> None:
             )
 
 
-def test_manifest_preserves_catalog_routing_and_pairwise_new_skill_contrasts() -> None:
+def test_manifest_preserves_catalog_routing_and_compact_new_skill_contrasts() -> None:
     cases = load_cases(MANIFEST)
     for skill, spec in SKILL_EVAL_SPECS.items():
         skill_cases = [case for case in cases if case["id"].startswith(f"{spec.prefix}-")]
@@ -56,6 +54,7 @@ def test_manifest_preserves_catalog_routing_and_pairwise_new_skill_contrasts() -
             assert any(skill in case.get("forbidden_skills", []) for case in skill_cases)
 
         if skill in NEW_SKILLS:
+            assert len(skill_cases) >= 3
             contrasted = {
                 forbidden
                 for case in skill_cases

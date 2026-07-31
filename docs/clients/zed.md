@@ -36,16 +36,16 @@ skill directory.
 
 ## Install or update selected skills
 
-Install one of the new skills:
+Install one selected skill:
 
 ```sh
 python3 scripts/install_zed_skills.py --skill failure-investigation
 ```
 
-Install all three new skills:
+Install a related workflow set:
 
 ```sh
-python3 scripts/install_zed_skills.py --skill failure-investigation --skill security-boundary-analysis --skill compatibility-migration
+python3 scripts/install_zed_skills.py --skill project-discovery --skill feature-specification
 ```
 
 Replace only a selected existing skill directory:
@@ -73,11 +73,10 @@ py scripts\install_zed_skills.py --target "$HOME\.agents\skills"
 
 Start a new agent session after installation. If the skills are not visible,
 restart Zed and confirm that its configured agent-skill directory matches the
-target printed by the installer. For a selected installation, verify directories
-such as `~/.agents/skills/failure-investigation`,
-`~/.agents/skills/security-boundary-analysis`, and
-`~/.agents/skills/compatibility-migration`. Each selected directory must retain
-its `SKILL.md` and any `references/` or `assets/` files.
+target printed by the installer. For a selected installation, verify its printed
+directories, for example `~/.agents/skills/project-discovery` or
+`~/.agents/skills/feature-specification`. Each selected directory must retain its
+`SKILL.md` and any `references/` or `assets/` files.
 
 Visibility verifies installation only. It does not prove which skill Zed or its
 configured model will load for a prompt.
