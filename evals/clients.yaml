@@ -1,0 +1,31 @@
+version: 1
+clients:
+  - id: fixture
+    mode: command
+    supported: false
+    purpose: Deterministic test adapter for the runtime-eval runner.
+    command:
+      - python
+      - -c
+      - "from pathlib import Path; import sys; Path(sys.argv[2]).write_text(sys.argv[1], encoding='utf-8')"
+      - "{fixture_response}"
+      - "{response_file}"
+
+  - id: codex-cli
+    mode: command
+    supported: true
+    purpose: Automated smoke coverage when a Codex CLI binary and authentication are provided by the runner environment.
+    command:
+      - codex
+      - exec
+      - --output-last-message
+      - "{response_file}"
+      - "{prompt}"
+    required_environment:
+      - AGENT_SKILLS_RUNTIME_EVALS
+    require_metadata: true
+
+  - id: zed
+    mode: manual-smoke
+    supported: true
+    purpose: Installation and interactive release smoke test; no headless Zed agent interface is assumed.

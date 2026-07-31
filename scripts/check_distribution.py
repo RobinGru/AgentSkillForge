@@ -39,6 +39,7 @@ def missing_skill_files(root: Path, wheel: Path) -> set[Path]:
 
 def missing_support_files(wheel: Path) -> set[str]:
     required = {
+        "share/agent-skill-forge/compatibility.md",
         "share/agent-skill-forge/clients/codex/codex.md",
         "share/agent-skill-forge/clients/zed/zed.md",
         "share/agent-skill-forge/scripts/install_skills.py",

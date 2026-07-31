@@ -79,7 +79,9 @@ directories, for example `~/.agents/skills/project-discovery` or
 `SKILL.md` and any `references/` or `assets/` files.
 
 Visibility verifies installation only. It does not prove which skill Zed or its
-configured model will load for a prompt.
+configured model will load for a prompt. For releases, complete the documented
+[Zed smoke checklist](../compatibility.md#zed-release-smoke-checklist) and record
+its client version, configured model, prompts, and observed outcomes.
 
 ## Uninstall
 

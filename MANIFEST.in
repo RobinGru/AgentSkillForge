@@ -1,6 +1,7 @@
 include README.md
 include NOTICE
 include THIRD_PARTY_NOTICES.md
+include docs/compatibility.md
 include docs/clients/codex.md
 include docs/clients/zed.md
 include scripts/install_skills.py

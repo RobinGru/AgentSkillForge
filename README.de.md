@@ -5,6 +5,7 @@
 ![AgentSkillForge-Banner](assets/github-banner.jpg)
 
 [![Validate](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml)
+[![Runtime evals](https://github.com/RobinGru/AgentSkillForge/actions/workflows/runtime-evals.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/runtime-evals.yml)
 [![CodeQL](https://github.com/RobinGru/AgentSkillForge/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/codeql.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
@@ -13,8 +14,8 @@ Wiederverwendbare Agent Skills, die KI-Coding-Assistenten zu sorgfältigen Ände
 
 [Skills entdecken](#skill-katalog) · [Mit Zed oder Codex installieren](#schnellstart) · [Mitwirken](CONTRIBUTING.md)
 
-> [!WARNING]
-Repository-Prüfungen decken Struktur, lokale Links, Paketierung, statische Aktivierungsfälle und die Skill-Validierung mit der GitHub CLI ab. Sie führen keine Agentenmodelle aus und belegen keine Kompatibilität mit jedem Client. Eine formale Wartungsrichtlinie oder ein Release-Rhythmus sind nicht dokumentiert.
+> [!NOTE]
+> Statische Repository-Prüfungen laufen für jeden Pull Request. Deterministische Runtime-Contract-Checks prüfen den Eval-Runner, während authentifizierte Codex-Smoke-Tests und interaktive Zed-Prüfungen optionale Release-Belege sind. Die [Kompatibilitäts- und Wartungsrichtlinie](docs/compatibility.md) beschreibt die Support-Matrix und ihre klaren Grenzen.
 
 ## Was ist AgentSkillForge?
 
@@ -111,7 +112,7 @@ Häufige Reihenfolgen sind:
 - Mehrstufige Migration: `solution-framing` wählt die Richtung nur, wenn sie noch offen ist, `compatibility-migration` definiert sichere Koexistenz- und Stilllegungszustände und `safe-code-change` implementiert jeden lokalen Schritt.
 - Explizites Threat Model: `security-boundary-analysis` definiert Vertrauensübergänge, Missbrauchspfade und Kontrollpflichten. Danach übernimmt `solution-framing` Architekturentscheidungen, `product-interface-engineering` sichtbare Berechtigungs- oder Recovery-Interaktionen oder `compatibility-migration` die gestufte Koexistenz; die Outputs bleiben getrennt.
 
-Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Die Repository-Evals sind statisch; aus der Installation allein folgt weder Runtime-Portabilität noch zuverlässige Aktivierung.
+Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Statische und Runtime-Contract-Checks liefern nur begrenzte Belege; aus einer Installation allein folgt weder universelle Portabilität noch zuverlässige automatische Aktivierung. Siehe die [Kompatibilitätsmatrix](docs/compatibility.md).
 
 ## Optionale Repository-Anweisungen
 
@@ -122,8 +123,8 @@ Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibun
 | Bereich | Unterstützt oder erforderlich |
 |---|---|
 | Agent-Skill-Format | Markdown-Verzeichnisse mit `SKILL.md` und relativen lokalen Referenzen |
-| Agent-Clients | Clients, die kompatible Skill-Verzeichnisse laden können; die genaue Unterstützung hängt von der Client-Konfiguration ab |
-| Dokumentierte Integration | Zed mit aktivierten Agent Skills; Codex CLI und Codex-IDE-Erweiterung |
+| Agent-Clients | Unterstützt: Codex CLI und Zed, abhängig von der dokumentierten Evidenzstufe; andere kompatible Clients sind nicht verifiziert |
+| Dokumentierte Integration | Zed mit aktivierten Agent Skills; Codex CLI und Codex-IDE-Erweiterung; siehe [Kompatibilitätsrichtlinie](docs/compatibility.md) |
 | Python | 3.11 oder neuer für Zed-/Codex-Installer, Paketierung und Repository-Prüfungen |
 | Paket-Runtime | Kein importierbares Python-Modul; das Wheel verteilt Agent Skills und Hilfsdateien als Daten |
 
@@ -139,13 +140,14 @@ python scripts/validate_repository.py
 python scripts/check_links.py
 pytest
 python scripts/run_evals.py
+python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat."
 python scripts/check_distribution.py
 ```
 
-Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verhalten von Installer und Paketierung, statische Abdeckung des Eval-Manifests und den Inhalt des verteilten Wheels.
+Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verhalten von Installer und Paketierung, statische Deklarationen für Eval- und Runtime-Contracts, deterministische Contract-Ausführung und den Inhalt des verteilten Wheels.
 
 > [!NOTE]
-> `python scripts/run_evals.py` prüft statische Falldeklarationen. Der Befehl führt keinen Agenten aus und belegt keine Runtime-Portabilität. Prüfe externe HTTP-Links ausdrücklich mit `python scripts/check_links.py --external`.
+> Der `fixture`-Client prüft den Runtime-Eval-Mechanismus ohne ein Agentenmodell auszuführen. Ein authentifizierter Codex-Modelllauf ist ein ausdrücklicher Release-Check und kein Pull-Request-Gate. Aufruf, Ergebnisartefakt, Client-/Modellversion, Datenschutzfolgen und Grenzen stehen in der [Kompatibilitätsrichtlinie](docs/compatibility.md). Prüfe externe HTTP-Links ausdrücklich mit `python scripts/check_links.py --external`.
 
 <details>
 <summary>Projektstruktur</summary>
@@ -153,9 +155,9 @@ Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verh
 ```text
 .
 ├── skills/                     # Portable Agent Skills
-├── evals/                      # Statische Fälle und Repository-Tests
-├── scripts/                    # Validierung, Paketierung sowie gemeinsame und Client-Installer
-├── docs/clients/               # Zed- und Codex-Integrationsanleitungen
+├── evals/                      # Statische Fälle, Runtime-Contracts, Client-Matrix und Tests
+├── scripts/                    # Validierung, Runtime-Eval, Paketierung und Installer
+├── docs/                       # Client-Anleitungen und Kompatibilitätsrichtlinie
 ├── templates/AGENTS.md         # Optionale Repository-Anweisungen
 ├── .github/workflows/          # Automatisierungs-Workflows
 ├── CONTRIBUTING.md             # Regeln zum Mitwirken und Clean-Room-Prozess

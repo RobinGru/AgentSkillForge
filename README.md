@@ -5,6 +5,7 @@
 ![AgentSkillForge banner](assets/github-banner.jpg)
 
 [![Validate](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/validate.yml)
+[![Runtime evals](https://github.com/RobinGru/AgentSkillForge/actions/workflows/runtime-evals.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/runtime-evals.yml)
 [![CodeQL](https://github.com/RobinGru/AgentSkillForge/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/RobinGru/AgentSkillForge/actions/workflows/codeql.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
@@ -13,8 +14,8 @@ Reusable Agent Skills that help AI coding assistants make careful changes and ex
 
 [Explore skills](#skill-catalog) · [Install with Zed or Codex](#quick-start) · [Contribute](CONTRIBUTING.md)
 
-> [!WARNING]
-Repository checks cover structure, local links, packaging, static activation cases, and GitHub CLI skill validation. They do not execute agent models or prove compatibility with every client. A formal maintenance policy and release cadence are not documented.
+> [!NOTE]
+> Static repository checks run for every pull request. Deterministic runtime-contract checks exercise the eval runner, while authenticated Codex smoke tests and Zed interactive checks are opt-in release evidence. See the [compatibility and maintenance policy](docs/compatibility.md) for the supported-client matrix and its explicit limits.
 
 ## What is AgentSkillForge?
 
@@ -111,7 +112,7 @@ Common sequences are:
 - Multi-step migration: `solution-framing` chooses the direction only when it is still open, `compatibility-migration` defines safe coexistence and retirement states, and `safe-code-change` implements each local step.
 - Explicit threat model: `security-boundary-analysis` defines trust transitions, abuse paths, and control obligations. Follow with `solution-framing` for architecture choices, `product-interface-engineering` for visible permission or recovery interactions, or `compatibility-migration` for staged coexistence; keep each output separate.
 
-Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. The repository's evals are static; do not infer runtime portability or reliable activation from installation alone.
+Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. Static and runtime-contract checks provide bounded evidence only; do not infer universal portability or reliable automatic activation from installation alone. See the [compatibility matrix](docs/compatibility.md).
 
 ## Optional repository instructions
 
@@ -122,8 +123,8 @@ Your AI client decides when to load an installed skill. Descriptions are routing
 | Area | Supported or required |
 |---|---|
 | Agent Skill format | Markdown `SKILL.md` directories with relative local references |
-| Agent clients | Clients that can load compatible skill directories; exact support depends on client configuration |
-| Documented integration | Zed with agent skills enabled; Codex CLI and Codex IDE extension |
+| Agent clients | Supported: Codex CLI and Zed, subject to the documented evidence level; other compatible clients are unverified |
+| Documented integration | Zed with agent skills enabled; Codex CLI and Codex IDE extension; see [compatibility policy](docs/compatibility.md) |
 | Python | 3.11 or newer for the Zed/Codex installers, packaging, and repository checks |
 | Package runtime | No importable Python module; the wheel distributes Agent Skills and support files as data |
 
@@ -139,13 +140,14 @@ python scripts/validate_repository.py
 python scripts/check_links.py
 pytest
 python scripts/run_evals.py
+python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat."
 python scripts/check_distribution.py
 ```
 
-These commands validate skill metadata and layout, local Markdown links, installer and packaging behavior, static eval-manifest coverage, and distributed wheel contents.
+These commands validate skill metadata and layout, local Markdown links, installer and packaging behavior, static eval-manifest and runtime-contract declarations, deterministic contract execution, and distributed wheel contents.
 
 > [!NOTE]
-> `python scripts/run_evals.py` validates static case declarations; it does not run an agent or establish runtime portability. Check external HTTP links explicitly with `python scripts/check_links.py --external`.
+> The `fixture` client tests the runtime-eval mechanism without executing an agent. Authenticated Codex model execution is an explicit release check, not a pull-request gate. Its invocation, output artifact, client/model version, privacy implications, and limits are documented in the [compatibility policy](docs/compatibility.md). Check external HTTP links explicitly with `python scripts/check_links.py --external`.
 
 <details>
 <summary>Project structure</summary>
@@ -153,9 +155,9 @@ These commands validate skill metadata and layout, local Markdown links, install
 ```text
 .
 ├── skills/                     # Portable Agent Skills
-├── evals/                      # Static cases and repository tests
-├── scripts/                    # Validation, packaging, and shared/client installer tools
-├── docs/clients/               # Zed and Codex integration guides
+├── evals/                      # Static cases, runtime contracts, client matrix, and tests
+├── scripts/                    # Validation, runtime eval, packaging, and installer tools
+├── docs/                       # Client guides and compatibility policy
 ├── templates/AGENTS.md         # Optional repository instructions
 ├── .github/workflows/          # Automation workflows
 ├── CONTRIBUTING.md             # Contribution and clean-room rules
