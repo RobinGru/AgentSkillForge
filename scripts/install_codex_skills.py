@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install portable skill directories into Zed's shared skill directory."""
+"""Install portable skill directories into Codex's shared skill directory."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ DEFAULT_TARGET = Path.home() / ".agents" / "skills"
 
 
 def main() -> int:
-    return install_main(DEFAULT_TARGET, "Zed")
+    return install_main(DEFAULT_TARGET, "Codex")
 
 
 if __name__ == "__main__":

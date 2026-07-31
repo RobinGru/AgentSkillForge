@@ -24,8 +24,13 @@ py-modules = []
 
 [tool.setuptools.data-files]
 "share/agent-skill-forge" = ["README.md", "THIRD_PARTY_NOTICES.md"]
+"share/agent-skill-forge/clients/codex" = ["docs/clients/codex.md"]
 "share/agent-skill-forge/clients/zed" = ["docs/clients/zed.md"]
-"share/agent-skill-forge/scripts" = ["scripts/install_zed_skills.py"]
+"share/agent-skill-forge/scripts" = [
+  "scripts/install_skills.py",
+  "scripts/install_zed_skills.py",
+  "scripts/install_codex_skills.py",
+]
 "share/agent-skill-forge/templates" = ["templates/AGENTS.md"]
 "share/agent-skill-forge/skills/compatibility-migration" = [
   "skills/compatibility-migration/SKILL.md",

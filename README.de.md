@@ -11,7 +11,7 @@
 
 Wiederverwendbare Agent Skills, die KI-Coding-Assistenten zu sorgfältigen Änderungen und verständlichen Ergebnissen anleiten.
 
-[Skills entdecken](#skill-katalog) · [Mit Zed installieren](#schnellstart) · [Mitwirken](CONTRIBUTING.md)
+[Skills entdecken](#skill-katalog) · [Mit Zed oder Codex installieren](#schnellstart) · [Mitwirken](CONTRIBUTING.md)
 
 > [!WARNING]
 Repository-Prüfungen decken Struktur, lokale Links, Paketierung, statische Aktivierungsfälle und die Skill-Validierung mit der GitHub CLI ab. Sie führen keine Agentenmodelle aus und belegen keine Kompatibilität mit jedem Client. Eine formale Wartungsrichtlinie oder ein Release-Rhythmus sind nicht dokumentiert.
@@ -20,7 +20,7 @@ Repository-Prüfungen decken Struktur, lokale Links, Paketierung, statische Akti
 
 AgentSkillForge ist eine Sammlung kleiner, wiederverwendbarer Agent Skills für KI-Coding-Assistenten. Jeder Skill beschreibt einen Aufgabentyp, die zu sammelnden Belege, nötige Entscheidungen und die Form des Ergebnisses.
 
-Agent Skills sind einfache Markdown-Verzeichnisse mit einer zentralen `SKILL.md`. Sie sind damit nicht an einen bestimmten Client gebunden. Dieses Repository dokumentiert die Installation für Zed; andere Clients benötigen ihren eigenen dokumentierten Mechanismus zum Laden kompatibler Skill-Verzeichnisse.
+Agent Skills sind einfache Markdown-Verzeichnisse mit einer zentralen `SKILL.md`. Sie sind damit nicht an einen bestimmten Client gebunden. Dieses Repository bietet dokumentierte Installer für Zed und Codex; andere Clients benötigen ihren eigenen dokumentierten Mechanismus zum Laden kompatibler Skill-Verzeichnisse.
 
 ## Warum verwenden?
 
@@ -52,7 +52,7 @@ Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre das vollständige V
 
 ## Schnellstart
 
-Installiere Git und Python 3.11 oder neuer, bevor du den Zed-Installer verwendest. Er installiert alle Skills in Zeds gemeinsames Verzeichnis `~/.agents/skills`.
+Installiere Git und Python 3.11 oder neuer, bevor du einen Installer verwendest. Die Wrapper für Zed und Codex installieren alle Skills in das gemeinsame Verzeichnis `~/.agents/skills`.
 
 <details>
 <summary>macOS, Linux oder WSL</summary>
@@ -60,7 +60,7 @@ Installiere Git und Python 3.11 oder neuer, bevor du den Zed-Installer verwendes
 ```sh
 git clone https://github.com/RobinGru/AgentSkillForge.git AgentSkillForge
 cd AgentSkillForge
-python3 scripts/install_zed_skills.py
+python3 scripts/install_zed_skills.py  # oder: scripts/install_codex_skills.py
 ```
 
 </details>
@@ -71,7 +71,7 @@ python3 scripts/install_zed_skills.py
 ```powershell
 git clone https://github.com/RobinGru/AgentSkillForge.git AgentSkillForge
 cd AgentSkillForge
-py scripts\install_zed_skills.py
+py scripts\install_zed_skills.py  # oder: scripts\install_codex_skills.py
 ```
 
 </details>
@@ -84,20 +84,21 @@ Starte nach der Installation eine neue Agentensitzung. Der Installer bricht ab, 
 
 Kopiere oder referenziere das gewünschte Verzeichnis `skills/<name>/` mit dem dokumentierten Mechanismus deines Clients. AgentSkillForge beansprucht weder einen universellen Installationspfad noch eine allgemeine Konvention zur automatischen Erkennung.
 
-### Zed
+### Zed und Codex
 
-Installiere nur einen Skill, wenn du nicht den gesamten Katalog benötigst:
+Verwende den Client-Wrapper, um nur einen Skill zu installieren, wenn du nicht den gesamten Katalog benötigst:
 
 ```sh
 python3 scripts/install_zed_skills.py --skill performance-investigation
+python3 scripts/install_codex_skills.py --skill performance-investigation
 ```
 
-Wiederhole `--skill`, um mehrere Skills zu installieren. Verwende `--target`, wenn Zed ein anderes Skill-Verzeichnis verwendet.
+Beide Wrapper verwenden denselben Installer und standardmäßig `~/.agents/skills`. Wiederhole `--skill`, um mehrere Skills zu installieren. Verwende `--target`, um in ein anderes Client- oder Repository-Skill-Verzeichnis zu installieren.
 
 > [!CAUTION]
 > `--force` löscht jedes ausgewählte Zielverzeichnis und erstellt es neu. Prüfe lokale Änderungen vorher; der Installer führt Dateien nicht zusammen.
 
-Die [vollständige Zed-Installationsanleitung](docs/clients/zed.md) beschreibt ausgewählte Skills, eigene Zielpfade, Updates, Überprüfung und Deinstallation.
+Die vollständigen Installationsanleitungen für [Zed](docs/clients/zed.md) und [Codex](docs/clients/codex.md) beschreiben ausgewählte Skills, eigene Zielpfade, Updates, Überprüfung und Deinstallation.
 
 ## Skills kombinieren
 
@@ -122,8 +123,8 @@ Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibun
 |---|---|
 | Agent-Skill-Format | Markdown-Verzeichnisse mit `SKILL.md` und relativen lokalen Referenzen |
 | Agent-Clients | Clients, die kompatible Skill-Verzeichnisse laden können; die genaue Unterstützung hängt von der Client-Konfiguration ab |
-| Dokumentierte Integration | Zed mit aktivierten Agent Skills |
-| Python | 3.11 oder neuer für Zed-Installer, Paketierung und Repository-Prüfungen |
+| Dokumentierte Integration | Zed mit aktivierten Agent Skills; Codex CLI und Codex-IDE-Erweiterung |
+| Python | 3.11 oder neuer für Zed-/Codex-Installer, Paketierung und Repository-Prüfungen |
 | Paket-Runtime | Kein importierbares Python-Modul; das Wheel verteilt Agent Skills und Hilfsdateien als Daten |
 
 Die Skill-Dokumente selbst benötigen kein Python. Python wird vom Installer und den Repository-Werkzeugen verwendet.
@@ -153,8 +154,8 @@ Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verh
 .
 ├── skills/                     # Portable Agent Skills
 ├── evals/                      # Statische Fälle und Repository-Tests
-├── scripts/                    # Validierung, Paketierung und Zed-Installer
-├── docs/clients/zed.md         # Zed-Integrationsanleitung
+├── scripts/                    # Validierung, Paketierung sowie gemeinsame und Client-Installer
+├── docs/clients/               # Zed- und Codex-Integrationsanleitungen
 ├── templates/AGENTS.md         # Optionale Repository-Anweisungen
 ├── .github/workflows/          # Automatisierungs-Workflows
 ├── CONTRIBUTING.md             # Regeln zum Mitwirken und Clean-Room-Prozess
@@ -164,7 +165,7 @@ Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verh
 └── LICENSE                     # Apache License 2.0
 ```
 
-Das Python-Wheel ist eine Datendistribution, keine Anwendung und kein importierbares SDK. Es legt README, Agent Skills, Referenzen, Zed-Anleitung und Installer unter `share/agent-skill-forge/` ab.
+Das Python-Wheel ist eine Datendistribution, keine Anwendung und kein importierbares SDK. Es legt README, Agent Skills, Referenzen, Client-Anleitungen und Installer unter `share/agent-skill-forge/` ab.
 
 </details>
 
