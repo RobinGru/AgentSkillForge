@@ -43,6 +43,7 @@ SKILL_EVAL_SPECS = {
     "project-discovery": SkillEvalSpec("pd", 18),
     "feature-specification": SkillEvalSpec("fs", 18),
     "session-handoff": SkillEvalSpec("sh", 18),
+    "adversarial-deep-review": SkillEvalSpec("adr", 18),
 }
 LEGACY_MANIFEST_REQUIRED = {
     "positive": 5,

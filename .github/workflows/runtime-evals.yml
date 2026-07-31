@@ -30,7 +30,7 @@ jobs:
           python scripts/run_runtime_evals.py --client fixture
           --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat."
           --output artifacts/runtime-evals/fixture.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: fixture-runtime-evals
           path: artifacts/runtime-evals/fixture.json
@@ -62,7 +62,7 @@ jobs:
           python scripts/run_runtime_evals.py --client codex-cli
           --client-version "$(codex --version)" --model "${{ vars.CODEX_EVAL_MODEL }}"
           --output artifacts/runtime-evals/codex-cli.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: codex-runtime-evals

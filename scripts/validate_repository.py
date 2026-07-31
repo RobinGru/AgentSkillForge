@@ -36,6 +36,7 @@ TARGET_SKILLS = frozenset(
         "project-discovery",
         "feature-specification",
         "session-handoff",
+        "adversarial-deep-review",
     }
 )
 NAME_PATTERN = re.compile(r"^[a-z0-9-]{1,64}$")

@@ -41,6 +41,7 @@ Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelne
 | [`skills/solution-framing/`](skills/solution-framing/) | Die Richtung ist unklar oder eine Entscheidung enthält wichtige Abwägungen. | „Welcher Migrationsansatz ist am sichersten?“ |
 | [`skills/safe-code-change/`](skills/safe-code-change/) | Du brauchst eine kleine, verstandene Änderung oder Fehlerbehebung. | „Behebe diesen reproduzierbaren Validierungsfehler.“ |
 | [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | Eine Änderung ist bereit zur Prüfung und braucht einen faktenbasierten Code-Review. | „Prüfe diesen Pull Request vor dem Merge.“ |
+| [`skills/adversarial-deep-review/`](skills/adversarial-deep-review/) | Eine ausdrücklich gewünschte tiefe Prüfung einer konkreten Hochrisiko-Änderung braucht evidenzbasierte Stressszenarien. | „Prüfe diesen Payment-Retry-Diff adversarial.“ |
 | [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | Eine Seite, ein Formular, eine Interaktion, Accessibility oder responsives Verhalten braucht Arbeit. | „Mache dieses Checkout-Formular mobil nutzbar.“ |
 | [`skills/performance-investigation/`](skills/performance-investigation/) | Du untersuchst ein gemessenes Latenz-, Durchsatz- oder Speicherproblem. | „Warum ist dieser Endpunkt langsamer geworden?“ |
 | [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente soll ohne Verhaltensänderung aufgeteilt werden. | „Teile diese große Vue-SFC in wartbare Teile auf.“ |
@@ -111,6 +112,7 @@ Häufige Reihenfolgen sind:
 - Gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem: Verwende `performance-investigation`, nicht `failure-investigation`; übergib eine verstandene Änderung an `safe-code-change` und prüfe sie anschließend mit `fact-based-code-review`.
 - Mehrstufige Migration: `solution-framing` wählt die Richtung nur, wenn sie noch offen ist, `compatibility-migration` definiert sichere Koexistenz- und Stilllegungszustände und `safe-code-change` implementiert jeden lokalen Schritt.
 - Explizites Threat Model: `security-boundary-analysis` definiert Vertrauensübergänge, Missbrauchspfade und Kontrollpflichten. Danach übernimmt `solution-framing` Architekturentscheidungen, `product-interface-engineering` sichtbare Berechtigungs- oder Recovery-Interaktionen oder `compatibility-migration` die gestufte Koexistenz; die Outputs bleiben getrennt.
+- Hochrisiko-Änderung: Verwende `adversarial-deep-review` nur für eine ausdrücklich gewünschte tiefe Prüfung einer konkreten Änderung und übergib die Evidenz anschließend an `fact-based-code-review` für die Merge-Entscheidung.
 
 Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Statische und Runtime-Contract-Checks liefern nur begrenzte Belege; aus einer Installation allein folgt weder universelle Portabilität noch zuverlässige automatische Aktivierung. Siehe die [Kompatibilitätsmatrix](docs/compatibility.md).
 
