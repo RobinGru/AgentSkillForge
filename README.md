@@ -32,21 +32,22 @@ Agent Skills are plain Markdown directories centred on `SKILL.md`, so they are n
 
 ## Skill Catalog
 
-Choose the skill that matches the task—not merely a word in the prompt.
+Choose the skill that matches the task—not merely a word in the prompt. The catalog follows a typical workflow; use the specialized investigation skills before making an otherwise understood change.
 
 | Skill | When to use it | Example |
 |---|---|---|
 | [`skills/project-discovery/`](skills/project-discovery/) | A new or unclear product needs users, outcomes, boundaries, and an initial capability map. | “Define the smallest useful first release for this product.” |
 | [`skills/feature-specification/`](skills/feature-specification/) | One substantial capability needs observable rules, states, permissions, and acceptance criteria. | “Specify retry and denial behavior for file import.” |
 | [`skills/solution-framing/`](skills/solution-framing/) | The direction is unclear or a decision has meaningful trade-offs. | “Which migration approach is safest?” |
-| [`skills/safe-code-change/`](skills/safe-code-change/) | You need a small, understood change or bug fix. | “Fix this reproducible validation error.” |
-| [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | A change is ready for review and needs a fact-based assessment. | “Review this pull request before merging.” |
-| [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | A screen, form, interaction, accessibility, or responsive behavior needs work. | “Make this checkout form usable on mobile.” |
-| [`skills/performance-investigation/`](skills/performance-investigation/) | You have a measured latency, throughput, or memory problem to investigate. | “Why did this endpoint become slower?” |
-| [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | A Vue or Nuxt component needs to be split without changing behavior. | “Separate this large Vue SFC into maintainable parts.” |
-| [`skills/failure-investigation/`](skills/failure-investigation/) | A non-performance test, build, runtime, integration, or data failure has an unknown cause or safe change boundary. | “Find why this integration fails before proposing a fix.” |
-| [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | An explicit security or threat-modeling task needs trust transitions, abuse paths, controls, and residual uncertainty. | “Threat-model this webhook ingestion boundary.” |
 | [`skills/compatibility-migration/`](skills/compatibility-migration/) | An agreed direction requires old and new behavior to coexist safely across multiple steps or consumers. | “Plan a compatible multi-release API migration.” |
+| [`skills/failure-investigation/`](skills/failure-investigation/) | A non-performance test, build, runtime, integration, or data failure has an unknown cause or safe change boundary. | “Find why this integration fails before proposing a fix.” |
+| [`skills/performance-investigation/`](skills/performance-investigation/) | You have a measured latency, throughput, or memory problem to investigate. | “Why did this endpoint become slower?” |
+| [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | An explicit security or threat-modeling task needs trust transitions, abuse paths, controls, and residual uncertainty. | “Threat-model this webhook ingestion boundary.” |
+| [`skills/safe-code-change/`](skills/safe-code-change/) | You need a small, understood change or bug fix. | “Fix this reproducible validation error.” |
+| [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | A screen, form, interaction, accessibility, or responsive behavior needs work. | “Make this checkout form usable on mobile.” |
+| [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | A Vue or Nuxt component needs to be split without changing behavior. | “Separate this large Vue SFC into maintainable parts.” |
+| [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | A change is ready for review and needs a fact-based assessment. | “Review this pull request before merging.” |
+| [`skills/adversarial-deep-review/`](skills/adversarial-deep-review/) | An explicitly requested deep review of a concrete high-risk change needs evidence-backed stress scenarios. | “Adversarially review this payment retry diff.” |
 | [`skills/session-handoff/`](skills/session-handoff/) | Unfinished repository work must be resumed by another session or developer from verified local state. | “Record the current worktree and the one safe next action.” |
 
 Read a skill’s `SKILL.md` before using it. Keep its complete directory, including any `references/` and `assets/`, because the skill may link to them.
@@ -111,6 +112,7 @@ Common sequences are:
 - Measured latency, throughput, memory, or resource problem: use `performance-investigation`, not `failure-investigation`; hand an understood change to `safe-code-change`, then use `fact-based-code-review`.
 - Multi-step migration: `solution-framing` chooses the direction only when it is still open, `compatibility-migration` defines safe coexistence and retirement states, and `safe-code-change` implements each local step.
 - Explicit threat model: `security-boundary-analysis` defines trust transitions, abuse paths, and control obligations. Follow with `solution-framing` for architecture choices, `product-interface-engineering` for visible permission or recovery interactions, or `compatibility-migration` for staged coexistence; keep each output separate.
+- High-risk change: use `adversarial-deep-review` only for an explicit deep assessment of a concrete change, then hand its evidence to `fact-based-code-review` for the merge decision.
 
 Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. Static and runtime-contract checks provide bounded evidence only; do not infer universal portability or reliable automatic activation from installation alone. See the [compatibility matrix](docs/compatibility.md).
 

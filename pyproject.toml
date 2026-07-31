@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-skill-forge"
-version = "0.5.0"
+version = "0.6.0"
 description = "Portable, independently authored agent skills"
 license = {text = "Apache-2.0"}
 readme = "README.md"
@@ -32,6 +32,7 @@ py-modules = []
   "scripts/install_codex_skills.py",
 ]
 "share/agent-skill-forge/templates" = ["templates/AGENTS.md"]
+"share/agent-skill-forge/skills/adversarial-deep-review" = ["skills/adversarial-deep-review/SKILL.md"]
 "share/agent-skill-forge/skills/compatibility-migration" = [
   "skills/compatibility-migration/SKILL.md",
 ]

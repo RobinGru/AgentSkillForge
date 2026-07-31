@@ -32,21 +32,22 @@ Agent Skills sind einfache Markdown-Verzeichnisse mit einer zentralen `SKILL.md`
 
 ## Skill-Katalog
 
-Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelnen Wort im Prompt.
+Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelnen Wort im Prompt. Der Katalog folgt einem typischen Arbeitsablauf; verwende die spezialisierten Investigations-Skills, bevor du eine ansonsten verstandene Änderung vornimmst.
 
 | Skill | Wann verwenden? | Beispiel |
 |---|---|---|
 | [`skills/project-discovery/`](skills/project-discovery/) | Ein neues oder unklares Produkt benötigt Nutzer, Ziele, Grenzen und eine erste Capability-Map. | „Definiere das kleinste nützliche erste Release.“ |
 | [`skills/feature-specification/`](skills/feature-specification/) | Eine größere Capability benötigt beobachtbare Regeln, Zustände, Berechtigungen und Akzeptanzkriterien. | „Spezifiziere Retry- und Ablehnungsverhalten für den Dateiimport.“ |
 | [`skills/solution-framing/`](skills/solution-framing/) | Die Richtung ist unklar oder eine Entscheidung enthält wichtige Abwägungen. | „Welcher Migrationsansatz ist am sichersten?“ |
-| [`skills/safe-code-change/`](skills/safe-code-change/) | Du brauchst eine kleine, verstandene Änderung oder Fehlerbehebung. | „Behebe diesen reproduzierbaren Validierungsfehler.“ |
-| [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | Eine Änderung ist bereit zur Prüfung und braucht einen faktenbasierten Code-Review. | „Prüfe diesen Pull Request vor dem Merge.“ |
-| [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | Eine Seite, ein Formular, eine Interaktion, Accessibility oder responsives Verhalten braucht Arbeit. | „Mache dieses Checkout-Formular mobil nutzbar.“ |
-| [`skills/performance-investigation/`](skills/performance-investigation/) | Du untersuchst ein gemessenes Latenz-, Durchsatz- oder Speicherproblem. | „Warum ist dieser Endpunkt langsamer geworden?“ |
-| [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente soll ohne Verhaltensänderung aufgeteilt werden. | „Teile diese große Vue-SFC in wartbare Teile auf.“ |
-| [`skills/failure-investigation/`](skills/failure-investigation/) | Ein technischer Fehler außerhalb der Performance-Domäne hat eine unbekannte Ursache oder sichere Änderungsgrenze. | „Ermittle vor einem Fix, warum diese Integration fehlschlägt.“ |
-| [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | Eine explizite Security- oder Threat-Modeling-Aufgabe benötigt Vertrauensübergänge, Missbrauchspfade, Kontrollen und Restunsicherheit. | „Erstelle ein Threat Model für diese Webhook-Grenze.“ |
 | [`skills/compatibility-migration/`](skills/compatibility-migration/) | Eine festgelegte Richtung erfordert sichere Koexistenz von altem und neuem Verhalten über mehrere Schritte oder Konsumenten. | „Plane eine kompatible API-Migration über mehrere Releases.“ |
+| [`skills/failure-investigation/`](skills/failure-investigation/) | Ein technischer Fehler außerhalb der Performance-Domäne hat eine unbekannte Ursache oder sichere Änderungsgrenze. | „Ermittle vor einem Fix, warum diese Integration fehlschlägt.“ |
+| [`skills/performance-investigation/`](skills/performance-investigation/) | Du untersuchst ein gemessenes Latenz-, Durchsatz- oder Speicherproblem. | „Warum ist dieser Endpunkt langsamer geworden?“ |
+| [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | Eine explizite Security- oder Threat-Modeling-Aufgabe benötigt Vertrauensübergänge, Missbrauchspfade, Kontrollen und Restunsicherheit. | „Erstelle ein Threat Model für diese Webhook-Grenze.“ |
+| [`skills/safe-code-change/`](skills/safe-code-change/) | Du brauchst eine kleine, verstandene Änderung oder Fehlerbehebung. | „Behebe diesen reproduzierbaren Validierungsfehler.“ |
+| [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | Eine Seite, ein Formular, eine Interaktion, Accessibility oder responsives Verhalten braucht Arbeit. | „Mache dieses Checkout-Formular mobil nutzbar.“ |
+| [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente soll ohne Verhaltensänderung aufgeteilt werden. | „Teile diese große Vue-SFC in wartbare Teile auf.“ |
+| [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | Eine Änderung ist bereit zur Prüfung und braucht einen faktenbasierten Code-Review. | „Prüfe diesen Pull Request vor dem Merge.“ |
+| [`skills/adversarial-deep-review/`](skills/adversarial-deep-review/) | Eine ausdrücklich gewünschte tiefe Prüfung einer konkreten Hochrisiko-Änderung braucht evidenzbasierte Stressszenarien. | „Prüfe diesen Payment-Retry-Diff adversarial.“ |
 | [`skills/session-handoff/`](skills/session-handoff/) | Unfertige Repository-Arbeit muss von einer anderen Sitzung oder Person anhand verifizierter Zustände fortgesetzt werden. | „Halte Worktree und die eine sichere nächste Aktion fest.“ |
 
 Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre das vollständige Verzeichnis einschließlich vorhandener `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
@@ -111,6 +112,7 @@ Häufige Reihenfolgen sind:
 - Gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem: Verwende `performance-investigation`, nicht `failure-investigation`; übergib eine verstandene Änderung an `safe-code-change` und prüfe sie anschließend mit `fact-based-code-review`.
 - Mehrstufige Migration: `solution-framing` wählt die Richtung nur, wenn sie noch offen ist, `compatibility-migration` definiert sichere Koexistenz- und Stilllegungszustände und `safe-code-change` implementiert jeden lokalen Schritt.
 - Explizites Threat Model: `security-boundary-analysis` definiert Vertrauensübergänge, Missbrauchspfade und Kontrollpflichten. Danach übernimmt `solution-framing` Architekturentscheidungen, `product-interface-engineering` sichtbare Berechtigungs- oder Recovery-Interaktionen oder `compatibility-migration` die gestufte Koexistenz; die Outputs bleiben getrennt.
+- Hochrisiko-Änderung: Verwende `adversarial-deep-review` nur für eine ausdrücklich gewünschte tiefe Prüfung einer konkreten Änderung und übergib die Evidenz anschließend an `fact-based-code-review` für die Merge-Entscheidung.
 
 Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Statische und Runtime-Contract-Checks liefern nur begrenzte Belege; aus einer Installation allein folgt weder universelle Portabilität noch zuverlässige automatische Aktivierung. Siehe die [Kompatibilitätsmatrix](docs/compatibility.md).
 

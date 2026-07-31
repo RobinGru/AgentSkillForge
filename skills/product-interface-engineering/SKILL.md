@@ -4,7 +4,7 @@ description: Engineer user-facing interface changes around a concrete user job, 
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.5.0
+  version: 0.6.0
 ---
 
 # Product interface engineering
