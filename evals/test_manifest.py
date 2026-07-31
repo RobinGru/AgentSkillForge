@@ -1,10 +1,10 @@
 from collections import Counter
 from pathlib import Path
+from typing import Any, cast
 
 import yaml
 
 from scripts.run_evals import (
-
     LEGACY_MANIFEST_REQUIRED,
     NEW_SKILLS,
     SKILL_EVAL_SPECS,
@@ -16,8 +16,13 @@ EVAL_DIR = ROOT / "evals"
 MANIFEST = EVAL_DIR / "manifest.yaml"
 
 
-def load_cases(path: Path) -> list[dict]:
-    return yaml.safe_load(path.read_text(encoding="utf-8"))["cases"]
+def load_cases(path: Path) -> list[dict[str, Any]]:
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert isinstance(data, dict)
+    cases = data.get("cases")
+    assert isinstance(cases, list)
+    assert all(isinstance(case, dict) for case in cases)
+    return cast(list[dict[str, Any]], cases)
 
 
 def test_eval_suite_uses_canonical_dynamic_coverage() -> None:

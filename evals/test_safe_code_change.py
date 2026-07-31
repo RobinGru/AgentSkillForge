@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any, cast
 
 import yaml
 
@@ -18,7 +19,12 @@ def test_safe_code_change_is_portable_and_compact() -> None:
 
 
 def test_safe_code_change_evals_cover_triggers_and_routing() -> None:
-    cases = {case["id"]: case for case in yaml.safe_load(EVALS.read_text(encoding="utf-8"))["cases"]}
+    data = yaml.safe_load(EVALS.read_text(encoding="utf-8"))
+    assert isinstance(data, dict)
+    raw_cases = data.get("cases")
+    assert isinstance(raw_cases, list)
+    assert all(isinstance(case, dict) for case in raw_cases)
+    cases = {case["id"]: case for case in cast(list[dict[str, Any]], raw_cases)}
 
     assert "safe-code-change" in cases["safe-code-change-local-bugfix"]["expected_skills"]
     assert "safe-code-change" in cases["safe-code-change-small-refactor"]["expected_skills"]

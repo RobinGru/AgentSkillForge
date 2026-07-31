@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any, cast
 
 import yaml
 
@@ -18,7 +19,12 @@ def test_review_skill_is_portable() -> None:
 
 
 def test_review_evals_cover_fact_boundaries() -> None:
-    cases = {case["id"]: case for case in yaml.safe_load(EVALS.read_text(encoding="utf-8"))["cases"]}
+    data = yaml.safe_load(EVALS.read_text(encoding="utf-8"))
+    assert isinstance(data, dict)
+    raw_cases = data.get("cases")
+    assert isinstance(raw_cases, list)
+    assert all(isinstance(case, dict) for case in raw_cases)
+    cases = {case["id"]: case for case in cast(list[dict[str, Any]], raw_cases)}
 
     assert len(cases) == 5
     assert "REQUEST CHANGES" in cases["review-data-loss"]["assertions"][0]

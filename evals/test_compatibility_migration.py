@@ -1,5 +1,6 @@
 from collections import Counter
 from pathlib import Path
+from typing import Any, cast
 
 import yaml
 
@@ -32,8 +33,13 @@ STATE_FIELDS = [
 ]
 
 
-def load_cases() -> list[dict]:
-    return yaml.safe_load(EVALS.read_text(encoding="utf-8"))["cases"]
+def load_cases() -> list[dict[str, Any]]:
+    data = yaml.safe_load(EVALS.read_text(encoding="utf-8"))
+    assert isinstance(data, dict)
+    cases = data.get("cases")
+    assert isinstance(cases, list)
+    assert all(isinstance(case, dict) for case in cases)
+    return cast(list[dict[str, Any]], cases)
 
 
 def test_compatibility_migration_is_portable_and_at_most_180_lines() -> None:
