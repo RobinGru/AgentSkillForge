@@ -145,8 +145,10 @@ Confirm that:
 
 ### 8. Report
 
-Report the change, preserved contract, pre-change proof, post-change proof,
-additional checks, gaps, risks, and intentionally untouched areas.
+Report only the facts needed to understand the patch and its evidence. Use terse
+bullets or a compact table; do not restate routine process steps or turn each
+fact into a sentence. Write report prose in German by default; use another
+language only when the user or repository instructions explicitly require it.
 
 Use one verdict:
 
@@ -156,41 +158,43 @@ Use one verdict:
 
 ## Output contract
 
-Use these exact headings:
+Use this compact structure; omit a section when it has no material content.
 
 ```markdown
-## Change
-## Behavior contract
-## Baseline proof
-## Post-change proof
-## Additional checks
-## Checks not run
-## Remaining risks
-## Intentionally untouched
-## Verification verdict
+## Änderung
+- `path`: knapper Effekt
+
+## Verhalten
+- Geändert: ...
+- Unverändert: ...
+
+## Nachweis
+- `command`: vorher → nachher; direkt: ja|nein
+
+## Checks
+- `command` ✓
+
+## Offene Punkte / Risiken
+- Nicht ausgeführt: ...
+- Risiko: ...
+
+## Fazit
+PROVED — Faktenbasis
 ```
 
-`Baseline proof` must include:
+Requirements:
 
-```markdown
-- Invocation or procedure:
-- Expected pre-change result:
-- Observed pre-change result:
-- Direct behavior signal: Yes | No
-- Environment or fixture:
-```
-
-`Post-change proof` must include:
-
-```markdown
-- Invocation or procedure:
-- Expected post-change result:
-- Observed post-change result:
-- Same proof repeated: Yes | No
-```
-
-`Verification verdict` must contain exactly one allowed verdict and its factual
-basis.
+- `Änderung`, `Verhalten`, `Nachweis`, and `Fazit` are always present.
+- `Verhalten` names the intended change and material preserved behavior.
+- `Nachweis` includes the direct procedure and concise before/after observations.
+  State a concrete limitation when no direct proof is possible.
+- `Checks` lists only checks actually run and their result; group routine passes
+  when useful (for example, `Zusätzliche Checks: YAML, diff, Tests ✓`).
+- Include `Offene Punkte / Risiken` only for unrun relevant checks, residual risk, or
+  material non-goals. Do not add empty no-risk or no-change statements.
+- `Fazit` contains exactly one allowed verdict and a short factual basis.
+- Keep prose, labels, and explanations in German by default. Do not translate
+  commands, paths, code, or the allowed verdict tokens.
 
 The change is complete when the behavior contract is explicit, the final patch
 stays within the understood boundary, the direct proof has been repeated or its

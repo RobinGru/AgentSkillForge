@@ -14,6 +14,19 @@ cases:
     forbidden_skills: []
     assertions:
       - preserves the public behavior
+  - id: safe-code-change-compact-report
+    prompt: Update a pinned CI action and report the completed change concisely.
+    expected_skills:
+      - safe-code-change
+    forbidden_skills: []
+    assertions:
+      - uses compact keyword-oriented reporting
+      - states changed and preserved behavior
+      - summarizes direct before-and-after proof
+      - groups routine successful checks without boilerplate
+      - names only material gaps or risks
+      - uses idiomatic German labels for behavior, open points, and verdict basis
+      - writes report prose and labels in German by default
   - id: safe-code-change-review-nontrigger
     prompt: Review this pull request for security and correctness.
     expected_skills: []
