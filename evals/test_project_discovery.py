@@ -1,6 +1,6 @@
 from collections import Counter
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 
@@ -23,7 +23,12 @@ HEADINGS = [
 
 
 def load_cases() -> list[dict[str, Any]]:
-    return yaml.safe_load(EVALS.read_text(encoding="utf-8"))["cases"]
+    data = yaml.safe_load(EVALS.read_text(encoding="utf-8"))
+    assert isinstance(data, dict)
+    cases = data.get("cases")
+    assert isinstance(cases, list)
+    assert all(isinstance(case, dict) for case in cases)
+    return cast(list[dict[str, Any]], cases)
 
 
 def test_project_discovery_is_portable_and_compact() -> None:

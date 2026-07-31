@@ -8,6 +8,7 @@ import re
 import sys
 import tomllib
 from pathlib import Path
+from typing import cast
 
 PACKAGE_VERSION = re.compile(
     r"^(?P<release>\d+(?:\.\d+)*)(?:(?P<pre>a|b|rc)(?P<number>\d+))?$"
@@ -31,10 +32,20 @@ def expected_skill_version(package_version: str) -> str:
 def check_release_version(root: Path, tag: str) -> list[str]:
     """Return mismatches between a release tag, package version, and skill versions."""
     with (root / "pyproject.toml").open("rb") as file:
-        package_version = tomllib.load(file)["project"]["version"]
+        metadata = cast(object, tomllib.load(file))
+    if not isinstance(metadata, dict):
+        raise TypeError("pyproject.toml must contain a project table")
+    metadata = cast(dict[str, object], metadata)
+    project = metadata.get("project")
+    if not isinstance(project, dict):
+        raise TypeError("pyproject.toml project must be a table")
+    project = cast(dict[str, object], project)
+    package_version = project.get("version")
+    if not isinstance(package_version, str):
+        raise TypeError("pyproject.toml project.version must be a string")
 
     expected_tag = f"v{package_version}"
-    findings = []
+    findings: list[str] = []
     if tag != expected_tag:
         findings.append(f"release tag {tag!r} does not match package version {expected_tag!r}")
 
@@ -43,17 +54,18 @@ def check_release_version(root: Path, tag: str) -> list[str]:
         match = SKILL_VERSION.search(path.read_text(encoding="utf-8"))
         actual_version = match.group("version") if match else None
         if actual_version != expected_version:
-            findings.append(
-                f"{path.relative_to(root)} has version {actual_version!r}; "
-                f"expected {expected_version!r}"
-            )
+            findings.append(f"{path.relative_to(root)} has version {actual_version!r}; expected {expected_version!r}")
     return findings
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("tag", help="Release tag, for example v0.4.0")
-    args = parser.parse_args()
+    _ = parser.add_argument("tag", help="Release tag, for example v0.4.0")
+
+    class Arguments(argparse.Namespace):
+        tag: str = ""
+
+    args = parser.parse_args(namespace=Arguments())
 
     findings = check_release_version(Path(__file__).resolve().parents[1], args.tag)
     if findings:

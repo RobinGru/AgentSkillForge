@@ -53,8 +53,12 @@ def missing_support_files(wheel: Path) -> set[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path.cwd())
-    args = parser.parse_args()
+    _ = parser.add_argument("--root", type=Path, default=Path.cwd())
+
+    class Arguments(argparse.Namespace):
+        root: Path = Path.cwd()
+
+    args = parser.parse_args(namespace=Arguments())
     root = args.root.resolve()
 
     with tempfile.TemporaryDirectory(prefix="agent-skill-forge-wheel-") as output:

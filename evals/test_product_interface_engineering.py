@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any, cast
 
 import yaml
 
@@ -17,7 +18,12 @@ def test_interface_skill_is_portable() -> None:
 
 
 def test_interface_evals_cover_boundaries() -> None:
-    cases = {case["id"]: case for case in yaml.safe_load(EVALS.read_text(encoding="utf-8"))["cases"]}
+    data = yaml.safe_load(EVALS.read_text(encoding="utf-8"))
+    assert isinstance(data, dict)
+    raw_cases = data.get("cases")
+    assert isinstance(raw_cases, list)
+    assert all(isinstance(case, dict) for case in raw_cases)
+    cases = {case["id"]: case for case in cast(list[dict[str, Any]], raw_cases)}
     assert "product-interface-engineering" in cases["interface-checkout-form"]["expected_skills"]
     assert "product-interface-engineering" in cases["interface-backend-nontrigger"]["forbidden_skills"]
     assert "product-interface-engineering" in cases["interface-vue-structural-nonprimary"]["forbidden_skills"]

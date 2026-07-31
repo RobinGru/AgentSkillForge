@@ -8,7 +8,7 @@ import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import cast
 from urllib.parse import urlparse
 
 import yaml
@@ -39,7 +39,7 @@ TARGET_SKILLS = frozenset(
     }
 )
 NAME_PATTERN = re.compile(r"^[a-z0-9-]{1,64}$")
-MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
+MARKDOWN_LINK: re.Pattern[str] = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
 FORBIDDEN_REFERENCES = re.compile(
     r"/review|/ship|security-auditor|test-engineer", re.IGNORECASE
 )
@@ -56,7 +56,7 @@ class Finding:
     message: str
 
 
-def parse_frontmatter(path: Path, text: str) -> tuple[dict[str, Any] | None, str | None]:
+def parse_frontmatter(_path: Path, text: str) -> tuple[dict[str, object] | None, str | None]:
     lines = text.splitlines()
     if not lines or lines[0] != "---":
         return None, "missing opening frontmatter delimiter"
@@ -67,12 +67,16 @@ def parse_frontmatter(path: Path, text: str) -> tuple[dict[str, Any] | None, str
         return None, "missing closing frontmatter delimiter"
 
     try:
-        data = yaml.safe_load("\n".join(lines[1:end]))
+        data = cast(object, yaml.safe_load("\n".join(lines[1:end])))
     except yaml.YAMLError as error:
         return None, f"invalid YAML frontmatter: {error}"
 
     if not isinstance(data, dict):
         return None, "frontmatter must be a mapping"
+    mapping = cast(dict[object, object], data)
+    if not all(isinstance(key, str) for key in mapping):
+        return None, "frontmatter must be a mapping"
+    data = cast(dict[str, object], mapping)
     if "---" in lines[end + 1 :]:
         return None, "multiple frontmatter blocks are not allowed"
     return data, None
@@ -85,8 +89,8 @@ def is_relative_target(target: str) -> bool:
 
 def validate_links(path: Path, text: str) -> list[Finding]:
     findings: list[Finding] = []
-    for target in MARKDOWN_LINK.findall(text):
-        target = target.split("#", 1)[0].strip()
+    for raw_target in cast(list[str], MARKDOWN_LINK.findall(text)):
+        target = raw_target.split("#", 1)[0].strip()
         if not target or not is_relative_target(target):
             continue
         if not (path.parent / target).exists():
@@ -132,9 +136,10 @@ def validate_skill(path: Path) -> tuple[str | None, list[Finding]]:
         findings.append(Finding("error", path, "description must be non-empty and at most 1024 characters"))
 
     metadata = frontmatter.get("metadata")
+    metadata_items = cast(dict[object, object], metadata).items() if isinstance(metadata, dict) else None
     if metadata is not None and (
-        not isinstance(metadata, dict)
-        or any(not isinstance(key, str) or not isinstance(value, str) for key, value in metadata.items())
+        metadata_items is None
+        or any(not isinstance(key, str) or not isinstance(value, str) for key, value in metadata_items)
     ):
         findings.append(Finding("error", path, "metadata keys and values must be strings"))
 
@@ -198,7 +203,7 @@ def validate_repository(root: Path, skills_dir: Path) -> list[Finding]:
 
     documented = readme_skill_names(root / "README.md")
     actual = set(names)
-    if actual != TARGET_SKILLS:
+    if frozenset(actual) != TARGET_SKILLS:
         findings.append(
             Finding("error", skills_root, f"target skills differ: expected={sorted(TARGET_SKILLS)}, actual={sorted(actual)}")
         )
@@ -211,9 +216,14 @@ def validate_repository(root: Path, skills_dir: Path) -> list[Finding]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path.cwd())
-    parser.add_argument("--skills-dir", type=Path, default=Path("skills"))
-    args = parser.parse_args()
+    _ = parser.add_argument("--root", type=Path, default=Path.cwd())
+    _ = parser.add_argument("--skills-dir", type=Path, default=Path("skills"))
+
+    class Arguments(argparse.Namespace):
+        root: Path = Path.cwd()
+        skills_dir: Path = Path("skills")
+
+    args = parser.parse_args(namespace=Arguments())
 
     try:
         findings = validate_repository(args.root.resolve(), args.skills_dir)

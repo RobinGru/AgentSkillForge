@@ -44,18 +44,25 @@ def install_skills(source: Path, target: Path, names: list[str] | None, force: b
             raise FileExistsError(f"destination already exists: {destination}; rerun with --force to replace it")
         if destination.exists():
             shutil.rmtree(destination)
-        shutil.copytree(origin, destination)
+        _ = shutil.copytree(origin, destination)
         installed.append(destination)
     return installed
 
 
 def main(default_target: Path, client_name: str, argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", type=Path, default=default_source(), help="directory containing skill folders")
-    parser.add_argument("--target", type=Path, default=default_target, help=f"{client_name} skill directory")
-    parser.add_argument("--skill", dest="skills", action="append", help="skill name to install; repeat for more than one")
-    parser.add_argument("--force", action="store_true", help="replace selected existing skill directories")
-    args = parser.parse_args(argv)
+    _ = parser.add_argument("--source", type=Path, default=default_source(), help="directory containing skill folders")
+    _ = parser.add_argument("--target", type=Path, default=default_target, help=f"{client_name} skill directory")
+    _ = parser.add_argument("--skill", dest="skills", action="append", help="skill name to install; repeat for more than one")
+    _ = parser.add_argument("--force", action="store_true", help="replace selected existing skill directories")
+
+    class Arguments(argparse.Namespace):
+        source: Path = default_source()
+        target: Path = default_target
+        skills: list[str] | None = None
+        force: bool = False
+
+    args = parser.parse_args(argv, namespace=Arguments())
 
     try:
         installed = install_skills(args.source, args.target, args.skills, args.force)

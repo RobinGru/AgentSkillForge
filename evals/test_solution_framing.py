@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any, cast
 
 import yaml
 
@@ -37,7 +38,11 @@ def test_solution_framing_template_has_an_objective_contract() -> None:
 
 def test_solution_framing_eval_manifest_covers_required_boundaries() -> None:
     data = yaml.safe_load(EVALS.read_text(encoding="utf-8"))
-    cases = {case["id"]: case for case in data["cases"]}
+    assert isinstance(data, dict)
+    raw_cases = data.get("cases")
+    assert isinstance(raw_cases, list)
+    assert all(isinstance(case, dict) for case in raw_cases)
+    cases = {case["id"]: case for case in cast(list[dict[str, Any]], raw_cases)}
 
     assert len(cases) == 8
     assert cases["solution-framing-auth-ambiguity"]["expected_skills"] == [

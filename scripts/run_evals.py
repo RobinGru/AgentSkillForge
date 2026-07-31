@@ -12,13 +12,11 @@ import sys
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
-import yaml
 
 if __package__ is None:  # Direct execution as `python scripts/run_evals.py`.
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from scripts.run_runtime_evals import load_cases as load_runtime_cases
+from scripts.run_runtime_evals import as_mapping, load_cases as load_runtime_cases, object_list, string_list
 from scripts.run_runtime_evals import load_yaml as load_runtime_yaml
 from scripts.run_runtime_evals import validate_client
 
@@ -57,19 +55,22 @@ NEW_SKILLS = {
 
 
 
-def load_cases(path: Path) -> tuple[list[dict[str, Any]], list[str]]:
+def load_cases(path: Path) -> tuple[list[dict[str, object]], list[str]]:
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, yaml.YAMLError) as error:
-        return [], [f"could not read {path}: {error}"]
-    if not isinstance(data, dict) or not isinstance(data.get("cases"), list):
+        data = as_mapping(load_runtime_yaml(path))
+    except ValueError as error:
+        return [], [str(error)]
+    raw_cases = object_list(data.get("cases")) if data is not None else None
+    if data is None or raw_cases is None:
         return [], [f"{path} must contain a cases list"]
-    if not all(isinstance(case, dict) for case in data["cases"]):
+    cases = [as_mapping(case) for case in raw_cases]
+    if any(case is None for case in cases):
         return [], [f"{path} cases must be mappings"]
-    return data["cases"], []
+    return [case for case in cases if case is not None], []
 
 
-def validate_case_identity(cases: list[dict[str, Any]], label: str) -> list[str]:
+
+def validate_case_identity(cases: list[dict[str, object]], label: str) -> list[str]:
     errors: list[str] = []
     identifiers = [case.get("id") for case in cases]
     prompts = [case.get("prompt") for case in cases]
@@ -132,7 +133,7 @@ def validate_manifest(path: Path) -> list[str]:
             contrasted = {
                 other
                 for case in skill_cases
-                for other in case.get("forbidden_skills", [])
+                for other in (string_list(case.get("forbidden_skills", [])) or [])
                 if other in comparison_skills
             }
             missing = sorted(comparison_skills - contrasted)
@@ -152,21 +153,25 @@ def validate_runtime_declarations(eval_dir: Path) -> list[str]:
             errors.append("runtime.yaml must declare at least one runtime case")
 
     try:
-        clients = load_runtime_yaml(eval_dir / "clients.yaml")
+        clients = as_mapping(load_runtime_yaml(eval_dir / "clients.yaml"))
     except ValueError as error:
         errors.append(str(error))
         return errors
-    if not isinstance(clients, dict) or clients.get("version") != 1 or not isinstance(clients.get("clients"), list):
+    raw_clients = object_list(clients.get("clients")) if clients is not None else None
+    if clients is None or clients.get("version") != 1 or raw_clients is None:
         return [*errors, f"{eval_dir / 'clients.yaml'} must contain version: 1 and a clients list"]
     identifiers: set[str] = set()
-    for client in clients["clients"]:
-        if not isinstance(client, dict) or not isinstance(client.get("id"), str) or not client["id"]:
+    for value in raw_clients:
+        client = as_mapping(value)
+        identifier = client.get("id") if client is not None else None
+        if not isinstance(identifier, str) or not identifier:
             errors.append("clients.yaml clients must have non-empty string ids")
             continue
-        if client["id"] in identifiers:
-            errors.append(f"clients.yaml duplicate client id: {client['id']}")
-        identifiers.add(client["id"])
-        errors.extend(f"{client['id']}: {error}" for error in validate_client(client))
+        assert client is not None
+        if identifier in identifiers:
+            errors.append(f"clients.yaml duplicate client id: {identifier}")
+        identifiers.add(identifier)
+        errors.extend(f"{identifier}: {error}" for error in validate_client(client))
     if not {"codex-cli", "zed"} <= identifiers:
         errors.append("clients.yaml must declare codex-cli and zed clients")
     return errors
@@ -180,7 +185,9 @@ def validate_eval_suite(manifest: Path) -> list[str]:
     manifest_cases, load_errors = load_cases(manifest)
     if not load_errors:
         duplicates = sorted(
-            case["prompt"] for case in manifest_cases if case.get("prompt") in detailed_prompts
+            prompt
+            for case in manifest_cases
+            if isinstance(prompt := case.get("prompt"), str) and prompt in detailed_prompts
         )
         if duplicates:
             errors.append(f"manifest prompts duplicate detailed evals: {duplicates}")
@@ -189,8 +196,12 @@ def validate_eval_suite(manifest: Path) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", type=Path, default=Path("evals/manifest.yaml"))
-    args = parser.parse_args()
+    _ = parser.add_argument("--manifest", type=Path, default=Path("evals/manifest.yaml"))
+
+    class Arguments(argparse.Namespace):
+        manifest: Path = Path("evals/manifest.yaml")
+
+    args = parser.parse_args(namespace=Arguments())
     errors = validate_eval_suite(args.manifest)
     if errors:
         for error in errors:

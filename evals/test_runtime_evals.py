@@ -58,18 +58,22 @@ def test_fixture_client_runs_contracts_and_writes_report(tmp_path: Path) -> None
     )
 
     report = json.loads(output.read_text(encoding="utf-8"))
+    assert isinstance(report, dict)
+    results = report.get("results")
+    assert isinstance(results, list)
+    assert all(isinstance(case, dict) for case in results)
     assert result == 0
     assert report["passed"] is True
-    assert all(case["passed"] for case in report["results"])
+    assert all(case["passed"] for case in results)
 
 
 def test_fixture_client_requires_explicit_response() -> None:
     with pytest.raises(SystemExit, match="2"):
-        main(["--client", "fixture"])
+        _ = main(["--client", "fixture"])
 
 
 def test_codex_client_requires_recorded_release_metadata(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("AGENT_SKILLS_RUNTIME_EVALS", "1")
 
     with pytest.raises(SystemExit, match="2"):
-        main(["--client", "codex-cli"])
+        _ = main(["--client", "codex-cli"])

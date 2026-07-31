@@ -1,3 +1,5 @@
+import tomllib
+import zipfile
 from pathlib import Path
 
 from scripts.check_distribution import (
@@ -33,10 +35,19 @@ def test_repository_agents_template_has_the_compact_routing_contract() -> None:
 
 
 def test_distribution_metadata_lists_every_skill_document() -> None:
-    import tomllib
-
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
-    groups = metadata["tool"]["setuptools"]["data-files"]
+    tool = metadata.get("tool")
+    assert isinstance(tool, dict)
+    setuptools = tool.get("setuptools")
+    assert isinstance(setuptools, dict)
+    data_files = setuptools.get("data-files")
+    assert isinstance(data_files, dict)
+    groups: dict[str, list[str]] = {}
+    for group, files in data_files.items():
+        assert isinstance(group, str)
+        assert isinstance(files, list)
+        assert all(isinstance(file, str) for file in files)
+        groups[group] = [file for file in files if isinstance(file, str)]
     listed = {Path(item) for files in groups.values() for item in files if item.startswith("skills/")}
     assert listed == expected_skill_files(ROOT)
     assert groups["share/agent-skill-forge"] == ["README.md", "THIRD_PARTY_NOTICES.md", "docs/compatibility.md"]
@@ -52,7 +63,6 @@ def test_distribution_metadata_lists_every_skill_document() -> None:
 
 def test_missing_skill_files_reports_missing_wheel_members(tmp_path: Path) -> None:
     wheel = tmp_path / "empty.whl"
-    import zipfile
 
     with zipfile.ZipFile(wheel, "w"):
         pass
