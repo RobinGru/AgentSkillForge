@@ -4,7 +4,7 @@ description: Choose a defensible technical or delivery direction for a consequen
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.4.0
+  version: 0.5.0
 ---
 
 # Solution framing

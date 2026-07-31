@@ -4,7 +4,7 @@ description: Review a concrete code change by tracing its relevant effects and s
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.4.0
+  version: 0.5.0
 ---
 
 # Fact-based code review
