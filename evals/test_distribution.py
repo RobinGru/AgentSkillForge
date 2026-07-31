@@ -19,6 +19,7 @@ def test_repository_agents_template_has_the_compact_routing_contract() -> None:
         "failure-investigation",
         "safe-code-change",
         "fact-based-code-review",
+        "adversarial-deep-review",
         "product-interface-engineering",
         "performance-investigation",
         "compatibility-migration",

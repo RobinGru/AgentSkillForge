@@ -41,6 +41,7 @@ Choose the skill that matches the task—not merely a word in the prompt.
 | [`skills/solution-framing/`](skills/solution-framing/) | The direction is unclear or a decision has meaningful trade-offs. | “Which migration approach is safest?” |
 | [`skills/safe-code-change/`](skills/safe-code-change/) | You need a small, understood change or bug fix. | “Fix this reproducible validation error.” |
 | [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | A change is ready for review and needs a fact-based assessment. | “Review this pull request before merging.” |
+| [`skills/adversarial-deep-review/`](skills/adversarial-deep-review/) | An explicitly requested deep review of a concrete high-risk change needs evidence-backed stress scenarios. | “Adversarially review this payment retry diff.” |
 | [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | A screen, form, interaction, accessibility, or responsive behavior needs work. | “Make this checkout form usable on mobile.” |
 | [`skills/performance-investigation/`](skills/performance-investigation/) | You have a measured latency, throughput, or memory problem to investigate. | “Why did this endpoint become slower?” |
 | [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | A Vue or Nuxt component needs to be split without changing behavior. | “Separate this large Vue SFC into maintainable parts.” |
@@ -111,6 +112,7 @@ Common sequences are:
 - Measured latency, throughput, memory, or resource problem: use `performance-investigation`, not `failure-investigation`; hand an understood change to `safe-code-change`, then use `fact-based-code-review`.
 - Multi-step migration: `solution-framing` chooses the direction only when it is still open, `compatibility-migration` defines safe coexistence and retirement states, and `safe-code-change` implements each local step.
 - Explicit threat model: `security-boundary-analysis` defines trust transitions, abuse paths, and control obligations. Follow with `solution-framing` for architecture choices, `product-interface-engineering` for visible permission or recovery interactions, or `compatibility-migration` for staged coexistence; keep each output separate.
+- High-risk change: use `adversarial-deep-review` only for an explicit deep assessment of a concrete change, then hand its evidence to `fact-based-code-review` for the merge decision.
 
 Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. Static and runtime-contract checks provide bounded evidence only; do not infer universal portability or reliable automatic activation from installation alone. See the [compatibility matrix](docs/compatibility.md).
 

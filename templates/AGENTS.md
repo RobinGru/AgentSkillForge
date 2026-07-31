@@ -24,6 +24,7 @@ Always answer the user in German. Be concise and explicit.
 - staged migration → `compatibility-migration`
 - explicit threat model → `security-boundary-analysis`
 - concrete diff or PR review → `fact-based-code-review`
+- explicit deep review of a concrete high-risk change → `adversarial-deep-review`
 - unfinished work that another session must resume → `session-handoff`
 
 For trivial, low-risk edits, work directly without creating extra process.

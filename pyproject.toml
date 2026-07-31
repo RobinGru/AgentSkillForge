@@ -32,6 +32,7 @@ py-modules = []
   "scripts/install_codex_skills.py",
 ]
 "share/agent-skill-forge/templates" = ["templates/AGENTS.md"]
+"share/agent-skill-forge/skills/adversarial-deep-review" = ["skills/adversarial-deep-review/SKILL.md"]
 "share/agent-skill-forge/skills/compatibility-migration" = [
   "skills/compatibility-migration/SKILL.md",
 ]

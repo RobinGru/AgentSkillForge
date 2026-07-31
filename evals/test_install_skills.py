@@ -104,6 +104,7 @@ def test_shared_installer_discovers_all_distributed_skills() -> None:
         "solution-framing",
         "safe-code-change",
         "fact-based-code-review",
+        "adversarial-deep-review",
         "product-interface-engineering",
         "performance-investigation",
         "vue-sfc-decomposition",
