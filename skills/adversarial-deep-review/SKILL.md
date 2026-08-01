@@ -9,6 +9,9 @@ metadata:
 
 # Adversarial deep review
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Assess a concrete high-risk change by systematically challenging the assumptions
 that make it safe. Retain only findings and uncertainty that repository evidence
 supports.

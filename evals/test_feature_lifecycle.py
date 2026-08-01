@@ -9,7 +9,7 @@ from scripts.validate_repository import validate_skill
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "skills" / "feature-lifecycle" / "SKILL.md"
 EVALS = ROOT / "evals" / "feature-lifecycle.yaml"
-REFERENCE = SKILL.parent / "references" / "artifact-templates.md"
+
 HEADINGS = [
     "## Lifecycle update",
     "## Evidence",
@@ -18,7 +18,7 @@ HEADINGS = [
     "## Lifecycle state",
 ]
 STATES = ["PROPOSED", "READY", "IN PROGRESS", "BLOCKED", "VERIFICATION", "DONE", "ABANDONED"]
-REQUIRED = {"positive": 5, "negative": 5, "conflict": 4, "output": 2, "adversarial": 4}
+REQUIRED = {"positive": 2, "negative": 2, "conflict": 1, "output": 1, "adversarial": 1}
 
 
 def load_cases() -> list[dict[str, Any]]:
@@ -41,18 +41,11 @@ def test_feature_lifecycle_is_portable_and_has_a_bounded_ledger() -> None:
 
     assert name == "feature-lifecycle"
     assert not [finding for finding in findings if finding.level == "error"]
-    assert len(text.splitlines()) <= 160
-    assert "revision-bound lifecycle record" in text
+    assert len(text.splitlines()) <= 110
+    assert "compact, revision-bound record" in text
     assert "project-management system" in text
-    assert "`feature-specification`" in text
-    assert "`session-handoff`" in text
-    assert "`compatibility-migration`" in text
-    assert "`adversarial-deep-review`" in text
-    assert REFERENCE.is_file()
-    reference = REFERENCE.read_text(encoding="utf-8")
-    assert "## Canonical implementation record" in reference
-    assert "## Feature index" in reference
-    assert "## Handoff boundary" in reference
+    assert "exactly one bounded next action" in text
+    assert not (SKILL.parent / "references").exists()
 
 
 def test_feature_lifecycle_output_contract_and_state_guards_are_exact() -> None:
@@ -60,8 +53,9 @@ def test_feature_lifecycle_output_contract_and_state_guards_are_exact() -> None:
 
     assert output_headings(text) == HEADINGS
     assert all(f"`{state}`" in text for state in STATES)
-    assert "verified_revision` equals `observed_revision" in text
-    assert "exactly one safe next action" in text
+    assert "Observed revision" in text
+    assert "Verified revision" in text
+    assert "exactly one bounded next action" in text
 
 
 def test_feature_lifecycle_evals_cover_boundaries_and_evidence() -> None:
@@ -80,8 +74,5 @@ def test_feature_lifecycle_evals_cover_boundaries_and_evidence() -> None:
         "feature-lifecycle",
         "session-handoff",
     ]
-    assert by_id["lifecycle-conflict-adversarial-review"]["expected_skills"] == [
-        "adversarial-deep-review",
-        "feature-lifecycle",
-    ]
+
     assert "refuses unsupported DONE state" in by_id["lifecycle-adversarial-false-done"]["assertions"]

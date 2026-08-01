@@ -9,6 +9,9 @@ metadata:
 
 # Failure investigation
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Establish why a non-performance failure occurs and where a later change can be
 made safely.
 

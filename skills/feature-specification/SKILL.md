@@ -9,6 +9,9 @@ metadata:
 
 # Feature specification
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Produce a testable behavior contract for one capability. Describe what users or
 systems can observe; leave architecture and implementation details to later
 work.

@@ -9,6 +9,9 @@ metadata:
 
 # Solution framing
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Turn an uncertain technical request into a bounded decision that another
 person or agent can inspect and act on. The result is a decision brief, not an
 implementation plan disguised as discovery.

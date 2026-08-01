@@ -9,6 +9,9 @@ metadata:
 
 # Vue SFC decomposition
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Decompose a Vue component only to solve an observed responsibility, maintenance,
 or testability problem. Choose the extraction boundary from behavior and
 ownership, not component length alone.

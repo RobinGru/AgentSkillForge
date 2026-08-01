@@ -9,6 +9,9 @@ metadata:
 
 # Performance investigation
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Treat performance work as an investigation, not a list of optimizations. Change
 behavior only after measurements identify a plausible bottleneck and an experiment
 can distinguish it from competing explanations.

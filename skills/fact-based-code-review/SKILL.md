@@ -9,6 +9,9 @@ metadata:
 
 # Fact-based code review
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Review a proposed change against its intended behavior and the facts available
 in the repository. Do not turn unknown context into a forced approval or
 rejection.

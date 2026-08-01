@@ -9,6 +9,9 @@ metadata:
 
 # Session handoff
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Preserve actionable state for unfinished repository work. This is a continuation
 record, not a transcript, retrospective, specification, or implementation plan.
 

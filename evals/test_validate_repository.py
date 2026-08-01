@@ -26,6 +26,14 @@ def test_valid_repository_passes(tmp_path: Path) -> None:
     assert validate_repository(tmp_path, Path("skills")) == []
 
 
+def test_skills_require_repository_language_and_conventions() -> None:
+    required_rule = "Use the repository's established language and conventions for any artifacts you create or update."
+
+    for name in TARGET_SKILLS:
+        text = (Path(__file__).resolve().parents[1] / "skills" / name / "SKILL.md").read_text(encoding="utf-8")
+        assert required_rule in text
+
+
 def test_extra_skill_is_an_error(tmp_path: Path) -> None:
     for name in TARGET_SKILLS | {"example-skill"}:
         write_skill(

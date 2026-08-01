@@ -9,6 +9,9 @@ metadata:
 
 # Project discovery
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Turn an idea or an unclear repository into a bounded product brief and a small,
 prioritized capability map. Define the problem and desired outcomes without
 choosing architecture or writing implementation code.
