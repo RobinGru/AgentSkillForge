@@ -14,6 +14,7 @@ PACKAGE_VERSION = re.compile(
     r"^(?P<release>\d+(?:\.\d+)*)(?:(?P<pre>a|b|rc)(?P<number>\d+))?$"
 )
 SKILL_VERSION = re.compile(r"(?m)^  version:\s*['\"]?(?P<version>[^'\"\s]+)['\"]?\s*$")
+RELEASE_TAG = re.compile(r"^\d+\.\d+\.\d+$")
 PRE_RELEASE_LABEL = {"a": "alpha", "b": "beta", "rc": "rc"}
 
 
@@ -46,6 +47,8 @@ def check_release_version(root: Path, tag: str) -> list[str]:
 
     expected_tag = package_version
     findings: list[str] = []
+    if RELEASE_TAG.fullmatch(tag) is None:
+        findings.append(f"release tag {tag!r} must match MAJOR.MINOR.PATCH")
     if tag != expected_tag:
         findings.append(f"release tag {tag!r} does not match package version {expected_tag!r}")
 
