@@ -39,6 +39,7 @@ def test_feature_specification_is_portable_and_compact() -> None:
     assert len(text.splitlines()) <= 160
     assert "one substantial product capability" in text
     assert "small, understood change" in text
+    assert "`feature-lifecycle`" in text
 
 
 def test_feature_specification_output_contract_is_exact() -> None:

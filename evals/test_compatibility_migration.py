@@ -46,7 +46,9 @@ def test_compatibility_migration_is_portable_and_at_most_180_lines() -> None:
     name, findings = validate_skill(SKILL)
     assert name == "compatibility-migration"
     assert not [finding for finding in findings if finding.level == "error"]
-    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 180
+    text = SKILL.read_text(encoding="utf-8")
+    assert len(text.splitlines()) <= 180
+    assert "`feature-lifecycle`" in text
 
 
 def test_compatibility_output_contract_is_exact_and_complete() -> None:

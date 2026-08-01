@@ -4,7 +4,7 @@ description: Establish an evidence-based product direction and initial capabilit
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.1
+  version: 0.6.2
 ---
 
 # Project discovery
@@ -77,8 +77,10 @@ brief; once several larger capabilities exist, maintain only this minimal index:
 |---|---|---|---|
 ```
 
-Use `Idea`, `Ready`, `In Progress`, and `Done`. Do not introduce a larger status
-machine unless the project demonstrates a need for one.
+Use `Idea`, `Ready`, `In Progress`, and `Done`. This brief-local map supports
+product prioritization only; it is not `docs/features/INDEX.md` and must not
+track implementation. When one selected feature needs durable coordination, hand
+it to `feature-lifecycle`, which owns the separate canonical lifecycle index.
 
 ### 6. Obtain a product decision
 

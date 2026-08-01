@@ -4,7 +4,7 @@ description: Make a bounded code change with an explicit behavior contract and p
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.1
+  version: 0.6.2
 ---
 
 # Safe code change
@@ -64,7 +64,9 @@ Before editing, record:
 
 A behavior-preserving refactor must name the observable contract it preserves.
 
-Route unresolved product or architecture decisions before editing.
+Route unresolved product or architecture decisions before editing. Within a
+tracked feature, `feature-lifecycle` records the resulting feature-level evidence;
+this skill remains authoritative for the patch and direct proof.
 
 ### 3. Establish the baseline proof
 

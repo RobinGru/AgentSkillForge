@@ -67,8 +67,10 @@ Remove unsupported empty sections instead of writing generic assurances.
 | F-001 | File import | IN PROGRESS | `F-001-file-import/spec.md` | `F-001-file-import/implementation.md` | `abc1234` | 2026-08-02 | — |
 ```
 
-The index must not introduce facts absent from the canonical record. When they
-differ, inspect the repository and repair both in the same lifecycle update.
+The index must not introduce facts absent from the canonical record. It is
+separate from the brief-local capability map produced by `project-discovery`.
+When the record and index differ, inspect the repository and repair both in the
+same lifecycle update.
 
 ## Parallel-work constraints
 

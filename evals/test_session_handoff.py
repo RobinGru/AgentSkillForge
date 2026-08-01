@@ -54,6 +54,7 @@ def test_session_handoff_is_portable_and_compact() -> None:
 
 def test_session_handoff_has_exact_output_contract_and_states() -> None:
     text = SKILL.read_text(encoding="utf-8")
+    assert "`feature-lifecycle`" in text
     assert output_headings(text) == HEADINGS
     for state in STATES:
         assert f"`{state}`" in text

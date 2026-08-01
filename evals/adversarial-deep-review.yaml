@@ -69,6 +69,11 @@ cases:
     prompt: Perform an explicit deep adversarial review of this concrete high-risk idempotency fix, then hand the supported mitigation boundary to the implementer for a bounded correction.
     expected_skills: [adversarial-deep-review, safe-code-change]
     assertions: [orders evidence before implementation, identifies a bounded mitigation, avoids speculative edits]
+  - id: adversarial-conflict-feature-lifecycle
+    category: conflict
+    prompt: Deeply review a concrete high-risk work unit of a tracked feature, then preserve the supported scenario evidence and resulting blocker in its lifecycle record before the final normal review.
+    expected_skills: [adversarial-deep-review, feature-lifecycle, fact-based-code-review]
+    assertions: [keeps scenario evidence linked, keeps lifecycle state out of review ownership, uses normal review for the sole integration decision]
   - id: adversarial-output-supported-finding
     category: output
     prompt: Produce the adversarial deep-review record for a supplied payment retry diff where repository evidence supports a duplicate-capture risk.

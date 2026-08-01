@@ -4,7 +4,7 @@ description: Define or refine the observable behavior contract for one substanti
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.1
+  version: 0.6.2
 ---
 
 # Feature specification
@@ -89,7 +89,9 @@ criteria that only restate implementation tasks.
 
 Have the product owner review scope, invariants, permissions, states, edge cases,
 and criteria. A draft remains unapproved. If implementation reveals a changed
-behavior obligation, return to specification before continuing.
+behavior obligation, return to specification before continuing. For durable
+multi-session coordination, `feature-lifecycle` may link this approved contract
+without changing its behavior obligations.
 
 ## Output contract
 

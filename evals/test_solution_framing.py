@@ -27,7 +27,9 @@ def test_solution_framing_is_portable_and_within_limit() -> None:
 
     assert name == "solution-framing"
     assert not [finding for finding in findings if finding.level == "error"]
-    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 220
+    text = SKILL.read_text(encoding="utf-8")
+    assert len(text.splitlines()) <= 220
+    assert "`feature-lifecycle`" in text
 
 
 def test_solution_framing_template_has_an_objective_contract() -> None:

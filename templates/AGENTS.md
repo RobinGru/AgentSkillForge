@@ -24,8 +24,8 @@ Always answer the user in German. Be concise and explicit.
 - measured performance issue → `performance-investigation`
 - staged migration → `compatibility-migration`
 - explicit threat model → `security-boundary-analysis`
-- concrete diff or PR review → `fact-based-code-review`
-- explicit deep review of a concrete high-risk change → `adversarial-deep-review`
+- explicit deep review of a concrete high-risk change → `adversarial-deep-review`, then `fact-based-code-review` for the final integration decision
+- concrete diff or PR review without an explicit deep assessment → `fact-based-code-review`
 - unfinished work that another session must resume → `session-handoff`
 
 For trivial, low-risk edits, work directly without creating extra process.

@@ -46,7 +46,8 @@ cases:
     expected_skills: [feature-lifecycle]
     expect:
       required_patterns:
-        - "(?i)(observed revision|verified revision|evidence)"
+        - "(?i)(observed revision|verified revision)"
+        - "(?i)canonical (record|implementation)"
         - "(?i)(next safe action|safe next action)"
       prohibited_patterns:
         - "(?i)tests? passed"

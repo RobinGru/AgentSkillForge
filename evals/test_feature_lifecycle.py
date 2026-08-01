@@ -46,6 +46,8 @@ def test_feature_lifecycle_is_portable_and_has_a_bounded_ledger() -> None:
     assert "project-management system" in text
     assert "`feature-specification`" in text
     assert "`session-handoff`" in text
+    assert "`compatibility-migration`" in text
+    assert "`adversarial-deep-review`" in text
     assert REFERENCE.is_file()
     reference = REFERENCE.read_text(encoding="utf-8")
     assert "## Canonical implementation record" in reference
@@ -77,5 +79,9 @@ def test_feature_lifecycle_evals_cover_boundaries_and_evidence() -> None:
     assert by_id["lifecycle-conflict-handoff"]["expected_skills"] == [
         "feature-lifecycle",
         "session-handoff",
+    ]
+    assert by_id["lifecycle-conflict-adversarial-review"]["expected_skills"] == [
+        "adversarial-deep-review",
+        "feature-lifecycle",
     ]
     assert "refuses unsupported DONE state" in by_id["lifecycle-adversarial-false-done"]["assertions"]

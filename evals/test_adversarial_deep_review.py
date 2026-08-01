@@ -76,3 +76,9 @@ def test_adversarial_deep_review_enforces_critical_routing_boundaries() -> None:
         "adversarial-deep-review",
         "security-boundary-analysis",
     ]
+    assert "`feature-lifecycle`" in SKILL.read_text(encoding="utf-8")
+    assert cases["adversarial-conflict-feature-lifecycle"]["expected_skills"] == [
+        "adversarial-deep-review",
+        "feature-lifecycle",
+        "fact-based-code-review",
+    ]

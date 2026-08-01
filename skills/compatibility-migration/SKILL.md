@@ -4,7 +4,7 @@ description: Plan and coordinate a selected migration when old and new schemas, 
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.1
+  version: 0.6.2
 ---
 
 # Compatibility migration
@@ -101,8 +101,10 @@ supported rollback still depends on it. Choose one state:
 - `DECISION REQUIRED`
 
 Hand each implementation step to `safe-code-change` and each completed diff to
-`fact-based-code-review`. This skill owns the state sequence, not implementation
-or general release approval.
+`fact-based-code-review`. For a tracked feature, `feature-lifecycle` may link
+this plan and record feature-level evidence, but this skill remains authoritative
+for compatibility states, transition evidence, rollback limits, and retirement.
+It does not own implementation or general release approval.
 
 ## Output contract
 

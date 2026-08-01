@@ -112,9 +112,9 @@ Häufige Reihenfolgen sind:
 
 - Unbekannter technischer Fehler außerhalb der Performance-Domäne: `failure-investigation` belegt Ursache und sichere Änderungsgrenze, danach implementiert `safe-code-change` den Fix und `fact-based-code-review` prüft ihn.
 - Gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem: Verwende `performance-investigation`, nicht `failure-investigation`; übergib eine verstandene Änderung an `safe-code-change` und prüfe sie anschließend mit `fact-based-code-review`.
-- Mehrstufige Migration: `solution-framing` wählt die Richtung nur, wenn sie noch offen ist, `compatibility-migration` definiert sichere Koexistenz- und Stilllegungszustände und `safe-code-change` implementiert jeden lokalen Schritt.
+- Mehrstufige Migration: `solution-framing` wählt die Richtung nur, wenn sie noch offen ist, `compatibility-migration` definiert die autoritativen Koexistenz- und Stilllegungszustände, `feature-lifecycle` darf Feature-Evidenz daraus verlinken und `safe-code-change` implementiert jeden lokalen Schritt.
 - Explizites Threat Model: `security-boundary-analysis` definiert Vertrauensübergänge, Missbrauchspfade und Kontrollpflichten. Danach übernimmt `solution-framing` Architekturentscheidungen, `product-interface-engineering` sichtbare Berechtigungs- oder Recovery-Interaktionen oder `compatibility-migration` die gestufte Koexistenz; die Outputs bleiben getrennt.
-- Hochrisiko-Änderung: Verwende `adversarial-deep-review` nur für eine ausdrücklich gewünschte tiefe Prüfung einer konkreten Änderung und übergib die Evidenz anschließend an `fact-based-code-review` für die Merge-Entscheidung.
+- Hochrisikoänderung: Nutze `adversarial-deep-review` nur für eine explizite tiefe Prüfung einer konkreten Änderung und übergib ihre Evidenz anschließend an `fact-based-code-review` für die alleinige Merge-Entscheidung. Ein getracktes Feature darf die Evidenz in `feature-lifecycle` verlinken, ohne Review-Verantwortung zu übernehmen.
 
 Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibungen sind Routing-Hinweise und keine Garantie für das Verhalten eines Hosts. Statische und Runtime-Contract-Checks liefern nur begrenzte Belege; aus einer Installation allein folgt weder universelle Portabilität noch zuverlässige automatische Aktivierung. Siehe die [Kompatibilitätsmatrix](docs/compatibility.md).
 
@@ -144,7 +144,7 @@ python scripts/validate_repository.py
 python scripts/check_links.py
 pytest
 python scripts/run_evals.py
-python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Revision-bound evidence and next safe action."
+python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Observed revision in the canonical record and next safe action."
 python scripts/check_distribution.py
 ```
 

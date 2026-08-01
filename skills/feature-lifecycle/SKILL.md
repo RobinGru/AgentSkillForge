@@ -4,7 +4,7 @@ description: Maintain a small, revision-bound lifecycle record for one substanti
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.1
+  version: 0.6.2
 ---
 
 # Feature lifecycle
@@ -22,15 +22,19 @@ units. Do not use it for one-session changes, generic status reports, or work
 already fully owned by a current repository system of record.
 
 Route product behavior to `feature-specification`, consequential technical
-choices to `solution-framing`, bounded implementation to `safe-code-change`, and
-fragile or dirty worktree continuation to `session-handoff`.
+choices to `solution-framing`, bounded implementation to `safe-code-change`,
+coexistence or mixed-version transitions to `compatibility-migration`, and fragile
+or dirty worktree continuation to `session-handoff`.
 
 ## Ownership and artifacts
 
 `feature-lifecycle` owns durable feature identity, readiness, state, linked source
 artifacts, bounded plan, revision-bound evidence, durable blockers, and exactly
 one safe next action. It links specifications and decisions without changing
-them and never duplicates transient handoff details.
+them and never duplicates transient handoff details. For a migration, link the
+migration artifact: it remains authoritative for compatibility, rollback, and
+retirement. For a deep review, link its scenario evidence and resulting blocker;
+`adversarial-deep-review` never sets lifecycle state or an integration decision.
 
 Use the repository's equivalent convention or:
 
