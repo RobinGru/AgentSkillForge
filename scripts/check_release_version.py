@@ -44,7 +44,7 @@ def check_release_version(root: Path, tag: str) -> list[str]:
     if not isinstance(package_version, str):
         raise TypeError("pyproject.toml project.version must be a string")
 
-    expected_tag = f"v{package_version}"
+    expected_tag = package_version
     findings: list[str] = []
     if tag != expected_tag:
         findings.append(f"release tag {tag!r} does not match package version {expected_tag!r}")
@@ -60,7 +60,7 @@ def check_release_version(root: Path, tag: str) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    _ = parser.add_argument("tag", help="Release tag, for example v0.4.0")
+    _ = parser.add_argument("tag", help="Release tag, for example 0.4.0")
 
     class Arguments(argparse.Namespace):
         tag: str = ""

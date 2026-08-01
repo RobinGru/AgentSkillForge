@@ -22,13 +22,13 @@ def test_expected_skill_version_converts_prerelease_versions() -> None:
 def test_release_version_validation_accepts_matching_versions(tmp_path: Path) -> None:
     write_repository(tmp_path, "1.2.3b4", "1.2.3-beta.4")
 
-    assert check_release_version(tmp_path, "v1.2.3b4") == []
+    assert check_release_version(tmp_path, "1.2.3b4") == []
 
 
 def test_release_version_validation_reports_tag_and_skill_mismatches(tmp_path: Path) -> None:
     write_repository(tmp_path, "1.2.3b4", "1.2.3-beta.3")
 
-    findings = check_release_version(tmp_path, "v1.2.3")
+    findings = check_release_version(tmp_path, "1.2.3")
 
     assert any("does not match package version" in finding for finding in findings)
     assert any("has version" in finding for finding in findings)
