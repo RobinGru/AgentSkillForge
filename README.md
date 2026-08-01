@@ -38,6 +38,7 @@ Choose the skill that matches the task—not merely a word in the prompt. The ca
 |---|---|---|
 | [`skills/project-discovery/`](skills/project-discovery/) | A new or unclear product needs users, outcomes, boundaries, and an initial capability map. | “Define the smallest useful first release for this product.” |
 | [`skills/feature-specification/`](skills/feature-specification/) | One substantial capability needs observable rules, states, permissions, and acceptance criteria. | “Specify retry and denial behavior for file import.” |
+| [`skills/feature-lifecycle/`](skills/feature-lifecycle/) | One substantial feature needs a durable, revision-bound coordination record across sessions, agents, or work units. | “Reconcile this feature ledger and give the next safe action.” |
 | [`skills/solution-framing/`](skills/solution-framing/) | The direction is unclear or a decision has meaningful trade-offs. | “Which migration approach is safest?” |
 | [`skills/compatibility-migration/`](skills/compatibility-migration/) | An agreed direction requires old and new behavior to coexist safely across multiple steps or consumers. | “Plan a compatible multi-release API migration.” |
 | [`skills/failure-investigation/`](skills/failure-investigation/) | A non-performance test, build, runtime, integration, or data failure has an unknown cause or safe change boundary. | “Find why this integration fails before proposing a fix.” |
@@ -107,12 +108,13 @@ See the complete [Zed](docs/clients/zed.md) and [Codex](docs/clients/codex.md) i
 Common sequences are:
 
 - New product: `project-discovery` establishes the product boundary and capability map, then `feature-specification` defines one capability before technical planning or implementation.
+- Multi-session feature delivery: `feature-specification` owns the behavior contract; use `solution-framing` for consequential technical choices, `feature-lifecycle` for the durable revision-bound record, `safe-code-change` for each bounded work unit, and `session-handoff` only when unfinished concrete work must be resumed.
 
 - Unknown non-performance failure: `failure-investigation` establishes a supported cause and safe change boundary, then `safe-code-change` implements the fix, and `fact-based-code-review` reviews it.
 - Measured latency, throughput, memory, or resource problem: use `performance-investigation`, not `failure-investigation`; hand an understood change to `safe-code-change`, then use `fact-based-code-review`.
-- Multi-step migration: `solution-framing` chooses the direction only when it is still open, `compatibility-migration` defines safe coexistence and retirement states, and `safe-code-change` implements each local step.
+- Multi-step migration: `solution-framing` chooses the direction only when it is still open, `compatibility-migration` defines authoritative coexistence and retirement states, `feature-lifecycle` may link their feature-level evidence, and `safe-code-change` implements each local step.
 - Explicit threat model: `security-boundary-analysis` defines trust transitions, abuse paths, and control obligations. Follow with `solution-framing` for architecture choices, `product-interface-engineering` for visible permission or recovery interactions, or `compatibility-migration` for staged coexistence; keep each output separate.
-- High-risk change: use `adversarial-deep-review` only for an explicit deep assessment of a concrete change, then hand its evidence to `fact-based-code-review` for the merge decision.
+- High-risk change: use `adversarial-deep-review` only for an explicit deep assessment of a concrete change, then hand its evidence to `fact-based-code-review` for the sole merge decision. A tracked feature may link the resulting evidence in `feature-lifecycle` without transferring either review responsibility.
 
 Your AI client decides when to load an installed skill. Descriptions are routing guidance, not guaranteed host behavior. Static and runtime-contract checks provide bounded evidence only; do not infer universal portability or reliable automatic activation from installation alone. See the [compatibility matrix](docs/compatibility.md).
 
@@ -142,7 +144,7 @@ python scripts/validate_repository.py
 python scripts/check_links.py
 pytest
 python scripts/run_evals.py
-python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat."
+python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Observed revision in the canonical record and next safe action."
 python scripts/check_distribution.py
 ```
 

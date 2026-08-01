@@ -4,7 +4,7 @@ description: Analyze an explicitly requested security or threat-modeling scope b
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.0
+  version: 0.6.2
 ---
 
 # Security boundary analysis

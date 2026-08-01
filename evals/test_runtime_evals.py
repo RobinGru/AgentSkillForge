@@ -10,7 +10,8 @@ CASES = ROOT / "evals" / "runtime.yaml"
 CLIENTS = ROOT / "evals" / "clients.yaml"
 FIXTURE_RESPONSE = (
     "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. "
-    "Finding and verification gap. Trust boundary and abuse path threat."
+    "Finding and verification gap. Trust boundary and abuse path threat. "
+    "Observed revision in the canonical record and next safe action."
 )
 
 

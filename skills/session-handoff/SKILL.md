@@ -4,13 +4,18 @@ description: Create a compact, verified continuation record for unfinished repos
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.0
+  version: 0.6.2
 ---
 
 # Session handoff
 
 Preserve actionable state for unfinished repository work. This is a continuation
 record, not a transcript, retrospective, specification, or implementation plan.
+
+For a tracked feature, `feature-lifecycle` owns durable feature state while this
+skill owns transient worktree state. Reference the canonical lifecycle record and
+fold durable facts found after resumption back into it; do not duplicate the diff
+or staged-state details there.
 
 ## Activation boundary
 

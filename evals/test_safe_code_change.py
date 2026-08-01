@@ -15,7 +15,9 @@ def test_safe_code_change_is_portable_and_compact() -> None:
 
     assert name == "safe-code-change"
     assert not [finding for finding in findings if finding.level == "error"]
-    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 220
+    text = SKILL.read_text(encoding="utf-8")
+    assert len(text.splitlines()) <= 220
+    assert "`feature-lifecycle`" in text
 
 
 def test_safe_code_change_evals_cover_triggers_and_routing() -> None:
@@ -35,4 +37,8 @@ def test_safe_code_change_evals_cover_triggers_and_routing() -> None:
     assert cases["safe-code-change-vue-composition"]["expected_skills"] == [
         "vue-sfc-decomposition",
         "safe-code-change",
+    ]
+    assert cases["safe-code-change-lifecycle-composition"]["expected_skills"] == [
+        "safe-code-change",
+        "feature-lifecycle",
     ]

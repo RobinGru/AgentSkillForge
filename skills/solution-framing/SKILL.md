@@ -4,7 +4,7 @@ description: Choose a defensible technical or delivery direction for a consequen
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.0
+  version: 0.6.2
 ---
 
 # Solution framing
@@ -80,6 +80,9 @@ assumptions from facts, and state how acceptance will be demonstrated. Consult
 **Exit:** a complete decision brief with no unlabelled uncertainty.
 
 ### 5. Choose a handoff state
+
+For durable feature coordination, `feature-lifecycle` may link this brief and
+record readiness; this brief remains authoritative for the chosen approach.
 
 Choose exactly one result:
 

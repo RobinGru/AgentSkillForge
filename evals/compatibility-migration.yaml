@@ -78,6 +78,11 @@ cases:
     prompt: Plan coexistence of old and new account states and design the user interface that must represent both during rollout.
     expected_skills: [compatibility-migration, product-interface-engineering]
     assertions: [separates compatibility states from interaction states, verifies both contracts]
+  - id: migration-conflict-lifecycle
+    category: conflict
+    prompt: Plan mixed-version consumer states for a tracked feature and link the approved migration plan from its durable lifecycle record.
+    expected_skills: [compatibility-migration, feature-lifecycle]
+    assertions: [keeps compatibility states authoritative, records feature-level evidence without flattening migration gates]
   - id: migration-output-state-sequence
     category: output
     prompt: Produce the migration record for moving producers and consumers from numeric to opaque identifiers.

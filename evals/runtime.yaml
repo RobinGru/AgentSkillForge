@@ -40,3 +40,14 @@ cases:
         - "(?i)(abuse path|threat)"
       prohibited_patterns:
         - "(?i)tests? passed"
+
+  - id: feature-lifecycle-contract
+    prompt: Reconcile a durable multi-session feature ledger with the current revision and state its one safe next action.
+    expected_skills: [feature-lifecycle]
+    expect:
+      required_patterns:
+        - "(?i)(observed revision|verified revision)"
+        - "(?i)canonical (record|implementation)"
+        - "(?i)(next safe action|safe next action)"
+      prohibited_patterns:
+        - "(?i)tests? passed"

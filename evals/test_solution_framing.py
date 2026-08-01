@@ -27,7 +27,9 @@ def test_solution_framing_is_portable_and_within_limit() -> None:
 
     assert name == "solution-framing"
     assert not [finding for finding in findings if finding.level == "error"]
-    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 220
+    text = SKILL.read_text(encoding="utf-8")
+    assert len(text.splitlines()) <= 220
+    assert "`feature-lifecycle`" in text
 
 
 def test_solution_framing_template_has_an_objective_contract() -> None:
@@ -44,7 +46,7 @@ def test_solution_framing_eval_manifest_covers_required_boundaries() -> None:
     assert all(isinstance(case, dict) for case in raw_cases)
     cases = {case["id"]: case for case in cast(list[dict[str, Any]], raw_cases)}
 
-    assert len(cases) == 8
+    assert len(cases) == 9
     assert cases["solution-framing-auth-ambiguity"]["expected_skills"] == [
         "feature-specification"
     ]
@@ -62,4 +64,8 @@ def test_solution_framing_eval_manifest_covers_required_boundaries() -> None:
     ]
     assert cases["solution-framing-product-discovery-routing"]["expected_skills"] == [
         "project-discovery"
+    ]
+    assert cases["solution-framing-lifecycle-composition"]["expected_skills"] == [
+        "solution-framing",
+        "feature-lifecycle",
     ]

@@ -1,10 +1,10 @@
 ---
 name: adversarial-deep-review
-description: Challenge an explicitly requested, concrete high-risk code change with evidence-based failure, abuse, compatibility, recovery, concurrency, and operational scenarios. Use after a normal review or for an explicit deep adversarial assessment; do not use for routine review, implementation, a system threat model without a diff, or diagnosis of an observed failure.
+description: Challenge an explicitly requested, concrete high-risk code change with evidence-based failure, abuse, compatibility, recovery, concurrency, and operational scenarios. Use before the final normal review for an explicit deep adversarial assessment; do not use for routine review, implementation, a system threat model without a diff, or diagnosis of an observed failure.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.0
+  version: 0.6.2
 ---
 
 # Adversarial deep review
@@ -134,8 +134,9 @@ Choose one handoff state:
 - `ROUTE TO FAILURE INVESTIGATION`
 
 Pass the scenario record and retained findings to `fact-based-code-review` for
-an integration decision. Keep analysis, implementation, and merge decisions
-separate.
+the sole final integration decision. For a tracked feature, `feature-lifecycle`
+may link this evidence and record a resulting blocker or verification gap. Keep
+analysis, implementation, lifecycle state, and merge decisions separate.
 
 ## Output contract
 

@@ -63,6 +63,11 @@ cases:
     prompt: Coordinate a staged API migration and create a handoff while the next compatibility gate awaits consumer confirmation.
     expected_skills: [compatibility-migration, session-handoff]
     assertions: [preserves migration source of truth, records external gate, does not replace migration plan]
+  - id: handoff-conflict-lifecycle
+    category: conflict
+    prompt: Preserve uncommitted work for a tracked feature while keeping its durable lifecycle ledger distinct from transient worktree state.
+    expected_skills: [feature-lifecycle, session-handoff]
+    assertions: [references the canonical lifecycle record, keeps worktree details in handoff, preserves one safe next action]
   - id: handoff-output-ready
     category: output
     prompt: Produce a handoff for committed preparatory work with one remaining local verification step.

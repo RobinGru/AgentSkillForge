@@ -61,3 +61,12 @@ cases:
       - solution-framing
     assertions:
       - establishes product direction before technical decisions
+  - id: solution-framing-lifecycle-composition
+    prompt: Choose the consequential technical direction for a tracked feature, then record the approved decision and readiness in its lifecycle ledger.
+    expected_skills:
+      - solution-framing
+      - feature-lifecycle
+    forbidden_skills: []
+    assertions:
+      - keeps the decision brief authoritative
+      - records readiness without selecting or revising the approach

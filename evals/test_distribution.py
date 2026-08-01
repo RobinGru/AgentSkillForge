@@ -17,6 +17,7 @@ def test_repository_agents_template_has_the_compact_routing_contract() -> None:
     skills = {
         "project-discovery",
         "feature-specification",
+        "feature-lifecycle",
         "solution-framing",
         "failure-investigation",
         "safe-code-change",

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-skill-forge"
-version = "0.6.0"
+version = "0.6.2"
 description = "Portable, independently authored agent skills"
 license = {text = "Apache-2.0"}
 readme = "README.md"
@@ -41,6 +41,10 @@ py-modules = []
   "skills/compatibility-migration/references/data-transition-checks.md",
 ]
 "share/agent-skill-forge/skills/fact-based-code-review" = ["skills/fact-based-code-review/SKILL.md"]
+"share/agent-skill-forge/skills/feature-lifecycle" = ["skills/feature-lifecycle/SKILL.md"]
+"share/agent-skill-forge/skills/feature-lifecycle/references" = [
+  "skills/feature-lifecycle/references/artifact-templates.md",
+]
 "share/agent-skill-forge/skills/feature-specification" = ["skills/feature-specification/SKILL.md"]
 "share/agent-skill-forge/skills/failure-investigation" = [
   "skills/failure-investigation/SKILL.md",

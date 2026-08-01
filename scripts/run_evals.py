@@ -40,6 +40,7 @@ SKILL_EVAL_SPECS = {
     "compatibility-migration": SkillEvalSpec("cm", 18),
     "project-discovery": SkillEvalSpec("pd", 18),
     "feature-specification": SkillEvalSpec("fs", 18),
+    "feature-lifecycle": SkillEvalSpec("fl", 20),
     "session-handoff": SkillEvalSpec("sh", 18),
     "adversarial-deep-review": SkillEvalSpec("adr", 18),
 }
