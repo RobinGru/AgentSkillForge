@@ -9,6 +9,9 @@ metadata:
 
 # Safe code change
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Make a small, understood change and prove its intended effect without expanding
 the task into redesign or broad refactoring.
 

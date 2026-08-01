@@ -9,6 +9,9 @@ metadata:
 
 # Compatibility migration
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Coordinate a chosen change through independently safe states while old and new
 contracts coexist. Make every transition observable, reversible where possible,
 and destructive only after evidence permits retirement.

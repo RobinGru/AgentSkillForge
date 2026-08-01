@@ -9,6 +9,9 @@ metadata:
 
 # Feature lifecycle
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Keep one small record for a feature that must survive across sessions. This is
 not a project-management system, task list, transcript, or replacement for
 Git, tests, issues, review, or CI.

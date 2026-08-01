@@ -9,6 +9,9 @@ metadata:
 
 # Security boundary analysis
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Produce an evidence-based security model for an explicitly authorized scope.
 Connect realistic attacker capabilities to concrete trust transitions and
 verifiable control obligations rather than supplying a generic checklist.

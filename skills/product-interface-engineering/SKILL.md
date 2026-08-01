@@ -9,6 +9,9 @@ metadata:
 
 # Product interface engineering
 
+Use the repository's established language and conventions for any artifacts you create or update.
+
+
 Build or review interfaces by making user task, interaction behavior, states,
 and verification explicit. Reuse product conventions before introducing a new
 visual pattern.
