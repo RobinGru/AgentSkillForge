@@ -4,7 +4,7 @@ description: Challenge an explicitly requested, concrete high-risk code change w
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.2
+  version: 0.6.3
 ---
 
 # Adversarial deep review
