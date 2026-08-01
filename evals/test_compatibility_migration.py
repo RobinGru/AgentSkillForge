@@ -103,3 +103,7 @@ def test_compatibility_evals_enforce_strategy_and_composition_routing() -> None:
         "compatibility-migration",
         "product-interface-engineering",
     ]
+    assert cases["migration-conflict-lifecycle"]["expected_skills"] == [
+        "compatibility-migration",
+        "feature-lifecycle",
+    ]

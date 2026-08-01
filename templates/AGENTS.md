@@ -15,6 +15,7 @@ Always answer the user in German. Be concise and explicit.
 
 - unclear project goal → `project-discovery`
 - non-trivial feature without clear behavior → `feature-specification`
+- substantial feature needing durable revision-bound coordination → `feature-lifecycle`
 - unclear technical direction → `solution-framing`
 - unknown failure cause → `failure-investigation`
 - small understood change → `safe-code-change`

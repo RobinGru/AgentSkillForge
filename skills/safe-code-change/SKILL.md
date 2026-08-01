@@ -4,7 +4,7 @@ description: Make a bounded code change with an explicit behavior contract and p
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.0
+  version: 0.6.1
 ---
 
 # Safe code change

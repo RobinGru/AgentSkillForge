@@ -38,6 +38,7 @@ Choose the skill that matches the task—not merely a word in the prompt. The ca
 |---|---|---|
 | [`skills/project-discovery/`](skills/project-discovery/) | A new or unclear product needs users, outcomes, boundaries, and an initial capability map. | “Define the smallest useful first release for this product.” |
 | [`skills/feature-specification/`](skills/feature-specification/) | One substantial capability needs observable rules, states, permissions, and acceptance criteria. | “Specify retry and denial behavior for file import.” |
+| [`skills/feature-lifecycle/`](skills/feature-lifecycle/) | One substantial feature needs a durable, revision-bound coordination record across sessions, agents, or work units. | “Reconcile this feature ledger and give the next safe action.” |
 | [`skills/solution-framing/`](skills/solution-framing/) | The direction is unclear or a decision has meaningful trade-offs. | “Which migration approach is safest?” |
 | [`skills/compatibility-migration/`](skills/compatibility-migration/) | An agreed direction requires old and new behavior to coexist safely across multiple steps or consumers. | “Plan a compatible multi-release API migration.” |
 | [`skills/failure-investigation/`](skills/failure-investigation/) | A non-performance test, build, runtime, integration, or data failure has an unknown cause or safe change boundary. | “Find why this integration fails before proposing a fix.” |
@@ -107,6 +108,7 @@ See the complete [Zed](docs/clients/zed.md) and [Codex](docs/clients/codex.md) i
 Common sequences are:
 
 - New product: `project-discovery` establishes the product boundary and capability map, then `feature-specification` defines one capability before technical planning or implementation.
+- Multi-session feature delivery: `feature-specification` owns the behavior contract; use `solution-framing` for consequential technical choices, `feature-lifecycle` for the durable revision-bound record, `safe-code-change` for each bounded work unit, and `session-handoff` only when unfinished concrete work must be resumed.
 
 - Unknown non-performance failure: `failure-investigation` establishes a supported cause and safe change boundary, then `safe-code-change` implements the fix, and `fact-based-code-review` reviews it.
 - Measured latency, throughput, memory, or resource problem: use `performance-investigation`, not `failure-investigation`; hand an understood change to `safe-code-change`, then use `fact-based-code-review`.
@@ -142,7 +144,7 @@ python scripts/validate_repository.py
 python scripts/check_links.py
 pytest
 python scripts/run_evals.py
-python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat."
+python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Revision-bound evidence and next safe action."
 python scripts/check_distribution.py
 ```
 

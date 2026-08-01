@@ -113,5 +113,6 @@ def test_shared_installer_discovers_all_distributed_skills() -> None:
         "compatibility-migration",
         "project-discovery",
         "feature-specification",
+        "feature-lifecycle",
         "session-handoff",
     }

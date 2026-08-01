@@ -49,7 +49,7 @@ def test_project_discovery_output_contract_is_exact() -> None:
 def test_project_discovery_evals_cover_behavior_boundaries() -> None:
     cases = load_cases()
     counts = Counter(case["category"] for case in cases)
-    assert counts == {"positive": 5, "negative": 5, "conflict": 4, "output": 2, "adversarial": 2}
+    assert counts == {"positive": 5, "negative": 5, "conflict": 5, "output": 2, "adversarial": 2}
     by_id = {case["id"]: case for case in cases}
     assert len(by_id) == len(cases)
     assert all(case.get("assertions") or case.get("forbidden_skills") for case in cases)
@@ -64,4 +64,8 @@ def test_project_discovery_evals_cover_behavior_boundaries() -> None:
     assert by_id["discovery-conflict-then-specify"]["expected_skills"] == [
         "project-discovery",
         "feature-specification",
+    ]
+    assert by_id["discovery-conflict-lifecycle"]["expected_skills"] == [
+        "project-discovery",
+        "feature-lifecycle",
     ]

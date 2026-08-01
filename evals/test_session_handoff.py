@@ -79,3 +79,7 @@ def test_session_handoff_evals_route_near_misses_and_combinations() -> None:
         "failure-investigation",
         "session-handoff",
     ]
+    assert cases["handoff-conflict-lifecycle"]["expected_skills"] == [
+        "feature-lifecycle",
+        "session-handoff",
+    ]

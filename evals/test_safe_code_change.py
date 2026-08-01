@@ -36,3 +36,7 @@ def test_safe_code_change_evals_cover_triggers_and_routing() -> None:
         "vue-sfc-decomposition",
         "safe-code-change",
     ]
+    assert cases["safe-code-change-lifecycle-composition"]["expected_skills"] == [
+        "safe-code-change",
+        "feature-lifecycle",
+    ]

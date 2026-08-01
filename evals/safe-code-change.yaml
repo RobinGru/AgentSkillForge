@@ -50,3 +50,12 @@ cases:
     forbidden_skills: []
     assertions:
       - decomposes the component in controlled steps
+  - id: safe-code-change-lifecycle-composition
+    prompt: Implement one bounded, proven work unit in a feature whose durable lifecycle ledger must be updated with the resulting evidence.
+    expected_skills:
+      - safe-code-change
+      - feature-lifecycle
+    forbidden_skills: []
+    assertions:
+      - keeps the patch and direct proof bounded
+      - records resulting evidence without making the lifecycle ledger implement the patch

@@ -44,7 +44,7 @@ def test_solution_framing_eval_manifest_covers_required_boundaries() -> None:
     assert all(isinstance(case, dict) for case in raw_cases)
     cases = {case["id"]: case for case in cast(list[dict[str, Any]], raw_cases)}
 
-    assert len(cases) == 8
+    assert len(cases) == 9
     assert cases["solution-framing-auth-ambiguity"]["expected_skills"] == [
         "feature-specification"
     ]
@@ -62,4 +62,8 @@ def test_solution_framing_eval_manifest_covers_required_boundaries() -> None:
     ]
     assert cases["solution-framing-product-discovery-routing"]["expected_skills"] == [
         "project-discovery"
+    ]
+    assert cases["solution-framing-lifecycle-composition"]["expected_skills"] == [
+        "solution-framing",
+        "feature-lifecycle",
     ]

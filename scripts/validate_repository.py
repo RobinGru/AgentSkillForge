@@ -35,6 +35,7 @@ TARGET_SKILLS = frozenset(
         "compatibility-migration",
         "project-discovery",
         "feature-specification",
+        "feature-lifecycle",
         "session-handoff",
         "adversarial-deep-review",
     }

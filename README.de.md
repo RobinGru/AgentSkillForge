@@ -38,6 +38,7 @@ Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelne
 |---|---|---|
 | [`skills/project-discovery/`](skills/project-discovery/) | Ein neues oder unklares Produkt benötigt Nutzer, Ziele, Grenzen und eine erste Capability-Map. | „Definiere das kleinste nützliche erste Release.“ |
 | [`skills/feature-specification/`](skills/feature-specification/) | Eine größere Capability benötigt beobachtbare Regeln, Zustände, Berechtigungen und Akzeptanzkriterien. | „Spezifiziere Retry- und Ablehnungsverhalten für den Dateiimport.“ |
+| [`skills/feature-lifecycle/`](skills/feature-lifecycle/) | Ein größeres Feature benötigt eine dauerhafte, revisionsgebundene Koordination über Sitzungen, Agenten oder Arbeitseinheiten hinweg. | „Gleiche dieses Feature-Ledger ab und nenne die nächste sichere Aktion.“ |
 | [`skills/solution-framing/`](skills/solution-framing/) | Die Richtung ist unklar oder eine Entscheidung enthält wichtige Abwägungen. | „Welcher Migrationsansatz ist am sichersten?“ |
 | [`skills/compatibility-migration/`](skills/compatibility-migration/) | Eine festgelegte Richtung erfordert sichere Koexistenz von altem und neuem Verhalten über mehrere Schritte oder Konsumenten. | „Plane eine kompatible API-Migration über mehrere Releases.“ |
 | [`skills/failure-investigation/`](skills/failure-investigation/) | Ein technischer Fehler außerhalb der Performance-Domäne hat eine unbekannte Ursache oder sichere Änderungsgrenze. | „Ermittle vor einem Fix, warum diese Integration fehlschlägt.“ |
@@ -107,6 +108,7 @@ Die vollständigen Installationsanleitungen für [Zed](docs/clients/zed.md) und 
 Häufige Reihenfolgen sind:
 
 - Neues Produkt: `project-discovery` legt Produktgrenze und Capability-Map fest; anschließend definiert `feature-specification` eine Capability vor technischer Planung oder Implementierung.
+- Mehrsitzungs-Feature: `feature-specification` besitzt den Verhaltensvertrag; `solution-framing` klärt folgenreiche technische Entscheidungen, `feature-lifecycle` führt den dauerhaften revisionsgebundenen Datensatz, `safe-code-change` implementiert jede begrenzte Arbeitseinheit und `session-handoff` übernimmt nur tatsächlich unterbrochene konkrete Arbeit.
 
 - Unbekannter technischer Fehler außerhalb der Performance-Domäne: `failure-investigation` belegt Ursache und sichere Änderungsgrenze, danach implementiert `safe-code-change` den Fix und `fact-based-code-review` prüft ihn.
 - Gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem: Verwende `performance-investigation`, nicht `failure-investigation`; übergib eine verstandene Änderung an `safe-code-change` und prüfe sie anschließend mit `fact-based-code-review`.
@@ -142,7 +144,7 @@ python scripts/validate_repository.py
 python scripts/check_links.py
 pytest
 python scripts/run_evals.py
-python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat."
+python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Revision-bound evidence and next safe action."
 python scripts/check_distribution.py
 ```
 
