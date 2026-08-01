@@ -42,9 +42,6 @@ py-modules = []
 ]
 "share/agent-skill-forge/skills/fact-based-code-review" = ["skills/fact-based-code-review/SKILL.md"]
 "share/agent-skill-forge/skills/feature-lifecycle" = ["skills/feature-lifecycle/SKILL.md"]
-"share/agent-skill-forge/skills/feature-lifecycle/references" = [
-  "skills/feature-lifecycle/references/artifact-templates.md",
-]
 "share/agent-skill-forge/skills/feature-specification" = ["skills/feature-specification/SKILL.md"]
 "share/agent-skill-forge/skills/failure-investigation" = [
   "skills/failure-investigation/SKILL.md",
