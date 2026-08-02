@@ -12,7 +12,7 @@
 
 Reusable Agent Skills that help AI coding assistants make careful changes and explain their work clearly.
 
-[Explore skills](#skill-catalog) · [Install with Zed or Codex](#quick-start) · [Contribute](CONTRIBUTING.md)
+[Explore skills](#skill-catalog) · [Install with Zed or Codex](#quick-start) · [Use the all-in-one template](#all-in-one-project-guidance) · [Contribute](CONTRIBUTING.md)
 
 > [!NOTE]
 > Static repository checks run for every pull request. Deterministic runtime-contract checks exercise the eval runner, while authenticated Codex smoke tests and Zed interactive checks are opt-in release evidence. See the [compatibility and maintenance policy](docs/compatibility.md) for the supported-client matrix and its explicit limits.
@@ -103,6 +103,18 @@ Both wrappers delegate to the same installer and default to `~/.agents/skills`. 
 
 See the complete [Zed](docs/clients/zed.md) and [Codex](docs/clients/codex.md) installation guides for selected skills, custom targets, updates, verification, and uninstallation.
 
+## All-in-one project guidance
+
+Don't want to choose among many skills or deal with a complex installation? Use [`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md), the compact all-in-one option.
+
+Copy it into your project root as `AGENTS.md`. It provides general guidance for product fit, accessibility, security, verification, and review priorities without requiring a particular agent client.
+
+```sh
+cp templates/AGENTS-AIO.md /path/to/your-project/AGENTS.md
+```
+
+Add project-specific rules to the copied template, not to the distributed skills.
+
 ## Using skills together
 
 Common sequences are:
@@ -120,12 +132,8 @@ Your AI client decides when to load an installed skill. Descriptions are routing
 
 ## Optional repository instructions
 
-Choose one of these optional repository-root templates; neither replaces the other:
+[`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated routing template for this catalog with a compact write-then-verify rule. Copy it only when German responses and `codebase-memory-mcp` are intended; otherwise adapt or remove those requirements first.
 
-- [`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated routing template for this catalog with a compact write-then-verify rule. Copy it only when German responses and `codebase-memory-mcp` are intended; otherwise adapt or remove those requirements first.
-[`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md) is an all-in-one quality template that guards against generic, unverified design and code output. It covers product fit, accessibility, security, verification, and review priorities without requiring a particular agent client.
-
-Add project-specific rules to the copied template, not to the distributed skills.
 
 ## Compatibility
 
