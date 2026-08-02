@@ -7,7 +7,7 @@ import yaml
 from scripts.validate_repository import validate_skill
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "feature-lifecycle" / "SKILL.md"
+SKILL = ROOT / "skills" / "planning" / "feature-lifecycle" / "SKILL.md"
 EVALS = ROOT / "evals" / "feature-lifecycle.yaml"
 
 HEADINGS = [

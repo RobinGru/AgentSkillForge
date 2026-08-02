@@ -30,63 +30,76 @@ py-modules = []
   "scripts/install_skills.py",
   "scripts/install_zed_skills.py",
   "scripts/install_codex_skills.py",
+  "scripts/build_skill_bundle.py",
 ]
 "share/agent-skill-forge/templates" = ["templates/AGENTS.md"]
-"share/agent-skill-forge/skills/adversarial-deep-review" = ["skills/adversarial-deep-review/SKILL.md"]
-"share/agent-skill-forge/skills/compatibility-migration" = [
-  "skills/compatibility-migration/SKILL.md",
+"share/agent-skill-forge/skills/quality/adversarial-deep-review" = ["skills/quality/adversarial-deep-review/SKILL.md"]
+"share/agent-skill-forge/skills/planning/compatibility-migration" = [
+  "skills/planning/compatibility-migration/SKILL.md",
 ]
-"share/agent-skill-forge/skills/compatibility-migration/references" = [
-  "skills/compatibility-migration/references/compatibility-envelope.md",
-  "skills/compatibility-migration/references/data-transition-checks.md",
+"share/agent-skill-forge/skills/planning/compatibility-migration/references" = [
+  "skills/planning/compatibility-migration/references/compatibility-envelope.md",
+  "skills/planning/compatibility-migration/references/data-transition-checks.md",
 ]
-"share/agent-skill-forge/skills/fact-based-code-review" = ["skills/fact-based-code-review/SKILL.md"]
-"share/agent-skill-forge/skills/feature-lifecycle" = ["skills/feature-lifecycle/SKILL.md"]
-"share/agent-skill-forge/skills/feature-specification" = ["skills/feature-specification/SKILL.md"]
-"share/agent-skill-forge/skills/failure-investigation" = [
-  "skills/failure-investigation/SKILL.md",
+"share/agent-skill-forge/skills/quality/fact-based-code-review" = ["skills/quality/fact-based-code-review/SKILL.md"]
+"share/agent-skill-forge/skills/planning/feature-lifecycle" = ["skills/planning/feature-lifecycle/SKILL.md"]
+"share/agent-skill-forge/skills/planning/feature-specification" = ["skills/planning/feature-specification/SKILL.md"]
+"share/agent-skill-forge/skills/quality/failure-investigation" = [
+  "skills/quality/failure-investigation/SKILL.md",
 ]
-"share/agent-skill-forge/skills/failure-investigation/references" = [
-  "skills/failure-investigation/references/evidence-strength.md",
-  "skills/failure-investigation/references/intermittent-failures.md",
+"share/agent-skill-forge/skills/quality/failure-investigation/references" = [
+  "skills/quality/failure-investigation/references/evidence-strength.md",
+  "skills/quality/failure-investigation/references/intermittent-failures.md",
 ]
-"share/agent-skill-forge/skills/performance-investigation" = [
-  "skills/performance-investigation/SKILL.md",
+"share/agent-skill-forge/skills/quality/performance-investigation" = [
+  "skills/quality/performance-investigation/SKILL.md",
 ]
-"share/agent-skill-forge/skills/performance-investigation/references" = [
-  "skills/performance-investigation/references/backend-signals.md",
-  "skills/performance-investigation/references/example-budgets.md",
-  "skills/performance-investigation/references/experiment-design.md",
-  "skills/performance-investigation/references/investigation-examples.md",
-  "skills/performance-investigation/references/web-signals.md",
+"share/agent-skill-forge/skills/quality/performance-investigation/references" = [
+  "skills/quality/performance-investigation/references/backend-signals.md",
+  "skills/quality/performance-investigation/references/example-budgets.md",
+  "skills/quality/performance-investigation/references/experiment-design.md",
+  "skills/quality/performance-investigation/references/investigation-examples.md",
+  "skills/quality/performance-investigation/references/web-signals.md",
 ]
-"share/agent-skill-forge/skills/product-interface-engineering" = [
-  "skills/product-interface-engineering/SKILL.md",
+"share/agent-skill-forge/skills/specialized/product-interface-engineering" = [
+  "skills/specialized/product-interface-engineering/SKILL.md",
 ]
-"share/agent-skill-forge/skills/project-discovery" = ["skills/project-discovery/SKILL.md"]
-"share/agent-skill-forge/skills/product-interface-engineering/references" = [
-  "skills/product-interface-engineering/references/accessibility-baseline.md",
-  "skills/product-interface-engineering/references/verification-matrix.md",
-  "skills/product-interface-engineering/references/visual-system-decisions.md",
+"share/agent-skill-forge/skills/planning/project-discovery" = ["skills/planning/project-discovery/SKILL.md"]
+"share/agent-skill-forge/skills/specialized/product-interface-engineering/references" = [
+  "skills/specialized/product-interface-engineering/references/accessibility-baseline.md",
+  "skills/specialized/product-interface-engineering/references/verification-matrix.md",
+  "skills/specialized/product-interface-engineering/references/visual-system-decisions.md",
 ]
-"share/agent-skill-forge/skills/safe-code-change" = ["skills/safe-code-change/SKILL.md"]
-"share/agent-skill-forge/skills/security-boundary-analysis" = [
-  "skills/security-boundary-analysis/SKILL.md",
+"share/agent-skill-forge/skills/core/safe-code-change" = ["skills/core/safe-code-change/SKILL.md"]
+"share/agent-skill-forge/skills/quality/security-boundary-analysis" = [
+  "skills/quality/security-boundary-analysis/SKILL.md",
 ]
-"share/agent-skill-forge/skills/security-boundary-analysis/references" = [
-  "skills/security-boundary-analysis/references/agentic-boundaries.md",
-  "skills/security-boundary-analysis/references/risk-reasoning.md",
+"share/agent-skill-forge/skills/quality/security-boundary-analysis/references" = [
+  "skills/quality/security-boundary-analysis/references/agentic-boundaries.md",
+  "skills/quality/security-boundary-analysis/references/risk-reasoning.md",
 ]
-"share/agent-skill-forge/skills/solution-framing" = ["skills/solution-framing/SKILL.md"]
-"share/agent-skill-forge/skills/solution-framing/assets" = [
-  "skills/solution-framing/assets/solution-brief-template.md",
+"share/agent-skill-forge/skills/planning/solution-framing" = ["skills/planning/solution-framing/SKILL.md"]
+"share/agent-skill-forge/skills/planning/solution-framing/assets" = [
+  "skills/planning/solution-framing/assets/solution-brief-template.md",
 ]
-"share/agent-skill-forge/skills/solution-framing/references" = [
-  "skills/solution-framing/references/decision-record.md",
-  "skills/solution-framing/references/risk-and-reversibility.md",
+"share/agent-skill-forge/skills/planning/solution-framing/references" = [
+  "skills/planning/solution-framing/references/decision-record.md",
+  "skills/planning/solution-framing/references/risk-and-reversibility.md",
 ]
-"share/agent-skill-forge/skills/vue-sfc-decomposition" = ["skills/vue-sfc-decomposition/SKILL.md"]
-"share/agent-skill-forge/skills/vue-sfc-decomposition/references" = [
-  "skills/vue-sfc-decomposition/references/nuxt-boundaries.md",
+"share/agent-skill-forge/skills/specialized/vue-sfc-decomposition" = ["skills/specialized/vue-sfc-decomposition/SKILL.md"]
+"share/agent-skill-forge/skills/specialized/vue-sfc-decomposition/references" = [
+  "skills/specialized/vue-sfc-decomposition/references/nuxt-boundaries.md",
 ]
-"share/agent-skill-forge/skills/session-handoff" = ["skills/session-handoff/SKILL.md"]
+"share/agent-skill-forge/skills/core/session-handoff" = ["skills/core/session-handoff/SKILL.md"]
+"share/agent-skill-forge/skills/core/repository-knowledge-curation" = [
+  "skills/core/repository-knowledge-curation/SKILL.md",
+]
+"share/agent-skill-forge/skills/core/repository-knowledge-curation/references" = [
+  "skills/core/repository-knowledge-curation/references/knowledge-placement.md",
+]
+"share/agent-skill-forge/skills/core/repository-onboarding" = [
+  "skills/core/repository-onboarding/SKILL.md",
+]
+"share/agent-skill-forge/skills/core/repository-onboarding/references" = [
+  "skills/core/repository-onboarding/references/repository-evidence.md",
+]

@@ -6,7 +6,7 @@ import yaml
 from scripts.validate_repository import validate_skill
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "adversarial-deep-review" / "SKILL.md"
+SKILL = ROOT / "skills" / "quality" / "adversarial-deep-review" / "SKILL.md"
 EVALS = ROOT / "evals" / "adversarial-deep-review.yaml"
 REQUIRED = {"positive": 5, "negative": 5, "conflict": 4, "output": 2, "adversarial": 2}
 HEADINGS = [

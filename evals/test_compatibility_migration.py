@@ -7,7 +7,7 @@ import yaml
 from scripts.validate_repository import validate_skill
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "compatibility-migration" / "SKILL.md"
+SKILL = ROOT / "skills" / "planning" / "compatibility-migration" / "SKILL.md"
 EVALS = ROOT / "evals" / "compatibility-migration.yaml"
 REFERENCES = SKILL.parent / "references"
 REQUIRED = {"positive": 5, "negative": 5, "conflict": 4, "output": 2, "adversarial": 2}

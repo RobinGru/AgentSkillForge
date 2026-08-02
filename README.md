@@ -32,26 +32,55 @@ Agent Skills are plain Markdown directories centred on `SKILL.md`, so they are n
 
 ## Skill Catalog
 
-Choose the skill that matches the task—not merely a word in the prompt. The catalog follows a typical workflow; use the specialized investigation skills before making an otherwise understood change.
+Choose the skill that matches the task—not merely a word in the prompt. Start with the category that describes the work, then use the narrowest skill whose activation boundary matches the situation.
 
-| Skill | When to use it | Example |
+> **Source layout vs. installation:** Categories organize this repository only. Installers and the flat ZIP bundle always place every skill directly at `<target>/<skill-name>/`.
+
+### Core workflow
+
+Use these skills for the repository-level work that commonly frames, enables, executes, preserves, or resumes other work.
+
+| Skill | Use it when | Use a different skill when |
 |---|---|---|
-| [`skills/project-discovery/`](skills/project-discovery/) | A new or unclear product needs users, outcomes, boundaries, and an initial capability map. | “Define the smallest useful first release for this product.” |
-| [`skills/feature-specification/`](skills/feature-specification/) | One substantial capability needs observable rules, states, permissions, and acceptance criteria. | “Specify retry and denial behavior for file import.” |
-| [`skills/feature-lifecycle/`](skills/feature-lifecycle/) | One substantial feature needs a durable, revision-bound coordination record across sessions, agents, or work units. | “Reconcile this feature ledger and give the next safe action.” |
-| [`skills/solution-framing/`](skills/solution-framing/) | The direction is unclear or a decision has meaningful trade-offs. | “Which migration approach is safest?” |
-| [`skills/compatibility-migration/`](skills/compatibility-migration/) | An agreed direction requires old and new behavior to coexist safely across multiple steps or consumers. | “Plan a compatible multi-release API migration.” |
-| [`skills/failure-investigation/`](skills/failure-investigation/) | A non-performance test, build, runtime, integration, or data failure has an unknown cause or safe change boundary. | “Find why this integration fails before proposing a fix.” |
-| [`skills/performance-investigation/`](skills/performance-investigation/) | You have a measured latency, throughput, or memory problem to investigate. | “Why did this endpoint become slower?” |
-| [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | An explicit security or threat-modeling task needs trust transitions, abuse paths, controls, and residual uncertainty. | “Threat-model this webhook ingestion boundary.” |
-| [`skills/safe-code-change/`](skills/safe-code-change/) | You need a small, understood change or bug fix. | “Fix this reproducible validation error.” |
-| [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | A screen, form, interaction, accessibility, or responsive behavior needs work. | “Make this checkout form usable on mobile.” |
-| [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | A Vue or Nuxt component needs to be split without changing behavior. | “Separate this large Vue SFC into maintainable parts.” |
-| [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | A change is ready for review and needs a fact-based assessment. | “Review this pull request before merging.” |
-| [`skills/adversarial-deep-review/`](skills/adversarial-deep-review/) | An explicitly requested deep review of a concrete high-risk change needs evidence-backed stress scenarios. | “Adversarially review this payment retry diff.” |
-| [`skills/session-handoff/`](skills/session-handoff/) | Unfinished repository work must be resumed by another session or developer from verified local state. | “Record the current worktree and the one safe next action.” |
+| [`repository-onboarding`](skills/core/repository-onboarding/) | An unfamiliar, inherited, or stale repository needs an evidence-based technical map before substantial work. | Product purpose is unclear (`project-discovery`) or a failure needs diagnosis (`failure-investigation`). |
+| [`repository-knowledge-curation`](skills/core/repository-knowledge-curation/) | A verified reusable repository fact needs one small canonical home. | The fact is unverified, transient, or an unresolved decision. |
+| [`safe-code-change`](skills/core/safe-code-change/) | A bounded change has a known behavior contract and safe implementation boundary. | The cause is unknown (`failure-investigation`) or rollout requires mixed-version coordination (`compatibility-migration`). |
+| [`session-handoff`](skills/core/session-handoff/) | Unfinished concrete work must be continued from verified local state. | Durable feature coordination is required (`feature-lifecycle`). |
 
-Read a skill’s `SKILL.md` before using it. Keep its complete directory, including any `references/` and `assets/`, because the skill may link to them.
+### Planning and coordination
+
+Use these skills to establish product intent, observable behavior, technical direction, or durable multi-step delivery state before implementation proceeds.
+
+| Skill | Use it when | Example |
+|---|---|---|
+| [`project-discovery`](skills/planning/project-discovery/) | A new or inherited product lacks trusted users, outcomes, scope, or a first-release boundary. | “Define the smallest useful first release.” |
+| [`feature-specification`](skills/planning/feature-specification/) | One substantial approved capability needs rules, states, permissions, and acceptance criteria. | “Specify retry and denial behavior for file import.” |
+| [`solution-framing`](skills/planning/solution-framing/) | A consequential technical or delivery direction remains open. | “Which migration approach is safest?” |
+| [`compatibility-migration`](skills/planning/compatibility-migration/) | An agreed migration needs safe coexistence of old and new consumers, contracts, or data. | “Plan a compatible API migration across releases.” |
+| [`feature-lifecycle`](skills/planning/feature-lifecycle/) | One substantial feature needs a compact, revision-bound record across sessions or agents. | “Reconcile this feature ledger and name the next safe action.” |
+
+### Quality, investigation, and review
+
+Use these skills to investigate evidence, assess risk, or review a concrete change. They establish facts and constraints; they do not substitute for an understood implementation step.
+
+| Skill | Use it when | Key boundary |
+|---|---|---|
+| [`failure-investigation`](skills/quality/failure-investigation/) | A non-performance test, build, runtime, integration, or data failure has an unknown cause. | Diagnose first; implement later with `safe-code-change`. |
+| [`performance-investigation`](skills/quality/performance-investigation/) | A measured latency, throughput, memory, or resource concern needs a baseline and experiments. | A request to “make it faster” without a signal needs measurement first. |
+| [`security-boundary-analysis`](skills/quality/security-boundary-analysis/) | An explicit threat-model or trust-boundary analysis is requested. | Routine review of a diff belongs to `fact-based-code-review`. |
+| [`fact-based-code-review`](skills/quality/fact-based-code-review/) | A concrete diff or changed-file set needs a merge-oriented, evidence-based assessment. | A high-risk deep assessment is explicitly requested (`adversarial-deep-review`). |
+| [`adversarial-deep-review`](skills/quality/adversarial-deep-review/) | A concrete high-risk change needs explicit stress scenarios for failures, abuse, recovery, concurrency, or operations. | It supplies risk evidence; `fact-based-code-review` makes the normal integration decision. |
+
+### Specialized engineering
+
+Use these skills when the task has a focused technical domain and its own behavioral safeguards.
+
+| Skill | Use it when | Key boundary |
+|---|---|---|
+| [`product-interface-engineering`](skills/specialized/product-interface-engineering/) | A page, form, flow, accessibility behavior, responsive layout, or visible UI state changes. | Backend-only work and behavior-preserving refactors are out of scope. |
+| [`vue-sfc-decomposition`](skills/specialized/vue-sfc-decomposition/) | A Vue or Nuxt single-file component has a demonstrated responsibility, maintenance, or testability seam. | UI behavior changes belong to `product-interface-engineering`. |
+
+Read a skill’s `SKILL.md` before using it. Keep a complete skill directory, including any `references/` and `assets/`, because the skill may link to them.
 
 ## Quick Start
 
@@ -85,7 +114,17 @@ Start a new agent session after installation. The installer stops rather than re
 
 ### Portable core
 
-Copy or reference the desired `skills/<name>/` directory using your client’s documented mechanism. AgentSkillForge does not claim a universal install path or automatic-discovery convention.
+Copy or reference the desired categorized source directory using your client’s documented mechanism. AgentSkillForge does not claim a universal install path or automatic-discovery convention.
+
+### Flat ZIP bundle
+
+Build a manually installable bundle from a source checkout:
+
+```sh
+python3 scripts/build_skill_bundle.py
+```
+
+It creates `dist/agent-skill-forge-skills.zip`. Extract its contents directly into your client skill directory, such as `~/.agents/skills`; each top-level directory is one complete skill. Do not copy the categorized `core/`, `planning/`, `quality/`, or `specialized/` source directories into that target.
 
 ### Zed and Codex
 
@@ -107,6 +146,7 @@ See the complete [Zed](docs/clients/zed.md) and [Codex](docs/clients/codex.md) i
 
 Common sequences are:
 
+- Unfamiliar repository: `repository-onboarding` establishes a technical working map before substantial work; hand verified reusable facts to `repository-knowledge-curation` when they need a canonical durable home.
 - New product: `project-discovery` establishes the product boundary and capability map, then `feature-specification` defines one capability before technical planning or implementation.
 - Multi-session feature delivery: `feature-specification` owns the behavior contract; use `solution-framing` for consequential technical choices, `feature-lifecycle` for the durable revision-bound record, `safe-code-change` for each bounded work unit, and `session-handoff` only when unfinished concrete work must be resumed.
 

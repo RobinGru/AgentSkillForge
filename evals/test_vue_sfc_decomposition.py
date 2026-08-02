@@ -6,7 +6,7 @@ import yaml
 from scripts.validate_repository import validate_skill
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "vue-sfc-decomposition" / "SKILL.md"
+SKILL = ROOT / "skills" / "specialized" / "vue-sfc-decomposition" / "SKILL.md"
 EVALS = ROOT / "evals" / "vue-sfc-decomposition.yaml"
 
 

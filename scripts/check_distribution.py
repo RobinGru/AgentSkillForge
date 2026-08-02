@@ -45,6 +45,7 @@ def missing_support_files(wheel: Path) -> set[str]:
         "share/agent-skill-forge/scripts/install_skills.py",
         "share/agent-skill-forge/scripts/install_zed_skills.py",
         "share/agent-skill-forge/scripts/install_codex_skills.py",
+        "share/agent-skill-forge/scripts/build_skill_bundle.py",
         "share/agent-skill-forge/templates/AGENTS.md",
     }
     members = wheel_members(wheel)

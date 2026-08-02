@@ -13,6 +13,7 @@ Always answer the user in German. Be concise and explicit.
 
 ## Skill routing
 
+- unfamiliar, inherited, or stale repository before substantial work → `repository-onboarding`
 - unclear project goal → `project-discovery`
 - non-trivial feature without clear behavior → `feature-specification`
 - substantial feature needing durable revision-bound coordination → `feature-lifecycle`
@@ -27,6 +28,7 @@ Always answer the user in German. Be concise and explicit.
 - explicit deep review of a concrete high-risk change → `adversarial-deep-review`, then `fact-based-code-review` for the final integration decision
 - concrete diff or PR review without an explicit deep assessment → `fact-based-code-review`
 - unfinished work that another session must resume → `session-handoff`
+- verified reusable repository fact needing one canonical durable home → `repository-knowledge-curation`
 
 For trivial, low-risk edits, work directly without creating extra process.
 

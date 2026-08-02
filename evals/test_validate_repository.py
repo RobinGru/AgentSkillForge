@@ -26,12 +26,26 @@ def test_valid_repository_passes(tmp_path: Path) -> None:
     assert validate_repository(tmp_path, Path("skills")) == []
 
 
+def test_readme_inventory_accepts_markdown_link_targets(tmp_path: Path) -> None:
+    for name in TARGET_SKILLS:
+        write_skill(
+            tmp_path,
+            name,
+            f"---\nname: {name}\ndescription: A portable example.\n---\n\n# Example\n\nUse this skill.\n",
+        )
+    inventory = "\n".join(f"[{name}](skills/category/{name}/)" for name in sorted(TARGET_SKILLS))
+    (tmp_path / "README.md").write_text(inventory + "\n", encoding="utf-8")
+
+    assert validate_repository(tmp_path, Path("skills")) == []
+
+
 def test_skills_require_repository_language_and_conventions() -> None:
     required_rule = "Use the repository's established language and conventions for any artifacts you create or update."
 
-    for name in TARGET_SKILLS:
-        text = (Path(__file__).resolve().parents[1] / "skills" / name / "SKILL.md").read_text(encoding="utf-8")
-        assert required_rule in text
+    skill_files = sorted((Path(__file__).resolve().parents[1] / "skills").rglob("SKILL.md"))
+    assert len(skill_files) == len(TARGET_SKILLS)
+    for path in skill_files:
+        assert required_rule in path.read_text(encoding="utf-8")
 
 
 def test_extra_skill_is_an_error(tmp_path: Path) -> None:

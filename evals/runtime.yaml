@@ -61,3 +61,25 @@ cases:
         - "(?i)(next safe action|safe next action)"
       prohibited_patterns:
         - "(?i)tests? passed"
+
+  - id: repository-onboarding-contract
+    prompt: Build an evidence-based technical working map for an unfamiliar repository before substantial work.
+    expected_skills: [repository-onboarding]
+    expect:
+      required_patterns:
+        - "(?i)(repository identity|structure and boundaries)"
+        - "(?i)(discovered|executed|blocked|stale)"
+        - "(?i)(verification model|verification)"
+      prohibited_patterns:
+        - "(?i)tests? passed"
+
+  - id: repository-knowledge-curation-contract
+    prompt: Persist a verified reusable repository fact in the smallest canonical durable artifact.
+    expected_skills: [repository-knowledge-curation]
+    expect:
+      required_patterns:
+        - "(?i)(knowledge candidate|placement decision)"
+        - "(?i)canonical"
+        - "(?i)(evidence|verification)"
+      prohibited_patterns:
+        - "(?i)tests? passed"

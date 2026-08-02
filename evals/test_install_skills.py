@@ -115,4 +115,6 @@ def test_shared_installer_discovers_all_distributed_skills() -> None:
         "feature-specification",
         "feature-lifecycle",
         "session-handoff",
+        "repository-knowledge-curation",
+        "repository-onboarding",
     }

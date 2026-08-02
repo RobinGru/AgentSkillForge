@@ -38,6 +38,8 @@ TARGET_SKILLS = frozenset(
         "feature-lifecycle",
         "session-handoff",
         "adversarial-deep-review",
+        "repository-knowledge-curation",
+        "repository-onboarding",
     }
 )
 NAME_PATTERN = re.compile(r"^[a-z0-9-]{1,64}$")
@@ -172,7 +174,9 @@ def validate_skill(path: Path) -> tuple[str | None, list[Finding]]:
 def readme_skill_names(readme: Path) -> set[str]:
     if not readme.exists():
         return set()
-    return set(re.findall(r"`skills/([a-z0-9-]+)/`", readme.read_text(encoding="utf-8")))
+    text = readme.read_text(encoding="utf-8")
+    path = r"skills/(?:[a-z0-9-]+/)*([a-z0-9-]+)/"
+    return set(re.findall(rf"`{path}`", text)) | set(re.findall(rf"\]\({path}\)", text))
 
 
 def validate_repository(root: Path, skills_dir: Path) -> list[Finding]:
@@ -188,12 +192,9 @@ def validate_repository(root: Path, skills_dir: Path) -> list[Finding]:
             _, legacy_findings = validate_skill(legacy_file)
             findings.extend(legacy_findings)
 
-    for directory in sorted(path for path in skills_root.iterdir() if path.is_dir()):
-        skill_files = list(directory.glob("SKILL.md"))
-        if len(skill_files) != 1:
-            findings.append(Finding("error", directory, "skill directory must contain exactly one SKILL.md"))
-            continue
-        name, skill_findings = validate_skill(skill_files[0])
+    for skill_file in sorted(skills_root.rglob("SKILL.md")):
+        directory = skill_file.parent
+        name, skill_findings = validate_skill(skill_file)
         findings.extend(skill_findings)
         if name is None:
             continue
