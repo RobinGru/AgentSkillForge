@@ -30,6 +30,18 @@ Agent Skills are plain Markdown directories centred on `SKILL.md`, so they are n
 - **Portable Agent Skills:** Copy a complete skill directory to a compatible client without a required Python runtime.
 - **Checked distribution:** Repository automation validates structure, links, tests, static eval cases, and package contents.
 
+## All-in-one project guidance
+
+Don't want to choose among many skills or deal with a complex installation? Use [`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md), the compact all-in-one option.
+
+Copy it into your project root as `AGENTS.md`. It provides general guidance for product fit, accessibility, security, verification, and review priorities without requiring a particular agent client.
+
+```sh
+cp templates/AGENTS-AIO.md /path/to/your-project/AGENTS.md
+```
+
+Add project-specific rules to the copied template, not to the distributed skills.
+
 ## Skill Catalog
 
 Choose the skill that matches the task—not merely a word in the prompt. The catalog follows a typical workflow; use the specialized investigation skills before making an otherwise understood change.
@@ -102,18 +114,6 @@ Both wrappers delegate to the same installer and default to `~/.agents/skills`. 
 > `--force` deletes and recreates every selected target directory. Review local edits first; the installer does not merge files.
 
 See the complete [Zed](docs/clients/zed.md) and [Codex](docs/clients/codex.md) installation guides for selected skills, custom targets, updates, verification, and uninstallation.
-
-## All-in-one project guidance
-
-Don't want to choose among many skills or deal with a complex installation? Use [`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md), the compact all-in-one option.
-
-Copy it into your project root as `AGENTS.md`. It provides general guidance for product fit, accessibility, security, verification, and review priorities without requiring a particular agent client.
-
-```sh
-cp templates/AGENTS-AIO.md /path/to/your-project/AGENTS.md
-```
-
-Add project-specific rules to the copied template, not to the distributed skills.
 
 ## Using skills together
 

@@ -30,6 +30,18 @@ Agent Skills sind einfache Markdown-Verzeichnisse mit einer zentralen `SKILL.md`
 - **Portable Agent Skills:** Kopiere ein vollständiges Skill-Verzeichnis in einen kompatiblen Client – ohne Python-Laufzeit für die Skill-Dokumente.
 - **Geprüfte Distribution:** Die Repository-Automatisierung prüft Struktur, Links, Tests, statische Eval-Fälle und Paketinhalt.
 
+## All-in-one-Anweisungen für Projekte
+
+Kein Bock auf viele verschiedene Skills und komplizierte Installationen? Dann nutze [`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md) als kompakte All-in-one-Lösung.
+
+Lege die Datei im Stammverzeichnis deines Projekts als `AGENTS.md` ab. Sie enthält allgemeine Anweisungen für Produktbezug, Barrierefreiheit, Sicherheit, Verifikation und Review-Prioritäten – ohne einen bestimmten Agent-Client vorauszusetzen.
+
+```sh
+cp templates/AGENTS-AIO.md /pfad/zu/deinem-projekt/AGENTS.md
+```
+
+Projektspezifische Regeln gehören in die kopierte Vorlage, nicht in die verteilten Skills.
+
 ## Skill-Katalog
 
 Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelnen Wort im Prompt. Der Katalog folgt einem typischen Arbeitsablauf; verwende die spezialisierten Investigations-Skills, bevor du eine ansonsten verstandene Änderung vornimmst.
@@ -102,18 +114,6 @@ Beide Wrapper verwenden denselben Installer und standardmäßig `~/.agents/skill
 > `--force` löscht jedes ausgewählte Zielverzeichnis und erstellt es neu. Prüfe lokale Änderungen vorher; der Installer führt Dateien nicht zusammen.
 
 Die vollständigen Installationsanleitungen für [Zed](docs/clients/zed.md) und [Codex](docs/clients/codex.md) beschreiben ausgewählte Skills, eigene Zielpfade, Updates, Überprüfung und Deinstallation.
-
-## All-in-one-Anweisungen für Projekte
-
-Kein Bock auf viele verschiedene Skills und komplizierte Installationen? Dann nutze [`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md) als kompakte All-in-one-Lösung.
-
-Lege die Datei im Stammverzeichnis deines Projekts als `AGENTS.md` ab. Sie enthält allgemeine Anweisungen für Produktbezug, Barrierefreiheit, Sicherheit, Verifikation und Review-Prioritäten – ohne einen bestimmten Agent-Client vorauszusetzen.
-
-```sh
-cp templates/AGENTS-AIO.md /pfad/zu/deinem-projekt/AGENTS.md
-```
-
-Projektspezifische Regeln gehören in die kopierte Vorlage, nicht in die verteilten Skills.
 
 ## Skills kombinieren
 
