@@ -120,7 +120,12 @@ Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibun
 
 ## Optionale Repository-Anweisungen
 
-[`templates/AGENTS.md`](templates/AGENTS.md) ist eine bewusst meinungsstarke Vorlage für die Repository-Wurzel. Sie übernimmt das Routing zwischen den Skills und definiert eine kompakte Write-Then-Verify-Regel. Kopiere sie nur in ein Ziel-Repository, wenn deutsche Antworten und `codebase-memory-mcp` gewünscht sind; passe diese Anforderungen andernfalls vorher an oder entferne sie. Projektspezifische Regeln gehören in die kopierte Datei, nicht in die verteilten Skills.
+Wähle eine dieser optionalen Vorlagen für die Repository-Wurzel; keine ersetzt die andere:
+
+- [`templates/AGENTS.md`](templates/AGENTS.md) ist eine bewusst meinungsstarke Routing-Vorlage für diesen Katalog mit einer kompakten Write-Then-Verify-Regel. Kopiere sie nur in ein Ziel-Repository, wenn deutsche Antworten und `codebase-memory-mcp` gewünscht sind; passe diese Anforderungen andernfalls vorher an oder entferne sie.
+[`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md) ist eine All-in-one-Qualitätsvorlage gegen generische, unbelegte Design- und Codeausgaben. Sie behandelt Produktbezug, Barrierefreiheit, Sicherheit, Verifikation und Review-Prioritäten, ohne einen bestimmten Agent-Client vorauszusetzen.
+
+Projektspezifische Regeln gehören in die kopierte Vorlage, nicht in die verteilten Skills.
 
 ## Kompatibilität
 
@@ -162,7 +167,9 @@ Diese Befehle prüfen Skill-Metadaten und -Struktur, lokale Markdown-Links, Verh
 ├── evals/                      # Statische Fälle, Runtime-Contracts, Client-Matrix und Tests
 ├── scripts/                    # Validierung, Runtime-Eval, Paketierung und Installer
 ├── docs/                       # Client-Anleitungen und Kompatibilitätsrichtlinie
-├── templates/AGENTS.md         # Optionale Repository-Anweisungen
+├── templates/                  # Optionale Vorlagen für Repository-Anweisungen
+│   ├── AGENTS.md               # Deutsches Skill-Routing und Verifikation
+│   └── AGENTS-AIO.md           # Allgemeine All-in-one-Qualitätsregeln
 ├── .github/workflows/          # Automatisierungs-Workflows
 ├── CONTRIBUTING.md             # Regeln zum Mitwirken und Clean-Room-Prozess
 ├── pyproject.toml              # Python-Werkzeuge und Paketmetadaten
