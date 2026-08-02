@@ -12,7 +12,7 @@
 
 Wiederverwendbare Agent Skills, die KI-Coding-Assistenten zu sorgfältigen Änderungen und verständlichen Ergebnissen anleiten.
 
-[Skills entdecken](#skill-katalog) · [Mit Zed oder Codex installieren](#schnellstart) · [Mitwirken](CONTRIBUTING.md)
+[Skills entdecken](#skill-katalog) · [Mit Zed oder Codex installieren](#schnellstart) · [All-in-one-Vorlage nutzen](#all-in-one-anweisungen-für-projekte) · [Mitwirken](CONTRIBUTING.md)
 
 > [!NOTE]
 > Statische Repository-Prüfungen laufen für jeden Pull Request. Deterministische Runtime-Contract-Checks prüfen den Eval-Runner, während authentifizierte Codex-Smoke-Tests und interaktive Zed-Prüfungen optionale Release-Belege sind. Die [Kompatibilitäts- und Wartungsrichtlinie](docs/compatibility.md) beschreibt die Support-Matrix und ihre klaren Grenzen.
@@ -103,6 +103,18 @@ Beide Wrapper verwenden denselben Installer und standardmäßig `~/.agents/skill
 
 Die vollständigen Installationsanleitungen für [Zed](docs/clients/zed.md) und [Codex](docs/clients/codex.md) beschreiben ausgewählte Skills, eigene Zielpfade, Updates, Überprüfung und Deinstallation.
 
+## All-in-one-Anweisungen für Projekte
+
+Kein Bock auf viele verschiedene Skills und komplizierte Installationen? Dann nutze [`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md) als kompakte All-in-one-Lösung.
+
+Lege die Datei im Stammverzeichnis deines Projekts als `AGENTS.md` ab. Sie enthält allgemeine Anweisungen für Produktbezug, Barrierefreiheit, Sicherheit, Verifikation und Review-Prioritäten – ohne einen bestimmten Agent-Client vorauszusetzen.
+
+```sh
+cp templates/AGENTS-AIO.md /pfad/zu/deinem-projekt/AGENTS.md
+```
+
+Projektspezifische Regeln gehören in die kopierte Vorlage, nicht in die verteilten Skills.
+
 ## Skills kombinieren
 
 Häufige Reihenfolgen sind:
@@ -120,12 +132,8 @@ Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibun
 
 ## Optionale Repository-Anweisungen
 
-Wähle eine dieser optionalen Vorlagen für die Repository-Wurzel; keine ersetzt die andere:
+[`templates/AGENTS.md`](templates/AGENTS.md) ist eine bewusst meinungsstarke Routing-Vorlage für diesen Katalog mit einer kompakten Write-Then-Verify-Regel. Kopiere sie nur in ein Ziel-Repository, wenn deutsche Antworten und `codebase-memory-mcp` gewünscht sind; passe diese Anforderungen andernfalls vorher an oder entferne sie.
 
-- [`templates/AGENTS.md`](templates/AGENTS.md) ist eine bewusst meinungsstarke Routing-Vorlage für diesen Katalog mit einer kompakten Write-Then-Verify-Regel. Kopiere sie nur in ein Ziel-Repository, wenn deutsche Antworten und `codebase-memory-mcp` gewünscht sind; passe diese Anforderungen andernfalls vorher an oder entferne sie.
-[`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md) ist eine All-in-one-Qualitätsvorlage gegen generische, unbelegte Design- und Codeausgaben. Sie behandelt Produktbezug, Barrierefreiheit, Sicherheit, Verifikation und Review-Prioritäten, ohne einen bestimmten Agent-Client vorauszusetzen.
-
-Projektspezifische Regeln gehören in die kopierte Vorlage, nicht in die verteilten Skills.
 
 ## Kompatibilität
 
