@@ -19,7 +19,7 @@ Always answer the user in German. Be concise and explicit.
 - unclear technical direction → `solution-framing`
 - unknown failure cause → `failure-investigation`
 - small understood change → `safe-code-change`
-- UI or accessibility work → `product-interface-engineering`
+- UI, UX, frontend, page, screen, form, modal, navigation, or dashboard work; accessibility/a11y; keyboard, focus, or touch behavior; responsive or mobile layouts; or visible loading, empty, error, success, disabled, or permission states → `product-interface-engineering`
 - large Vue or Nuxt component decomposition → `vue-sfc-decomposition`
 - measured performance issue → `performance-investigation`
 - staged migration → `compatibility-migration`

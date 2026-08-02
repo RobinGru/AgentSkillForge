@@ -4,7 +4,7 @@ description: Establish an evidence-based product direction and initial capabilit
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.3
+  version: 0.6.4
 ---
 
 # Project discovery

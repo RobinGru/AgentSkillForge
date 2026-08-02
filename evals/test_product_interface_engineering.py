@@ -14,7 +14,10 @@ def test_interface_skill_is_portable() -> None:
     name, findings = validate_skill(SKILL)
     assert name == "product-interface-engineering"
     assert not [item for item in findings if item.level == "error"]
-    assert len(SKILL.read_text(encoding="utf-8").splitlines()) <= 250
+    content = SKILL.read_text(encoding="utf-8")
+    assert len(content.splitlines()) <= 250
+    for signal in ("UI/UX", "frontend", "dialogs or modals", "keyboard", "responsive or mobile"):
+        assert signal in content
 
 
 def test_interface_evals_cover_boundaries() -> None:
@@ -25,5 +28,11 @@ def test_interface_evals_cover_boundaries() -> None:
     assert all(isinstance(case, dict) for case in raw_cases)
     cases = {case["id"]: case for case in cast(list[dict[str, Any]], raw_cases)}
     assert "product-interface-engineering" in cases["interface-checkout-form"]["expected_skills"]
+    assert "product-interface-engineering" in cases["interface-short-modal-de"]["expected_skills"]
+    assert "product-interface-engineering" in cases["interface-responsive-navigation-de"]["expected_skills"]
+    assert "product-interface-engineering" in cases["interface-figma-implementation"]["expected_skills"]
+    assert "product-interface-engineering" in cases["interface-keyboard-focus"]["expected_skills"]
+    assert "product-interface-engineering" in cases["interface-ui-debug-short"]["expected_skills"]
+    assert "product-interface-engineering" in cases["interface-token-nontrigger"]["forbidden_skills"]
     assert "product-interface-engineering" in cases["interface-backend-nontrigger"]["forbidden_skills"]
     assert "product-interface-engineering" in cases["interface-vue-structural-nonprimary"]["forbidden_skills"]

@@ -58,6 +58,10 @@ cases:
   - {id: ui-positive-3, category: positive, prompt: "Add a settings form with validation and errors.", expected_skills: [product-interface-engineering]}
   - {id: ui-positive-4, category: positive, prompt: "Design empty and permission states for a dashboard.", expected_skills: [product-interface-engineering]}
   - {id: ui-positive-5, category: positive, prompt: "Make a data-entry flow keyboard usable.", expected_skills: [product-interface-engineering]}
+  - {id: ui-positive-6, category: positive, prompt: "Bau ein Login-Modal mit Validierung und Fehlerzuständen.", expected_skills: [product-interface-engineering]}
+  - {id: ui-positive-7, category: positive, prompt: "Mach die mobile Navigation bedienbar.", expected_skills: [product-interface-engineering]}
+  - {id: ui-positive-8, category: positive, prompt: "Repair focus order and keyboard navigation in the confirmation dialog.", expected_skills: [product-interface-engineering]}
+  - {id: ui-positive-9, category: positive, prompt: "Why does the Save button remain disabled after an error?", expected_skills: [product-interface-engineering]}
   - {id: ui-negative-1, category: negative, prompt: "Add a backend endpoint only.", forbidden_skills: [product-interface-engineering]}
   - {id: ui-negative-2, category: negative, prompt: "Rename a server variable.", forbidden_skills: [product-interface-engineering]}
   - {id: ui-negative-3, category: negative, prompt: "Extract a Vue composable without UX change.", forbidden_skills: [product-interface-engineering]}

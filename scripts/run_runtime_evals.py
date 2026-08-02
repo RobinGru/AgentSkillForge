@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Run declared runtime skill contracts through a configured agent-client adapter.
 
-The command validates only explicit response contracts. A passing run does not
-prove model routing, semantic quality, or compatibility with untested clients.
+The command evaluates explicit response contracts. It assesses routing only when
+an adapter supplies reliable selected-skill metadata; otherwise routing is
+reported as not available and does not make a response-contract run pass or fail.
 """
 
 from __future__ import annotations
@@ -155,6 +156,19 @@ def assess_response(case: RuntimeCase, response: str) -> dict[str, object]:
     return {"passed": not missing and not prohibited, "missing_patterns": missing, "prohibited_matches": prohibited}
 
 
+def assess_routing(case: RuntimeCase, selected_skills: tuple[str, ...] | None) -> dict[str, object]:
+    if selected_skills is None:
+        return {"status": "not_available", "selected_skills": []}
+    missing = [skill for skill in case.expected_skills if skill not in selected_skills]
+    prohibited = [skill for skill in case.forbidden_skills if skill in selected_skills]
+    return {
+        "status": "passed" if not missing and not prohibited else "failed",
+        "selected_skills": list(selected_skills),
+        "missing_expected_skills": missing,
+        "selected_forbidden_skills": prohibited,
+    }
+
+
 def run_case(client: dict[str, object], case: RuntimeCase, fixture_response: str | None, skills_source: Path) -> dict[str, object]:
     with tempfile.TemporaryDirectory(prefix="agent-skill-eval-") as directory:
         workdir = Path(directory)
@@ -173,7 +187,8 @@ def run_case(client: dict[str, object], case: RuntimeCase, fixture_response: str
         command = expand_command(command, values)
         completed = subprocess.run(command, cwd=workdir, text=True, capture_output=True, timeout=120, check=False)
         response = response_file.read_text(encoding="utf-8") if response_file.is_file() else completed.stdout
-        assessment = assess_response(case, response)
+        response_contract = assess_response(case, response)
+        routing_assessment = assess_routing(case, selected_skills=None)
         return {
             "id": case.identifier,
             "installed_skills": [path.name for path in installed],
@@ -184,8 +199,9 @@ def run_case(client: dict[str, object], case: RuntimeCase, fixture_response: str
             "stdout": completed.stdout,
             "stderr": completed.stderr,
             "response": response,
-            "assessment": assessment,
-            "passed": completed.returncode == 0 and bool(response.strip()) and assessment["passed"],
+            "response_contract": response_contract,
+            "routing_assessment": routing_assessment,
+            "passed": completed.returncode == 0 and bool(response.strip()) and response_contract["passed"],
         }
 
 
@@ -242,6 +258,8 @@ def main(argv: list[str] | None = None) -> int:
         "model": args.model,
         "executed_at": datetime.now(UTC).isoformat(),
         "case_count": len(results),
+        "response_contract_passed": all(result["passed"] for result in results),
+        "routing_assessment": "not_available",
         "passed": all(result["passed"] for result in results),
         "results": results,
     }

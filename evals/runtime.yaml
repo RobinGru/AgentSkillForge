@@ -10,6 +10,16 @@ cases:
       prohibited_patterns:
         - "(?i)tests? passed"
 
+  - id: product-interface-engineering-contract
+    prompt: Bau mir ein Login-Modal mit Validierung und Fehlerzuständen.
+    expected_skills: [product-interface-engineering]
+    expect:
+      required_patterns:
+        - "(?i)scope"
+        - "(?i)(interaction|state|validation|error)"
+      prohibited_patterns:
+        - "(?i)tests? passed"
+
   - id: performance-investigation-contract
     prompt: Investigate a measured p95 API latency regression after a release.
     expected_skills: [performance-investigation]

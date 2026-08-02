@@ -1,10 +1,18 @@
 ---
 name: product-interface-engineering
-description: Engineer user-facing interface changes around a concrete user job, existing product patterns, complete interaction states, and proportionate verification. Use for UI flows, components, accessibility, or responsive behavior.
+description: >-
+  Use for building, changing, debugging, or reviewing user-facing UI/UX and
+  frontend behavior: pages, screens, forms, dialogs or modals, navigation,
+  dashboards, components, interaction flows, validation and recovery,
+  loading, empty, error, success, disabled, or permission states,
+  accessibility, keyboard, focus, touch behavior, and responsive or mobile
+  layouts. Also use when implementing a supplied design where visible behavior
+  or interaction states change. Do not use for backend-only work, isolated
+  visual-token changes, or behavior-preserving component refactors.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.3
+  version: 0.6.4
 ---
 
 # Product interface engineering

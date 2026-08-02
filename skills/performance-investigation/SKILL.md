@@ -4,7 +4,7 @@ description: Investigate a measured performance concern with a comparable baseli
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.3
+  version: 0.6.4
 ---
 
 # Performance investigation
