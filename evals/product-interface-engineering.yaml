@@ -2,9 +2,9 @@ cases:
   - id: interface-checkout-form
     prompt: Build a checkout form with validation, payment failure recovery, and mobile use.
     expected_skills: [product-interface-engineering]
-  - id: interface-color-token-local
-    prompt: Correct one existing color token in a button state.
-    expected_skills: [product-interface-engineering]
+  - id: interface-token-nontrigger
+    prompt: Ändere nur den vorhandenen Button-Spacing-Token von 12px auf 16px.
+    forbidden_skills: [product-interface-engineering]
     assertions: [uses local scope]
   - id: interface-backend-nontrigger
     prompt: Add a backend endpoint with no UI changes.
@@ -16,3 +16,18 @@ cases:
   - id: interface-vue-structural-nonprimary
     prompt: Extract composables from a Vue component without changing UX.
     forbidden_skills: [product-interface-engineering]
+  - id: interface-short-modal-de
+    prompt: Bau mir ein Login-Modal mit Validierung und Fehlerzuständen.
+    expected_skills: [product-interface-engineering]
+  - id: interface-responsive-navigation-de
+    prompt: Mach die Navigation auf dem Handy benutzbar.
+    expected_skills: [product-interface-engineering]
+  - id: interface-figma-implementation
+    prompt: Implement this Figma settings screen with loading, empty, error, and success states.
+    expected_skills: [product-interface-engineering]
+  - id: interface-keyboard-focus
+    prompt: Fix the keyboard focus behavior in this dialog.
+    expected_skills: [product-interface-engineering]
+  - id: interface-ui-debug-short
+    prompt: Warum bleibt der Speichern-Button nach einem Fehler deaktiviert?
+    expected_skills: [product-interface-engineering]

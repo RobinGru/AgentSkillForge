@@ -3,14 +3,21 @@ from pathlib import Path
 
 import pytest
 
-from scripts.run_runtime_evals import assess_response, load_cases, load_client, main, validate_client
+from scripts.run_runtime_evals import (
+    assess_response,
+    assess_routing,
+    load_cases,
+    load_client,
+    main,
+    validate_client,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "evals" / "runtime.yaml"
 CLIENTS = ROOT / "evals" / "clients.yaml"
 FIXTURE_RESPONSE = (
-    "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. "
-    "Finding and verification gap. Trust boundary and abuse path threat. "
+    "Behavior contract. Scope, interaction state, validation error, and verification plan. "
+    "Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. "
     "Observed revision in the canonical record and next safe action."
 )
 
@@ -44,6 +51,18 @@ def test_response_assessment_reports_missing_and_prohibited_patterns() -> None:
     assert assessment["prohibited_matches"]
 
 
+def test_routing_assessment_requires_selected_skill_metadata() -> None:
+    case = load_cases(CASES)[0]
+
+    unavailable = assess_routing(case, selected_skills=None)
+    passed = assess_routing(case, selected_skills=case.expected_skills)
+    failed = assess_routing(case, selected_skills=case.forbidden_skills)
+
+    assert unavailable == {"status": "not_available", "selected_skills": []}
+    assert passed["status"] == "passed"
+    assert failed["status"] == "failed"
+
+
 def test_fixture_client_runs_contracts_and_writes_report(tmp_path: Path) -> None:
     output = tmp_path / "runtime-report.json"
 
@@ -65,7 +84,11 @@ def test_fixture_client_runs_contracts_and_writes_report(tmp_path: Path) -> None
     assert all(isinstance(case, dict) for case in results)
     assert result == 0
     assert report["passed"] is True
+    assert report["response_contract_passed"] is True
+    assert report["routing_assessment"] == "not_available"
     assert all(case["passed"] for case in results)
+    assert all(case["response_contract"]["passed"] for case in results)
+    assert all(case["routing_assessment"]["status"] == "not_available" for case in results)
 
 
 def test_fixture_client_requires_explicit_response() -> None:

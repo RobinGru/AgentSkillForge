@@ -32,9 +32,11 @@ The repository has independent evidence layers:
 4. **Zed manual smoke checks** cover discovery and interactive use until Zed
    offers a stable headless agent interface suitable for automation.
 
-A pass means only the declared assertions passed for the recorded client,
-model, and prompt run. It does not prove skill routing, semantic correctness,
-or behavior for clients or models outside that record.
+A pass means only the declared response-contract assertions passed for the
+recorded client, model, and prompt run. Routing is assessed separately only when
+the client supplies reliable selected-skill metadata; otherwise it is reported
+as not available. A pass does not prove semantic correctness or behavior for
+clients or models outside that record.
 
 ## Run the command smoke suite
 
@@ -53,7 +55,9 @@ python scripts/run_runtime_evals.py \
 Before each case, the adapter copies all skills to an isolated
 `.agents/skills` directory in its temporary workspace. It then sends each prompt
 to the configured client command and evaluates only the required and prohibited
-regular-expression contracts in `evals/runtime.yaml`. The Codex adapter requires
+regular-expression response contracts in `evals/runtime.yaml`. Its current
+adapter does not provide selected-skill metadata, so routing is reported as not
+available. The Codex adapter requires
 a recorded client version and model identifier. Preserve the resulting JSON
 artifact with the release record. The report contains the executed command and
 response, so review it for sensitive data before publishing it.
