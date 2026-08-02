@@ -7,7 +7,7 @@ import yaml
 from scripts.validate_repository import validate_skill
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "session-handoff" / "SKILL.md"
+SKILL = ROOT / "skills" / "core" / "session-handoff" / "SKILL.md"
 EVALS = ROOT / "evals" / "session-handoff.yaml"
 REQUIRED = {"positive": 5, "negative": 5, "conflict": 3, "output": 2, "adversarial": 2}
 HEADINGS = [

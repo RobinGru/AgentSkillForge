@@ -6,7 +6,7 @@ import yaml
 from scripts.validate_repository import validate_skill
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "performance-investigation" / "SKILL.md"
+SKILL = ROOT / "skills" / "quality" / "performance-investigation" / "SKILL.md"
 EVALS = ROOT / "evals" / "performance-investigation.yaml"
 REFERENCES = SKILL.parent / "references"
 

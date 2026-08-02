@@ -20,11 +20,15 @@ def default_source() -> Path:
 def available_skills(source: Path) -> dict[str, Path]:
     if not source.is_dir():
         raise ValueError(f"skill source directory does not exist: {source}")
-    return {
-        path.name: path
-        for path in sorted(source.iterdir())
-        if path.is_dir() and (path / "SKILL.md").is_file()
-    }
+
+    skills: dict[str, Path] = {}
+    for skill_file in sorted(source.rglob("SKILL.md")):
+        directory = skill_file.parent
+        name = directory.name
+        if name in skills:
+            raise ValueError(f"duplicate skill name '{name}': {skills[name]} and {directory}")
+        skills[name] = directory
+    return skills
 
 
 def install_skills(source: Path, target: Path, names: list[str] | None, force: bool) -> list[Path]:

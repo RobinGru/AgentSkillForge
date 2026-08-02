@@ -43,6 +43,8 @@ SKILL_EVAL_SPECS = {
     "feature-lifecycle": SkillEvalSpec("fl", 20),
     "session-handoff": SkillEvalSpec("sh", 18),
     "adversarial-deep-review": SkillEvalSpec("adr", 18),
+    "repository-knowledge-curation": SkillEvalSpec("rkc", 18),
+    "repository-onboarding": SkillEvalSpec("rko", 18),
 }
 LEGACY_MANIFEST_REQUIRED = {
     "positive": 5,

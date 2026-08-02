@@ -35,6 +35,18 @@ python3 scripts/install_codex_skills.py
 The command prints each installed directory. It refuses to replace an existing
 skill directory.
 
+## Manual ZIP installation
+
+Build `dist/agent-skill-forge-skills.zip` from a source checkout with:
+
+```sh
+python3 scripts/build_skill_bundle.py
+```
+
+Extract the ZIP contents directly into the configured skill directory. Its top-level
+entries are complete flat skill directories; do not extract them below a category
+folder.
+
 ## Install or update selected skills
 
 Install one selected skill:

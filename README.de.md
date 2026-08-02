@@ -44,26 +44,55 @@ Projektspezifische Regeln gehören in die kopierte Vorlage, nicht in die verteil
 
 ## Skill-Katalog
 
-Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelnen Wort im Prompt. Der Katalog folgt einem typischen Arbeitsablauf; verwende die spezialisierten Investigations-Skills, bevor du eine ansonsten verstandene Änderung vornimmst.
+Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelnen Wort im Prompt. Beginne mit der Kategorie, die die Arbeit beschreibt, und wähle dann den engsten Skill, dessen Aktivierungsgrenze zur Situation passt.
 
-| Skill | Wann verwenden? | Beispiel |
+> **Quellstruktur und Installation:** Die Kategorien dienen nur der Navigation in diesem Repository. Installer und das flache ZIP-Bundle legen jeden Skill direkt unter `<ziel>/<skill-name>/` ab.
+
+### Kernablauf
+
+Diese Skills decken die repositoryweiten Abläufe ab, die andere Arbeit häufig vorbereiten, ermöglichen, umsetzen, sichern oder fortsetzen.
+
+| Skill | Verwenden, wenn | Anderen Skill verwenden, wenn |
 |---|---|---|
-| [`skills/project-discovery/`](skills/project-discovery/) | Ein neues oder unklares Produkt benötigt Nutzer, Ziele, Grenzen und eine erste Capability-Map. | „Definiere das kleinste nützliche erste Release.“ |
-| [`skills/feature-specification/`](skills/feature-specification/) | Eine größere Capability benötigt beobachtbare Regeln, Zustände, Berechtigungen und Akzeptanzkriterien. | „Spezifiziere Retry- und Ablehnungsverhalten für den Dateiimport.“ |
-| [`skills/feature-lifecycle/`](skills/feature-lifecycle/) | Ein größeres Feature benötigt eine dauerhafte, revisionsgebundene Koordination über Sitzungen, Agenten oder Arbeitseinheiten hinweg. | „Gleiche dieses Feature-Ledger ab und nenne die nächste sichere Aktion.“ |
-| [`skills/solution-framing/`](skills/solution-framing/) | Die Richtung ist unklar oder eine Entscheidung enthält wichtige Abwägungen. | „Welcher Migrationsansatz ist am sichersten?“ |
-| [`skills/compatibility-migration/`](skills/compatibility-migration/) | Eine festgelegte Richtung erfordert sichere Koexistenz von altem und neuem Verhalten über mehrere Schritte oder Konsumenten. | „Plane eine kompatible API-Migration über mehrere Releases.“ |
-| [`skills/failure-investigation/`](skills/failure-investigation/) | Ein technischer Fehler außerhalb der Performance-Domäne hat eine unbekannte Ursache oder sichere Änderungsgrenze. | „Ermittle vor einem Fix, warum diese Integration fehlschlägt.“ |
-| [`skills/performance-investigation/`](skills/performance-investigation/) | Du untersuchst ein gemessenes Latenz-, Durchsatz- oder Speicherproblem. | „Warum ist dieser Endpunkt langsamer geworden?“ |
-| [`skills/security-boundary-analysis/`](skills/security-boundary-analysis/) | Eine explizite Security- oder Threat-Modeling-Aufgabe benötigt Vertrauensübergänge, Missbrauchspfade, Kontrollen und Restunsicherheit. | „Erstelle ein Threat Model für diese Webhook-Grenze.“ |
-| [`skills/safe-code-change/`](skills/safe-code-change/) | Du brauchst eine kleine, verstandene Änderung oder Fehlerbehebung. | „Behebe diesen reproduzierbaren Validierungsfehler.“ |
-| [`skills/product-interface-engineering/`](skills/product-interface-engineering/) | Eine Seite, ein Formular, eine Interaktion, Accessibility oder responsives Verhalten braucht Arbeit. | „Mache dieses Checkout-Formular mobil nutzbar.“ |
-| [`skills/vue-sfc-decomposition/`](skills/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente soll ohne Verhaltensänderung aufgeteilt werden. | „Teile diese große Vue-SFC in wartbare Teile auf.“ |
-| [`skills/fact-based-code-review/`](skills/fact-based-code-review/) | Eine Änderung ist bereit zur Prüfung und braucht einen faktenbasierten Code-Review. | „Prüfe diesen Pull Request vor dem Merge.“ |
-| [`skills/adversarial-deep-review/`](skills/adversarial-deep-review/) | Eine ausdrücklich gewünschte tiefe Prüfung einer konkreten Hochrisiko-Änderung braucht evidenzbasierte Stressszenarien. | „Prüfe diesen Payment-Retry-Diff adversarial.“ |
-| [`skills/session-handoff/`](skills/session-handoff/) | Unfertige Repository-Arbeit muss von einer anderen Sitzung oder Person anhand verifizierter Zustände fortgesetzt werden. | „Halte Worktree und die eine sichere nächste Aktion fest.“ |
+| [`repository-onboarding`](skills/core/repository-onboarding/) | Ein unbekanntes, übernommenes oder veraltetes Repository vor umfangreicher Arbeit eine evidenzbasierte technische Arbeitskarte benötigt. | Produktzweck unklar ist (`project-discovery`) oder ein Fehler untersucht werden muss (`failure-investigation`). |
+| [`repository-knowledge-curation`](skills/core/repository-knowledge-curation/) | Eine verifizierte wiederverwendbare Repository-Erkenntnis genau einen kanonischen Ablageort benötigt. | Die Erkenntnis unbestätigt, vorübergehend oder eine offene Entscheidung ist. |
+| [`safe-code-change`](skills/core/safe-code-change/) | Eine begrenzte Änderung einen bekannten Verhaltensvertrag und eine sichere Änderungsgrenze hat. | Die Ursache unbekannt ist (`failure-investigation`) oder ein Rollout gemischte Versionen koordinieren muss (`compatibility-migration`). |
+| [`session-handoff`](skills/core/session-handoff/) | Unfertige konkrete Arbeit anhand verifizierter lokaler Zustände fortgesetzt werden muss. | Dauerhafte Feature-Koordination erforderlich ist (`feature-lifecycle`). |
 
-Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre das vollständige Verzeichnis einschließlich vorhandener `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
+### Planung und Koordination
+
+Diese Skills definieren Produktabsicht, beobachtbares Verhalten, technische Richtung oder die dauerhafte Koordination einer mehrstufigen Auslieferung, bevor die Implementierung fortschreitet.
+
+| Skill | Verwenden, wenn | Beispiel |
+|---|---|---|
+| [`project-discovery`](skills/planning/project-discovery/) | Ein neues oder übernommenes Produkt keine verlässlichen Nutzer, Ziele, Grenzen oder erste Release-Grenze besitzt. | „Definiere das kleinste nützliche erste Release.“ |
+| [`feature-specification`](skills/planning/feature-specification/) | Eine genehmigte größere Capability Regeln, Zustände, Berechtigungen und Akzeptanzkriterien benötigt. | „Spezifiziere Retry- und Ablehnungsverhalten für den Dateiimport.“ |
+| [`solution-framing`](skills/planning/solution-framing/) | Eine folgenreiche technische oder Delivery-Richtung noch offen ist. | „Welcher Migrationsansatz ist am sichersten?“ |
+| [`compatibility-migration`](skills/planning/compatibility-migration/) | Eine festgelegte Migration alte und neue Konsumenten, Verträge oder Daten sicher koexistieren lassen muss. | „Plane eine kompatible API-Migration über mehrere Releases.“ |
+| [`feature-lifecycle`](skills/planning/feature-lifecycle/) | Ein größeres Feature über Sitzungen oder Agenten hinweg einen kompakten revisionsgebundenen Datensatz benötigt. | „Gleiche dieses Feature-Ledger ab und nenne die nächste sichere Aktion.“ |
+
+### Qualität, Untersuchung und Review
+
+Diese Skills untersuchen Evidenz, bewerten Risiken oder prüfen konkrete Änderungen. Sie schaffen Fakten und Grenzen; sie ersetzen keinen verstandenen Implementierungsschritt.
+
+| Skill | Verwenden, wenn | Wichtige Abgrenzung |
+|---|---|---|
+| [`failure-investigation`](skills/quality/failure-investigation/) | Ein Fehler in Test, Build, Laufzeit, Integration oder Daten außerhalb der Performance-Domäne eine unbekannte Ursache hat. | Erst diagnostizieren, danach mit `safe-code-change` implementieren. |
+| [`performance-investigation`](skills/quality/performance-investigation/) | Ein gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem Baseline und Experimente benötigt. | Bei „Mach es schneller“ ohne Signal zuerst Messung schaffen. |
+| [`security-boundary-analysis`](skills/quality/security-boundary-analysis/) | Ein explizites Threat Model oder eine Vertrauensgrenzenanalyse gefordert ist. | Ein Routine-Review eines Diffs gehört zu `fact-based-code-review`. |
+| [`fact-based-code-review`](skills/quality/fact-based-code-review/) | Ein konkreter Diff oder Satz geänderter Dateien eine faktenbasierte Bewertung für die Integration benötigt. | Eine ausdrücklich tiefe Hochrisiko-Prüfung gehört zu `adversarial-deep-review`. |
+| [`adversarial-deep-review`](skills/quality/adversarial-deep-review/) | Eine konkrete Hochrisikoänderung ausdrücklich auf Ausfall, Missbrauch, Recovery, Concurrency oder Betrieb herausgefordert werden soll. | Er liefert Risikoevidenz; die normale Integrationsentscheidung trifft `fact-based-code-review`. |
+
+### Spezialisierte Engineering-Arbeit
+
+Diese Skills besitzen einen fokussierten technischen Bereich und eigene Verhaltensschutzmechanismen.
+
+| Skill | Verwenden, wenn | Wichtige Abgrenzung |
+|---|---|---|
+| [`product-interface-engineering`](skills/specialized/product-interface-engineering/) | Eine Seite, ein Formular, ein Flow, Accessibility-Verhalten, responsives Layout oder sichtbarer UI-Zustand verändert wird. | Backend-Arbeit und verhaltensbewahrende Refactorings liegen außerhalb des Scopes. |
+| [`vue-sfc-decomposition`](skills/specialized/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-SFC eine nachgewiesene Verantwortungs-, Wartbarkeits- oder Testbarkeitsgrenze besitzt. | Änderungen am UI-Verhalten gehören zu `product-interface-engineering`. |
+
+Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre ein vollständiges Skill-Verzeichnis einschließlich vorhandener `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
 
 ## Schnellstart
 
@@ -97,7 +126,17 @@ Starte nach der Installation eine neue Agentensitzung. Der Installer bricht ab, 
 
 ### Portabler Kern
 
-Kopiere oder referenziere das gewünschte Verzeichnis `skills/<name>/` mit dem dokumentierten Mechanismus deines Clients. AgentSkillForge beansprucht weder einen universellen Installationspfad noch eine allgemeine Konvention zur automatischen Erkennung.
+Kopiere oder referenziere das gewünschte kategorisierte Quellverzeichnis mit dem dokumentierten Mechanismus deines Clients. AgentSkillForge beansprucht weder einen universellen Installationspfad noch eine allgemeine Konvention zur automatischen Erkennung.
+
+### Flaches ZIP-Bundle
+
+Erzeuge aus einem Quell-Checkout ein manuell installierbares Bundle:
+
+```sh
+python3 scripts/build_skill_bundle.py
+```
+
+Dadurch entsteht `dist/agent-skill-forge-skills.zip`. Entpacke dessen Inhalt direkt in das Skill-Verzeichnis deines Clients, beispielsweise `~/.agents/skills`; jedes Verzeichnis auf oberster Ebene ist ein vollständiger Skill. Kopiere die kategorisierten Quellverzeichnisse `core/`, `planning/`, `quality/` oder `specialized/` nicht in dieses Ziel.
 
 ### Zed und Codex
 
@@ -119,6 +158,7 @@ Die vollständigen Installationsanleitungen für [Zed](docs/clients/zed.md) und 
 
 Häufige Reihenfolgen sind:
 
+- Unbekanntes Repository: `repository-onboarding` erstellt vor umfangreicher Arbeit eine technische Arbeitskarte; `repository-knowledge-curation` übernimmt verifizierte wiederverwendbare Fakten, wenn sie einen kanonischen dauerhaften Ablageort benötigen.
 - Neues Produkt: `project-discovery` legt Produktgrenze und Capability-Map fest; anschließend definiert `feature-specification` eine Capability vor technischer Planung oder Implementierung.
 - Mehrsitzungs-Feature: `feature-specification` besitzt den Verhaltensvertrag; `solution-framing` klärt folgenreiche technische Entscheidungen, `feature-lifecycle` führt den dauerhaften revisionsgebundenen Datensatz, `safe-code-change` implementiert jede begrenzte Arbeitseinheit und `session-handoff` übernimmt nur tatsächlich unterbrochene konkrete Arbeit.
 
