@@ -44,55 +44,55 @@ Projektspezifische Regeln gehören in die kopierte Vorlage, nicht in die verteil
 
 ## Skill-Katalog
 
-Wähle den Skill, der wirklich zur Aufgabe passt – nicht nur zu einem einzelnen Wort im Prompt. Beginne mit der Kategorie, die die Arbeit beschreibt, und wähle dann den engsten Skill, dessen Aktivierungsgrenze zur Situation passt.
+Starte mit dem Satz, der deine Aufgabe am besten beschreibt. Die zweite Spalte sagt dir, wann du einen Skill wählen solltest. Die letzte Spalte zeigt, wann ein anderer Skill besser passt. Du musst nicht alle Fachbegriffe kennen, um eine gute erste Wahl zu treffen.
 
-> **Quellstruktur und Installation:** Die Kategorien dienen nur der Navigation in diesem Repository. Installer und das flache ZIP-Bundle legen jeden Skill direkt unter `<ziel>/<skill-name>/` ab.
+> **Quellstruktur und Installation:** Die Kategorien helfen nur bei der Orientierung in diesem Repository. Nach der Installation liegt jeder Skill direkt unter `<ziel>/<skill-name>/`.
 
 ### Kernablauf
 
-Diese Skills decken die repositoryweiten Abläufe ab, die andere Arbeit häufig vorbereiten, ermöglichen, umsetzen, sichern oder fortsetzen.
+Diese Skills helfen bei der alltäglichen Arbeit im Repository: ein Projekt verstehen, eine kleine Änderung machen, nützliches Wissen festhalten oder unterbrochene Arbeit fortsetzen.
 
 | Skill | Verwenden, wenn | Anderen Skill verwenden, wenn |
 |---|---|---|
-| [`repository-onboarding`](skills/core/repository-onboarding/) | Ein unbekanntes, übernommenes oder veraltetes Repository vor umfangreicher Arbeit eine evidenzbasierte technische Arbeitskarte benötigt. | Produktzweck unklar ist (`project-discovery`) oder ein Fehler untersucht werden muss (`failure-investigation`). |
-| [`repository-knowledge-curation`](skills/core/repository-knowledge-curation/) | Eine verifizierte wiederverwendbare Repository-Erkenntnis genau einen kanonischen Ablageort benötigt. | Die Erkenntnis unbestätigt, vorübergehend oder eine offene Entscheidung ist. |
-| [`safe-code-change`](skills/core/safe-code-change/) | Eine begrenzte Änderung einen bekannten Verhaltensvertrag und eine sichere Änderungsgrenze hat. | Die Ursache unbekannt ist (`failure-investigation`) oder ein Rollout gemischte Versionen koordinieren muss (`compatibility-migration`). |
-| [`session-handoff`](skills/core/session-handoff/) | Unfertige konkrete Arbeit anhand verifizierter lokaler Zustände fortgesetzt werden muss. | Dauerhafte Feature-Koordination erforderlich ist (`feature-lifecycle`). |
+| [`repository-onboarding`](skills/core/repository-onboarding/) | Du ein unbekanntes Projekt verstehen musst, bevor du größere Änderungen machst. | Du zuerst klären musst, was das Produkt leisten soll (`project-discovery`), oder einen Fehler untersuchst (`failure-investigation`). |
+| [`repository-knowledge-curation`](skills/core/repository-knowledge-curation/) | Du eine bestätigte, nützliche Information über das Repository am richtigen Ort festhalten möchtest. | Die Information nur eine Vermutung, vorübergehend oder noch nicht entschieden ist. |
+| [`safe-code-change`](skills/core/safe-code-change/) | Du weißt, was sich ändern soll und wo du die Änderung sicher machen kannst. | Du noch nicht weißt, warum etwas kaputt ist (`failure-investigation`), oder alte und neue Versionen während der Umstellung zusammen funktionieren müssen (`compatibility-migration`). |
+| [`session-handoff`](skills/core/session-handoff/) | Du klare Notizen hinterlassen musst, damit jemand unfertige Arbeit sicher fortsetzen kann. | Du ein größeres Feature über mehrere Sitzungen hinweg verfolgen musst (`feature-lifecycle`). |
 
 ### Planung und Koordination
 
-Diese Skills definieren Produktabsicht, beobachtbares Verhalten, technische Richtung oder die dauerhafte Koordination einer mehrstufigen Auslieferung, bevor die Implementierung fortschreitet.
+Nutze diese Skills vor dem Programmieren, wenn du entscheiden musst, was gebaut werden soll, wie es funktionieren soll oder wie eine größere Änderung sicher ausgeliefert wird.
 
-| Skill | Verwenden, wenn | Beispiel |
+| Skill | Verwenden, wenn | Anderen Skill verwenden, wenn |
 |---|---|---|
-| [`project-discovery`](skills/planning/project-discovery/) | Ein neues oder übernommenes Produkt keine verlässlichen Nutzer, Ziele, Grenzen oder erste Release-Grenze besitzt. | „Definiere das kleinste nützliche erste Release.“ |
-| [`feature-specification`](skills/planning/feature-specification/) | Eine genehmigte größere Capability Regeln, Zustände, Berechtigungen und Akzeptanzkriterien benötigt. | „Spezifiziere Retry- und Ablehnungsverhalten für den Dateiimport.“ |
-| [`solution-framing`](skills/planning/solution-framing/) | Eine folgenreiche technische oder Delivery-Richtung noch offen ist. | „Welcher Migrationsansatz ist am sichersten?“ |
-| [`compatibility-migration`](skills/planning/compatibility-migration/) | Eine festgelegte Migration alte und neue Konsumenten, Verträge oder Daten sicher koexistieren lassen muss. | „Plane eine kompatible API-Migration über mehrere Releases.“ |
-| [`feature-lifecycle`](skills/planning/feature-lifecycle/) | Ein größeres Feature über Sitzungen oder Agenten hinweg einen kompakten revisionsgebundenen Datensatz benötigt. | „Gleiche dieses Feature-Ledger ab und nenne die nächste sichere Aktion.“ |
+| [`project-discovery`](skills/planning/project-discovery/) | Das Produkt neu oder unklar ist: Nutzer, Ziele oder die erste nützliche Version stehen noch nicht fest. | Das Produktziel klar ist und du ein einzelnes Feature genauer beschreiben musst (`feature-specification`). |
+| [`feature-specification`](skills/planning/feature-specification/) | Für ein geplantes Feature klare Regeln fehlen: Was dürfen Nutzer tun, was passiert in jeder Situation und woran erkennt man den Erfolg? | Du noch klären musst, was das Produkt erreichen soll (`project-discovery`), oder wie es technisch gebaut wird (`solution-framing`). |
+| [`solution-framing`](skills/planning/solution-framing/) | Das Ziel klar ist, aber du noch einen wichtigen technischen Weg auswählen musst. | Der Weg schon feststeht und alte sowie neue Versionen eine Zeit lang zusammen laufen müssen (`compatibility-migration`). |
+| [`compatibility-migration`](skills/planning/compatibility-migration/) | Du eine API, ein Datenformat oder ein System änderst und alte und neue Versionen eine Zeit lang zusammen funktionieren müssen. | Du den grundsätzlichen Weg erst noch auswählen musst (`solution-framing`) oder nur eine einzelne sichere Änderung machst (`safe-code-change`). |
+| [`feature-lifecycle`](skills/planning/feature-lifecycle/) | Ein größeres Feature über mehrere Sitzungen oder Personen hinweg einen kurzen, aktuellen Stand braucht. | Du nur einmal unfertige Arbeit übergeben musst (`session-handoff`). |
 
 ### Qualität, Untersuchung und Review
 
-Diese Skills untersuchen Evidenz, bewerten Risiken oder prüfen konkrete Änderungen. Sie schaffen Fakten und Grenzen; sie ersetzen keinen verstandenen Implementierungsschritt.
+Nutze diese Skills, um ein Problem zu verstehen, Leistung zu messen, Sicherheitsrisiken zu prüfen oder eine fertige Änderung zu bewerten. Sie helfen dir, Fakten zu sammeln, bevor du den nächsten Schritt entscheidest.
 
-| Skill | Verwenden, wenn | Wichtige Abgrenzung |
+| Skill | Verwenden, wenn | Anderen Skill verwenden, wenn |
 |---|---|---|
-| [`failure-investigation`](skills/quality/failure-investigation/) | Ein Fehler in Test, Build, Laufzeit, Integration oder Daten außerhalb der Performance-Domäne eine unbekannte Ursache hat. | Erst diagnostizieren, danach mit `safe-code-change` implementieren. |
-| [`performance-investigation`](skills/quality/performance-investigation/) | Ein gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem Baseline und Experimente benötigt. | Bei „Mach es schneller“ ohne Signal zuerst Messung schaffen. |
-| [`security-boundary-analysis`](skills/quality/security-boundary-analysis/) | Ein explizites Threat Model oder eine Vertrauensgrenzenanalyse gefordert ist. | Ein Routine-Review eines Diffs gehört zu `fact-based-code-review`. |
-| [`fact-based-code-review`](skills/quality/fact-based-code-review/) | Ein konkreter Diff oder Satz geänderter Dateien eine faktenbasierte Bewertung für die Integration benötigt. | Eine ausdrücklich tiefe Hochrisiko-Prüfung gehört zu `adversarial-deep-review`. |
-| [`adversarial-deep-review`](skills/quality/adversarial-deep-review/) | Eine konkrete Hochrisikoänderung ausdrücklich auf Ausfall, Missbrauch, Recovery, Concurrency oder Betrieb herausgefordert werden soll. | Er liefert Risikoevidenz; die normale Integrationsentscheidung trifft `fact-based-code-review`. |
+| [`failure-investigation`](skills/quality/failure-investigation/) | Etwas kaputt ist und du noch nicht weißt, warum. | Das Problem Geschwindigkeit, Speicherverbrauch oder andere Ressourcen betrifft (`performance-investigation`). Wenn du die Lösung kennst, nutze `safe-code-change`. |
+| [`performance-investigation`](skills/quality/performance-investigation/) | Die Anwendung zu langsam ist oder zu viel Speicher beziehungsweise andere Ressourcen nutzt und du das messen kannst. | Du eine andere Art von Fehler untersuchst (`failure-investigation`). Bei „Mach es schneller“ ohne Messwert misst du zuerst. |
+| [`security-boundary-analysis`](skills/quality/security-boundary-analysis/) | Du prüfen musst, wer worauf zugreifen darf, wie Angreifer etwas missbrauchen könnten und welche Schutzmaßnahmen nötig sind. | Du nur eine normale Prüfung von Codeänderungen brauchst (`fact-based-code-review`). |
+| [`fact-based-code-review`](skills/quality/fact-based-code-review/) | Du konkrete Codeänderungen vor dem Zusammenführen praktisch bewerten möchtest. | Du eine ausdrücklich besonders strenge Prüfung einer riskanten Änderung brauchst (`adversarial-deep-review`). |
+| [`adversarial-deep-review`](skills/quality/adversarial-deep-review/) | Du eine riskante Änderung ausdrücklich auf Ausfälle, Missbrauch, Wiederherstellung, parallele Arbeit und Betrieb prüfen möchtest. | Du das normale Review vor dem Zusammenführen brauchst (`fact-based-code-review`); dieser Skill liefert dafür zusätzliche Risikofunde. |
 
 ### Spezialisierte Engineering-Arbeit
 
-Diese Skills besitzen einen fokussierten technischen Bereich und eigene Verhaltensschutzmechanismen.
+Nutze diese Skills, wenn es konkret um eine Benutzeroberfläche oder um eine Vue-/Nuxt-Komponente geht.
 
-| Skill | Verwenden, wenn | Wichtige Abgrenzung |
+| Skill | Verwenden, wenn | Anderen Skill verwenden, wenn |
 |---|---|---|
-| [`product-interface-engineering`](skills/specialized/product-interface-engineering/) | Eine Seite, ein Formular, ein Flow, Accessibility-Verhalten, responsives Layout oder sichtbarer UI-Zustand verändert wird. | Backend-Arbeit und verhaltensbewahrende Refactorings liegen außerhalb des Scopes. |
-| [`vue-sfc-decomposition`](skills/specialized/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-SFC eine nachgewiesene Verantwortungs-, Wartbarkeits- oder Testbarkeitsgrenze besitzt. | Änderungen am UI-Verhalten gehören zu `product-interface-engineering`. |
+| [`product-interface-engineering`](skills/specialized/product-interface-engineering/) | Du etwas änderst, das Nutzer sehen oder bedienen: eine Seite, ein Formular, Navigation, Fehlermeldungen, Barrierefreiheit oder ein mobiles Layout. | Die Arbeit nur im Backend stattfindet oder du Code umsortierst, ohne dass Nutzer eine Änderung merken. |
+| [`vue-sfc-decomposition`](skills/specialized/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente schwer wartbar geworden ist und sich in klarere, kleinere Aufgaben aufteilen lässt. | Du änderst, was Nutzer sehen oder wie die Oberfläche funktioniert (`product-interface-engineering`). |
 
-Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre ein vollständiges Skill-Verzeichnis einschließlich vorhandener `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
+Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre das ganze Skill-Verzeichnis einschließlich `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
 
 ## Schnellstart
 
