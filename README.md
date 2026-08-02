@@ -120,7 +120,12 @@ Your AI client decides when to load an installed skill. Descriptions are routing
 
 ## Optional repository instructions
 
-[`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated repository-root template that routes work across this catalog and defines a compact write-then-verify rule. Copy it to a target repository only when German responses and `codebase-memory-mcp` are intended; otherwise adapt or remove those requirements first. Project-specific rules should be added in the copied file, not in the distributed skills.
+Choose one of these optional repository-root templates; neither replaces the other:
+
+- [`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated routing template for this catalog with a compact write-then-verify rule. Copy it only when German responses and `codebase-memory-mcp` are intended; otherwise adapt or remove those requirements first.
+[`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md) is an all-in-one quality template that guards against generic, unverified design and code output. It covers product fit, accessibility, security, verification, and review priorities without requiring a particular agent client.
+
+Add project-specific rules to the copied template, not to the distributed skills.
 
 ## Compatibility
 
@@ -162,7 +167,9 @@ These commands validate skill metadata and layout, local Markdown links, install
 ├── evals/                      # Static cases, runtime contracts, client matrix, and tests
 ├── scripts/                    # Validation, runtime eval, packaging, and installer tools
 ├── docs/                       # Client guides and compatibility policy
-├── templates/AGENTS.md         # Optional repository instructions
+├── templates/                  # Optional repository instruction templates
+│   ├── AGENTS.md               # German skill routing and verification
+│   └── AGENTS-AIO.md           # General all-in-one quality guidance
 ├── .github/workflows/          # Automation workflows
 ├── CONTRIBUTING.md             # Contribution and clean-room rules
 ├── pyproject.toml              # Python tooling and package metadata
