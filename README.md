@@ -12,7 +12,7 @@
 
 Reusable Agent Skills that help AI coding assistants make careful changes and explain their work clearly.
 
-[Explore skills](#skill-catalog) · [Install with Zed or Codex](#quick-start) · [Contribute](CONTRIBUTING.md)
+[Explore skills](#skill-catalog) · [Install with Zed or Codex](#quick-start) · [Use the all-in-one template](#all-in-one-project-guidance) · [Contribute](CONTRIBUTING.md)
 
 > [!NOTE]
 > Static repository checks run for every pull request. Deterministic runtime-contract checks exercise the eval runner, while authenticated Codex smoke tests and Zed interactive checks are opt-in release evidence. See the [compatibility and maintenance policy](docs/compatibility.md) for the supported-client matrix and its explicit limits.
@@ -29,6 +29,18 @@ Agent Skills are plain Markdown directories centred on `SKILL.md`, so they are n
 - **Facts before assumptions:** Skills distinguish observed facts, inferences, and checks that were not run.
 - **Portable Agent Skills:** Copy a complete skill directory to a compatible client without a required Python runtime.
 - **Checked distribution:** Repository automation validates structure, links, tests, static eval cases, and package contents.
+
+## All-in-one project guidance
+
+Don't want to choose among many skills or deal with a complex installation? Use [`templates/AGENTS-AIO.md`](templates/AGENTS-AIO.md), the compact all-in-one option.
+
+Copy it into your project root as `AGENTS.md`. It provides general guidance for product fit, accessibility, security, verification, and review priorities without requiring a particular agent client.
+
+```sh
+cp templates/AGENTS-AIO.md /path/to/your-project/AGENTS.md
+```
+
+Add project-specific rules to the copied template, not to the distributed skills.
 
 ## Skill Catalog
 
@@ -160,7 +172,8 @@ Your AI client decides when to load an installed skill. Descriptions are routing
 
 ## Optional repository instructions
 
-[`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated repository-root template that routes work across this catalog and defines a compact write-then-verify rule. Copy it to a target repository only when German responses and `codebase-memory-mcp` are intended; otherwise adapt or remove those requirements first. Project-specific rules should be added in the copied file, not in the distributed skills.
+[`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated routing template for this catalog with a compact write-then-verify rule. Copy it only when German responses and `codebase-memory-mcp` are intended; otherwise adapt or remove those requirements first.
+
 
 ## Compatibility
 
@@ -202,7 +215,9 @@ These commands validate skill metadata and layout, local Markdown links, install
 ├── evals/                      # Static cases, runtime contracts, client matrix, and tests
 ├── scripts/                    # Validation, runtime eval, packaging, and installer tools
 ├── docs/                       # Client guides and compatibility policy
-├── templates/AGENTS.md         # Optional repository instructions
+├── templates/                  # Optional repository instruction templates
+│   ├── AGENTS.md               # German skill routing and verification
+│   └── AGENTS-AIO.md           # General all-in-one quality guidance
 ├── .github/workflows/          # Automation workflows
 ├── CONTRIBUTING.md             # Contribution and clean-room rules
 ├── pyproject.toml              # Python tooling and package metadata

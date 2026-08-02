@@ -61,7 +61,10 @@ def test_distribution_metadata_lists_every_skill_document() -> None:
         "scripts/install_codex_skills.py",
         "scripts/build_skill_bundle.py",
     ]
-    assert groups["share/agent-skill-forge/templates"] == ["templates/AGENTS.md"]
+    assert groups["share/agent-skill-forge/templates"] == [
+        "templates/AGENTS.md",
+        "templates/AGENTS-AIO.md",
+    ]
 
 
 def test_missing_skill_files_reports_missing_wheel_members(tmp_path: Path) -> None:
@@ -79,4 +82,5 @@ def test_missing_skill_files_reports_missing_wheel_members(tmp_path: Path) -> No
         "share/agent-skill-forge/scripts/install_codex_skills.py",
         "share/agent-skill-forge/scripts/build_skill_bundle.py",
         "share/agent-skill-forge/templates/AGENTS.md",
+        "share/agent-skill-forge/templates/AGENTS-AIO.md",
     }
