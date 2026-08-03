@@ -28,7 +28,7 @@ jobs:
       - run: python -m pip install -e ".[dev]"
       - run: >-
           python scripts/run_runtime_evals.py --client fixture
-          --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Observed revision in the canonical record and next safe action."
+          --fixture-response "Behavior contract. Scope, interaction state, validation error, and verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Observed revision in the canonical record and next safe action. Repository identity, structure and boundaries, discovered command, and verification model. Knowledge candidate and placement decision."
           --output artifacts/runtime-evals/fixture.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
