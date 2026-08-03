@@ -197,7 +197,7 @@ python scripts/validate_repository.py
 python scripts/check_links.py
 pytest
 python scripts/run_evals.py
-python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Observed revision in the canonical record and next safe action."
+python scripts/run_runtime_evals.py --client fixture --fixture-response "Behavior contract. Scope, interaction state, validation error, and verification plan. Baseline evidence and hypothesis experiment. Finding and verification gap. Trust boundary and abuse path threat. Observed revision in the canonical record and next safe action. Repository identity, structure and boundaries, discovered command, and verification model. Knowledge candidate and placement decision."
 python scripts/check_distribution.py
 ```
 
