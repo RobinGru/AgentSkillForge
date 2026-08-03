@@ -46,6 +46,6 @@ For trivial, low-risk edits, work directly without creating extra process.
 
 For every durable change:
 
-`Read → Write → Re-read → Inspect diff → Run direct proof → Report`
+`Targeted read → Write → Inspect changed range → Narrow proof → Compact report`
 
 Never claim a file, test, status, or memory update without verification.

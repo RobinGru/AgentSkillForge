@@ -11,8 +11,7 @@ metadata:
 
 Use the repository's established language and conventions for any artifacts you create or update.
 
-Make a small, understood change and prove its intended effect without expanding
-the task into redesign or broad refactoring.
+Make a small, understood change and prove its intended effect without expanding the task into redesign or broad refactoring.
 
 ## Activation boundary
 
@@ -34,13 +33,10 @@ Route elsewhere when:
 
 ## Core rule
 
-Use the narrowest direct proof before and after the patch.
-
-The pre-change proof establishes the baseline. The post-change proof repeats the
-same behavior path against the final worktree.
+Use the narrowest direct proof before and after the patch. The pre-change proof
+establishes the baseline; the post-change proof repeats that path against the final worktree.
 
 Minimize context and chat output throughout the task:
-
 - read only targeted files and relevant line ranges;
 - expand inspection only when evidence requires it;
 - do not print complete files, complete diffs, directory trees, or successful
@@ -49,7 +45,6 @@ Minimize context and chat output throughout the task:
 - summarize routine tool results in one short sentence or less.
 
 ## Workflow
-
 ### 1. Inspect the boundary
 
 Read only the smallest relevant scope:
@@ -188,7 +183,6 @@ Do not:
 Default maximum: 6 lines and 100 words.
 
 ## Output contract
-
 Use exactly this compact structure:
 
 ```markdown
@@ -215,7 +209,6 @@ Rules:
 - If the user requests more detail, expand only the requested section.
 
 Allowed verdicts:
-
 - `PROVED`
 - `PARTIALLY PROVED`
 - `NOT PROVED`
