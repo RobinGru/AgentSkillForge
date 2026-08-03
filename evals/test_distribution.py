@@ -33,7 +33,7 @@ def test_repository_agents_template_has_the_compact_routing_contract() -> None:
     assert all(f"`{skill}`" in text for skill in skills)
     assert "workflow-navigator" not in text
     assert "For trivial, low-risk edits, work directly" in text
-    assert "Read → Write → Re-read → Inspect diff → Run direct proof → Report" in text
+    assert "Targeted read → Write → Inspect changed range → Narrow proof → Compact report" in text
 
 
 def test_distribution_metadata_lists_every_skill_document() -> None:
