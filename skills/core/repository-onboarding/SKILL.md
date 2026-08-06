@@ -10,6 +10,9 @@ metadata:
 # Repository onboarding
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Build the smallest current technical map that makes a later task safe to bound.
 Do not turn onboarding into architecture design, product discovery, implementation,

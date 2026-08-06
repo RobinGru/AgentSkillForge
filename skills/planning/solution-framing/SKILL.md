@@ -10,6 +10,9 @@ metadata:
 # Solution framing
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Turn one uncertain consequential choice into a bounded, evidence-linked decision.
 Do not disguise discovery or implementation planning as a decision.

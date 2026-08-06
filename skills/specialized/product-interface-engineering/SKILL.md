@@ -10,6 +10,9 @@ metadata:
 # Product interface engineering
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Make the user job, interaction contract, states, accessibility, and verification
 explicit. Reuse established product patterns before introducing new ones.

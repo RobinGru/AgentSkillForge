@@ -50,6 +50,11 @@ FORBIDDEN_REFERENCES = re.compile(
 )
 PLACEHOLDER = re.compile(r"\b(?:TODO|TBD)\b|\bplaceholder\b", re.IGNORECASE)
 TESTS_PASSED = re.compile(r"\btests? passed\b", re.IGNORECASE)
+TOKEN_EFFICIENCY_RULE = (
+    "Use the smallest sufficient context and bounded tool output. "
+    "Reuse inspected evidence and stop once the task can proceed safely; "
+    "never trade correctness, safety, or required verification for brevity."
+)
 HEADING = re.compile(r"^(#{1,6})\s+\S.*$", re.MULTILINE)
 FENCED_CODE = re.compile(r"^```.*?^```[ \t]*$", re.MULTILINE | re.DOTALL)
 
@@ -150,6 +155,17 @@ def validate_skill(path: Path) -> tuple[str | None, list[Finding]]:
 
     if "allowed-tools" in frontmatter:
         findings.append(Finding("warning", path, "allowed-tools requires an explicit portability justification"))
+
+    normalized_text = " ".join(text.split())
+    rule_count = normalized_text.count(TOKEN_EFFICIENCY_RULE)
+    if rule_count != 1:
+        findings.append(
+            Finding(
+                "error",
+                path,
+                f"must contain the token-efficiency rule exactly once (found {rule_count})",
+            )
+        )
 
     line_count = len(text.splitlines())
     if line_count > 500:

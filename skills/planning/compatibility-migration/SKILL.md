@@ -10,6 +10,9 @@ metadata:
 # Compatibility migration
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Move a chosen contract through independently safe states while old and new forms
 coexist. Make each transition observable and destructive retirement evidence-gated.

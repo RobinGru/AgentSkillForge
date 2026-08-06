@@ -10,6 +10,9 @@ metadata:
 # Repository knowledge curation
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Turn one verified reusable finding into the smallest durable documentation change.
 Do not create a transcript, context dump, or second source of truth.

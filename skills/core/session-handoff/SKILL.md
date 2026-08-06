@@ -10,6 +10,9 @@ metadata:
 # Session handoff
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Preserve actionable transient state for unfinished work. Do not create a
 transcript, retrospective, specification, or implementation plan.

@@ -35,7 +35,9 @@ For known files, localized changes, exact implementations, and nearby tests, pre
 
 - Use the smallest evidence set that safely answers the task.
 - Read only relevant files and line ranges.
+- Reuse already inspected, unchanged evidence; do not reread it without a concrete reason.
 - Expand scope only for demonstrated dependencies, contracts, side effects, callers, or failing tests.
+- Stop exploration once enough evidence exists to decide, act, and verify safely.
 - Do not recursively inventory the repository unless required.
 - Do not print complete files, repository trees, diffs, or long logs unless requested.
 - Do not narrate routine tool use.

@@ -10,6 +10,9 @@ metadata:
 # Performance investigation
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Treat performance work as measurement-driven investigation, not an optimization
 list. Do not change behavior before evidence identifies a plausible bottleneck.

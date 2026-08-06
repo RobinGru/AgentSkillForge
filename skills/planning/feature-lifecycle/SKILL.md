@@ -10,6 +10,9 @@ metadata:
 # Feature lifecycle
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Keep a compact, revision-bound record across sessions. This is not a
 project-management system, task list, transcript, delivery loop, or replacement for Git,

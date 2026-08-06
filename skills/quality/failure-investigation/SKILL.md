@@ -10,6 +10,9 @@ metadata:
 # Failure investigation
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Establish why a non-performance failure occurs and where a later change is safe.
 Diagnose only; do not implement the fix.

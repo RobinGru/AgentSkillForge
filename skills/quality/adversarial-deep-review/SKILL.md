@@ -10,6 +10,9 @@ metadata:
 # Adversarial deep review
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
 Challenge assumptions that make a concrete high-risk change safe. Produce risk
 evidence for later ordinary review; do not edit code or make the merge decision.
