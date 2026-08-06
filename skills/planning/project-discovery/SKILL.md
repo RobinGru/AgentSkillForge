@@ -1,6 +1,6 @@
 ---
 name: project-discovery
-description: Establish an evidence-based product direction and initial capability map for a new, uninitialized, or purpose-unclear repository. Use before feature specification or technical design when users, outcomes, scope, non-goals, or success signals are not yet agreed.
+description: Define an evidence-based product direction and initial capability map for a new or purpose-unclear repository. Use before feature specification or technical design when users, outcomes, first-release scope, non-goals, constraints, or success signals are unresolved.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -11,85 +11,59 @@ metadata:
 
 Use the repository's established language and conventions for any artifacts you create or update.
 
+Turn an idea or unclear repository into a bounded product brief and prioritized
+capability map. Do not choose architecture or implement.
 
-Turn an idea or an unclear repository into a bounded product brief and a small,
-prioritized capability map. Define the problem and desired outcomes without
-choosing architecture or writing implementation code.
+## Activation boundary
 
-## Use this skill when
-
-- A product or repository is being started.
-- Existing code has no trustworthy statement of users, purpose, or scope.
-- Product outcomes, non-goals, constraints, or success signals are disputed.
-- A feature request cannot be assessed because the wider product boundary is
-  missing.
-
-## Do not use this skill when
-
-- One known capability only needs observable behavior and acceptance criteria;
-  use `feature-specification`.
-- The product direction is accepted and only a technical choice remains; use
-  `solution-framing`.
-- The task is implementation, diagnosis, migration, review, or release work.
+Use when product purpose, users, outcomes, scope, constraints, non-goals, or
+success signals are unknown or disputed. Use `feature-specification` when one
+known capability only needs behavior, `solution-framing` when product direction
+is accepted and a technical choice remains, and specialist skills for delivery.
 
 ## Rules
 
-- Inspect current product documents, code, tests, configuration, and history
-  before asking questions.
-- Separate observed facts, user-provided facts, inferences, assumptions, and
-  unknowns.
-- Ask only questions that can change scope, priority, or product viability.
-- Prefer the smallest coherent useful outcome; keep future possibilities out of
-  current scope.
-- Do not invent research, baselines, users, constraints, or approval.
-- Do not select detailed architecture or modify product code.
+- Inspect existing product artifacts and behavior before asking questions.
+- Separate observed, provided, inferred, assumed, and unknown claims.
+- Ask only questions that can change scope, priority, or viability.
+- Prefer the smallest coherent useful release.
+- Do not invent users, research, baselines, targets, constraints, or approval.
 
 ## Workflow
 
-### 1. Inventory current evidence
+### 1. Establish problem and users
 
-Summarize observed capabilities, stated intent, contradictions, and missing
-product decisions. Verify important claims against current repository sources.
+Inventory current evidence, intent, contradictions, and missing decisions. State
+the undesirable condition, primary actors, jobs, costly failures, and desired end
+condition without prescribing a solution.
 
-### 2. Define the problem and users
+### 2. Bound outcomes
 
-State the undesirable current condition, affected primary actors, their concrete
-jobs and costly failure modes, and the desired end condition. Keep the problem
-separate from a proposed solution.
+Record in-scope outcomes, explicit non-goals, hard constraints, data and permission
+concerns, integrations, operating context, reversible assumptions, and known
+owners. For each outcome, define an observable signal, source, horizon, and owner;
+keep missing baselines or targets unknown.
 
-### 3. Bound the product
+### 3. Build the initial capability map
 
-Record in-scope outcomes, explicit non-goals, hard constraints, data and
-permission concerns, integrations, operational context, and reversible
-assumptions. Name owners or decision makers when known.
-
-### 4. Define success
-
-For each desired outcome, identify an observable signal, source, time horizon,
-and owner. Record missing baselines or targets as unknown rather than creating
-numbers.
-
-### 5. Build the initial capability map
-
-List larger, independently understandable capabilities and prioritize only what
-is needed for the first coherent useful release. Keep a single capability in the
-brief; once several larger capabilities exist, maintain only this minimal index:
+List independently understandable capabilities and prioritize only the first
+coherent release. Keep this brief-local product index minimal:
 
 ```markdown
 | ID | Feature | Status | Spec |
 |---|---|---|---|
 ```
 
-Use `Idea`, `Ready`, `In Progress`, and `Done`. This brief-local map supports
-product prioritization only; it is not `docs/features/INDEX.md` and must not
-track implementation. When one selected feature needs durable coordination, hand
-it to `feature-lifecycle`, which owns the separate canonical lifecycle index.
+Use `Idea`, `Ready`, `In Progress`, and `Done`. This map supports product
+prioritization only; it is not `docs/features/index.md` and does not track
+implementation. Hand a selected capability to `feature-specification`, which
+creates its canonical specification and compact feature-index entry. Use
+`feature-lifecycle` only when durable revision-bound status is needed.
 
-### 6. Obtain a product decision
+### 4. Obtain product decision
 
-Present the brief and map for human review. Do not treat a draft, silence, or
-agent recommendation as approval. After approval, identify the first capability
-that should receive a detailed specification.
+Present the brief for human review. Drafts, silence, and agent recommendations are
+not approval. After approval, identify the first capability to specify.
 
 ## Output contract
 
@@ -97,27 +71,15 @@ Return exactly these headings:
 
 ```markdown
 ## Product problem
-
 ## Users and jobs
-
 ## Outcomes and success signals
-
 ## Scope, non-goals, and constraints
-
 ## Repository evidence and uncertainty
-
 ## Initial capability map
-
 ## Recommended first capability
-
 ## Open decisions
-
 ## Handoff state
 ```
 
-Choose one handoff state: `READY FOR FEATURE SPECIFICATION`, `PRODUCT DECISION
-REQUIRED`, `MORE EVIDENCE REQUIRED`, or `ALREADY INITIALIZED`.
-
-The result is complete only when product facts and assumptions are distinct,
-the first-release boundary is coherent, every capability has an observable
-outcome, and no unresolved decision is represented as approved.
+Choose one state: `READY FOR FEATURE SPECIFICATION`, `PRODUCT DECISION REQUIRED`,
+`MORE EVIDENCE REQUIRED`, or `ALREADY INITIALIZED`.

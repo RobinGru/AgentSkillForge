@@ -14,25 +14,15 @@ TEMPLATE = ROOT / "templates" / "AGENTS.md"
 
 def test_repository_agents_template_has_the_compact_routing_contract() -> None:
     text = TEMPLATE.read_text(encoding="utf-8")
-    skills = {
-        "project-discovery",
-        "feature-specification",
-        "feature-lifecycle",
-        "solution-framing",
-        "failure-investigation",
-        "safe-code-change",
-        "fact-based-code-review",
-        "adversarial-deep-review",
-        "product-interface-engineering",
-        "performance-investigation",
-        "compatibility-migration",
-        "security-boundary-analysis",
-        "vue-sfc-decomposition",
-        "session-handoff",
-    }
-    assert all(f"`{skill}`" in text for skill in skills)
+
+    assert "Use a skill only when its workflow materially improves the task" in text
+    assert "Handle trivial, localized, low-risk changes directly" in text
+    assert "Use the narrowest applicable skill" in text
+    assert "Do not activate skills based on keywords alone" in text
+    assert "Do not combine multiple skills unless each is independently necessary" in text
+    assert "`feature-delivery`" in text
+    assert "Never use parallel agents" in text
     assert "workflow-navigator" not in text
-    assert "For trivial, low-risk edits, work directly" in text
     assert "Targeted read → Write → Inspect changed range → Narrow proof → Compact report" in text
 
 

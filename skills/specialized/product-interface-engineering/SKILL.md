@@ -1,14 +1,6 @@
 ---
 name: product-interface-engineering
-description: >-
-  Use for building, changing, debugging, or reviewing user-facing UI/UX and
-  frontend behavior: pages, screens, forms, dialogs or modals, navigation,
-  dashboards, components, interaction flows, validation and recovery,
-  loading, empty, error, success, disabled, or permission states,
-  accessibility, keyboard, focus, touch behavior, and responsive or mobile
-  layouts. Also use when implementing a supplied design where visible behavior
-  or interaction states change. Do not use for backend-only work, isolated
-  visual-token changes, or behavior-preserving component refactors.
+description: Build, change, debug, or review user-facing UI/UX and frontend behavior. Use for pages, forms, dialogs or modals, navigation, validation, recovery, interaction states, accessibility, keyboard, focus, touch, and responsive or mobile layouts; exclude backend-only work and behavior-preserving refactors.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -19,68 +11,50 @@ metadata:
 
 Use the repository's established language and conventions for any artifacts you create or update.
 
+Make the user job, interaction contract, states, accessibility, and verification
+explicit. Reuse established product patterns before introducing new ones.
 
-Build or review interfaces by making user task, interaction behavior, states,
-and verification explicit. Reuse product conventions before introducing a new
-visual pattern.
+## Activation boundary
 
-## Use this skill when
+Use when a user-facing screen, component, flow, decision, data entry, recovery,
+accessibility behavior, or responsive interaction changes. Do not use for
+backend-only work, behavior-preserving structural refactors, or isolated visual
+token corrections without interaction impact.
 
-- A screen, component, flow, accessibility behavior, or responsive interaction changes.
-- Users must make a decision, enter data, recover from failure, or complete an action.
-
-## Do not use this skill when
-
-- Work is backend-only or has no user-facing effect.
-- A structural component refactor preserves interaction and visual behavior.
-- An exact token or alignment correction has no behavior impact; use local scope only.
-
-## Scope
-
-Choose `local` for isolated adjustment, `flow` for bounded journey, or
-`systemic` for reusable or cross-screen change. Increase verification depth only
-when scope or risk requires it.
+Choose `local`, `flow`, or `systemic` scope. Increase verification only with scope
+or risk.
 
 ## Workflow
 
-### 1. User job
+### 1. Establish user and system facts
 
-Identify actor, concrete goal, decision or action supported, and costly errors.
-Mark missing product knowledge as unknown; do not fabricate research.
+Identify actor, goal, supported decision or action, and costly errors. Inspect
+nearby components, tokens, content, routes, state patterns, platforms, tests, and
+stories. Mark missing product knowledge unknown; do not invent research.
 
-### 2. Existing system
+### 2. Define interaction and states
 
-Inspect nearby components, tokens, content conventions, routes, state patterns,
-supported platforms, tests, and stories. Retain established patterns when they
-serve job.
+Specify primary action, inputs, outcomes, validation, errors, cancellation,
+resumption, permissions, and the result users can safely expect. Include only
+relevant initial, pending, empty, partial, populated, invalid, recoverable,
+terminal, success, disabled, permission-limited, destructive confirmation, and
+offline states. Define recovery for each failure state.
 
-### 3. Interaction contract
+### 3. Implement
 
-Specify primary action, inputs, outcomes, errors, cancellation, resumption, and
-permission-limited behavior. State result users can safely expect.
+Use semantic elements and established primitives. Keep component APIs minimal.
+Support keyboard, touch, assistive technology, responsive text and layout, and
+localization. Do not invent production content or measurements.
 
-### 4. State model
+### 4. Verify
 
-List relevant states: initial, pending, empty, partial, populated, invalid,
-recoverable or terminal failure, success, disabled, permission-limited,
-destructive confirmation, and offline when applicable. Define recovery for each
-state that can fail.
-
-### 5. Implementation
-
-Use semantic elements and existing primitives. Keep component APIs minimal.
-Support keyboard, touch, and assistive technology; account for responsive text,
-layout, and localization. Do not invent production content or measurements.
-
-### 6. Verification
-
-Use [verification matrix](references/verification-matrix.md) to report checks.
-Load [accessibility baseline](references/accessibility-baseline.md) and
-[visual decision guidance](references/visual-system-decisions.md) when needed.
+Use the [verification matrix](references/verification-matrix.md). Load the
+[accessibility baseline](references/accessibility-baseline.md) and
+[visual decision guidance](references/visual-system-decisions.md) when relevant.
 
 ## Output contract
 
-Report `Scope`, `User job`, `System facts`, `Interaction contract`, `State
-model`, `Implementation`, `Checks`, and `Remaining risks`. Each check uses
-Passed, Failed, Not run, or Not applicable. State unverified assumptions and
-accessibility conflicts with closest usable alternative.
+Report `Scope`, `User job`, `System facts`, `Interaction contract`, `State model`,
+`Implementation`, `Checks`, and `Remaining risks`. Mark each check `Passed`,
+`Failed`, `Not run`, or `Not applicable`. State unverified assumptions and any
+accessibility conflict with the closest usable alternative.

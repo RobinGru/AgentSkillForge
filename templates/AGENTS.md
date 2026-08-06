@@ -61,6 +61,8 @@ Use a skill only when its workflow materially improves the task.
 - Use the narrowest applicable skill.
 - Do not activate skills based on keywords alone.
 - Do not combine multiple skills unless each is independently necessary.
+- For tracked feature delivery, keep specification, lifecycle status, and technical tasks in separate canonical artifacts.
+- Use `feature-delivery` to execute feature tasks strictly sequentially in the same agent. Never use parallel agents or mark multiple tasks `IN PROGRESS`.
 
 ## Verification
 

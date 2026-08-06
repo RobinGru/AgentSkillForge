@@ -1,5 +1,6 @@
 from collections import Counter
 from pathlib import Path
+from typing import Any, cast
 
 import yaml
 
@@ -24,8 +25,13 @@ HEADINGS = [
 ]
 
 
-def load_cases() -> list[dict]:
-    return yaml.safe_load(EVALS.read_text(encoding="utf-8"))["cases"]
+def load_cases() -> list[dict[str, Any]]:
+    data = yaml.safe_load(EVALS.read_text(encoding="utf-8"))
+    assert isinstance(data, dict)
+    cases = data.get("cases")
+    assert isinstance(cases, list)
+    assert all(isinstance(case, dict) for case in cases)
+    return cast(list[dict[str, Any]], cases)
 
 
 def test_adversarial_deep_review_has_portable_metadata() -> None:

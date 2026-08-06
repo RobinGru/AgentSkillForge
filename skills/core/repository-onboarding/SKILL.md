@@ -1,6 +1,6 @@
 ---
 name: repository-onboarding
-description: Establish an evidence-based technical map of an unfamiliar, inherited, or stale repository before substantial work. Use when repository instructions, structure, build and run paths, verification commands, system boundaries, interfaces, or documentation reliability are unclear; do not use to define product purpose or choose architecture.
+description: Build an evidence-based technical map of an unfamiliar or stale repository before substantial work. Use when instructions, structure, entry points, build or verification paths, interfaces, side effects, or documentation reliability are unclear.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -11,149 +11,75 @@ metadata:
 
 Use the repository's established language and conventions for any artifacts you create or update.
 
-Build a compact technical working map from current repository evidence. The map
-must help a later task start safely without turning repository onboarding into an
-exhaustive architecture exercise, implementation plan, or generated encyclopedia.
+Build the smallest current technical map that makes a later task safe to bound.
+Do not turn onboarding into architecture design, product discovery, implementation,
+or an encyclopedia.
 
 ## Activation boundary
 
-Use this skill when:
+Use this for an unfamiliar, inherited, or materially changed repository when its
+instructions, executable paths, boundaries, or verification model are unclear.
 
-- entering an unfamiliar, inherited, or materially changed repository;
-- repository instructions are absent, contradictory, or likely stale;
-- the correct build, run, test, lint, type, or packaging paths are unclear;
-- module boundaries, entry points, public interfaces, data stores, or side
-  effects must be located before work can be bounded;
-- a repository needs evidence for a concise agent or developer onboarding guide.
+Route unknown product purpose to `project-discovery`, one behavior contract to
+`feature-specification`, open architecture to `solution-framing`, unknown failure
+cause to `failure-investigation`, ready local work to `safe-code-change`, and a
+verified fact needing persistence to `repository-knowledge-curation`.
 
-Route elsewhere when:
+Do not modify production code or claim a discovered command succeeds without
+executing it.
 
-- users, outcomes, product scope, or repository purpose are unresolved:
-  `project-discovery`;
-- one capability needs observable rules and acceptance criteria:
-  `feature-specification`;
-- a consequential technical direction is still open: `solution-framing`;
-- a concrete failure has an unknown cause: `failure-investigation`;
-- a small understood change is ready: `safe-code-change`;
-- verified knowledge is ready to be persisted:
-  `repository-knowledge-curation`.
+## Rules
 
-Do not modify production code, select architecture, or claim that discovered
-commands work merely because they appear in documentation or configuration.
-
-## Core rules
-
-- Read applicable repository instructions before interpreting other files.
-- Prefer current, local, inspectable evidence over generic ecosystem knowledge.
-- Distinguish observed, executed, provided, inferred, stale, and unknown claims.
-- Use targeted inspection before broad traversal; stop when the working map is
-  sufficient for the stated task.
-- Treat documentation, source, tests, automation, and history as evidence that
-  may disagree, not as automatically consistent truth.
+- Read applicable repository instructions first.
+- Prefer current local evidence over generic knowledge.
+- Label claims observed, executed, provided, inferred, stale, or unknown.
+- Inspect targeted high-signal sources; stop when the requested work can be bounded.
+- Treat docs, source, tests, automation, and history as potentially conflicting.
 - Do not run destructive, deployment, release, migration, credential-dependent,
-  or externally mutating commands merely to learn the repository.
-- Do not expose secrets, personal data, credentials, or unnecessary local paths.
-- Keep permanent instructions minimal. Recommend detailed knowledge for
-  on-demand documentation rather than expanding a root instruction file.
+  or externally mutating commands for onboarding.
+- Protect secrets, personal data, credentials, and unnecessary local paths.
 
-Consult [repository evidence](references/repository-evidence.md) when evidence
-conflicts, command safety is uncertain, or the repository is large.
+Use [repository evidence](references/repository-evidence.md) for large repositories,
+conflicting evidence, or uncertain command safety.
 
 ## Workflow
 
-### 1. Establish scope and instruction precedence
+### 1. Establish scope
 
-Identify the repository root, current revision when available, worktree state,
-applicable instruction files, requested onboarding depth, and the concrete work
-this map should enable.
+Record root, revision when available, worktree state, applicable instructions,
+requested depth, and the concrete later work this map should enable.
 
-Record whether the repository is new to the agent, genuinely undocumented, or
-only missing evidence for one area. Do not re-document established facts without
-need.
+### 2. Inspect high-signal sources
 
-### 2. Inventory high-signal evidence
+Inspect only relevant manifests, scripts, CI, documentation, tests, entry points,
+public interfaces, schemas, migrations, infrastructure, generated boundaries, and
+recent history. Distinguish active code from generated, vendored, archived,
+example, and experimental areas.
 
-Inspect the smallest useful set of:
+### 3. Map boundaries
 
-- root files and directory names;
-- package, dependency, workspace, and lock manifests;
-- build, task, and developer scripts;
-- continuous-integration and release configuration;
-- existing architecture, operations, contribution, and testing documents;
-- test layout, fixtures, examples, and executable entry points;
-- public interfaces, schemas, migrations, infrastructure, and generated-code
-  boundaries relevant to the task;
-- recent history only when it resolves ownership, convention, or drift.
+Use concrete paths for primary packages, entry points, public interfaces,
+dependency direction, ownership, persistence, integrations, queues, scheduled
+work, side effects, and files not edited directly. Mark interpretations inferred.
 
-Do not infer an active technology solely from a file extension or unused
-configuration. Note generated, vendored, archived, example, and experimental
-areas separately.
+### 4. Establish executable paths
 
-### 3. Map structure and boundaries
+Record prerequisites, install, start, services, configuration, environment,
+packaging, and verification commands. Give each command exactly one status:
 
-Describe only boundaries that are supported by repository evidence:
+- `DISCOVERED` — found but not run;
+- `EXECUTED` — run with the observed result;
+- `BLOCKED` — a named prerequisite is missing;
+- `STALE OR CONFLICTING` — contradicted by current evidence.
 
-- primary packages, applications, services, libraries, or workspaces;
-- entry points and public interfaces;
-- dependency direction and ownership boundaries;
-- persistence, external integrations, queues, scheduled work, and other side
-  effects;
-- generated artifacts and files that should not be edited directly;
-- areas where the boundary remains ambiguous.
+Prefer repository-defined entry points. Separate narrow local checks from broader
+CI checks and state verification gaps.
 
-Use concrete paths. Label architectural interpretations as inferred until an
-authoritative artifact or maintainer confirms them.
+### 5. Assess documentation and readiness
 
-### 4. Establish build and runtime paths
-
-Identify prerequisites, dependency installation, local startup, required
-services, configuration sources, environment assumptions, and packaging or
-artifact production.
-
-For each important command, record one status:
-
-- `DISCOVERED` — present in a current repository source but not executed;
-- `EXECUTED` — run in the current environment with the observed result;
-- `BLOCKED` — not runnable because a named prerequisite is missing;
-- `STALE OR CONFLICTING` — contradicted by another current source or result.
-
-Prefer repository-defined entry points over reconstructed commands.
-
-### 5. Establish the verification model
-
-Locate the narrowest checks for a local change and the broader checks used by
-continuous integration. Identify test layers, selection mechanisms, fixtures,
-external dependencies, static analysis, formatting, generated checks, and known
-verification gaps.
-
-Do not treat the existence of a test directory or workflow as evidence that it
-currently succeeds. Record commands actually executed separately from commands
-only discovered.
-
-### 6. Assess documentation reliability
-
-Identify canonical sources, duplicated guidance, missing links, contradictions,
-stale claims, and large instruction files that mix durable rules with narrative
-or temporary state.
-
-Classify each useful documentation candidate as one of:
-
-- `AGENTS.md` instruction;
-- architecture knowledge;
-- testing knowledge;
-- accepted decision record;
-- scoped learning;
-- no durable update.
-
-Do not persist these candidates during onboarding unless the user explicitly
-requested both onboarding and curation. Otherwise hand them to
-`repository-knowledge-curation`.
-
-### 7. Bound readiness
-
-State what a later agent can safely do, what still requires evidence, which
-areas should not be touched yet, and the narrowest next task that the map enables.
-Do not convert missing product purpose into a technical assumption.
+Identify canonical sources, duplicates, contradictions, stale claims, and durable
+knowledge candidates. Do not persist them unless curation was also requested.
+State safe next work, areas still needing evidence, and one narrow next task.
 
 ## Output contract
 
@@ -171,28 +97,11 @@ Return exactly these headings:
 ## Handoff state
 ```
 
-Requirements:
-
-- `Repository identity` states the repository purpose only when observed or
-  provided and names the inspected revision or its absence.
-- `Instructions and sources of truth` names applicable instruction files and
-  distinguishes authoritative, supporting, conflicting, and stale sources.
-- `Structure and boundaries` uses concrete paths and labels inferences.
-- `Build and runtime` and `Verification model` give each important command one
-  of the four command statuses and include observed results only for executed
-  commands.
-- `Knowledge candidates` classifies each proposed durable fact without editing
-  documentation or duplicating its full content.
-- `Handoff state` contains exactly one allowed state and its factual basis.
-
-Choose one handoff state:
+Use concrete paths, distinguish command status from command success, and choose
+exactly one state:
 
 - `READY FOR BOUNDED WORK`
 - `READY WITH DOCUMENTATION GAPS`
 - `MORE REPOSITORY EVIDENCE REQUIRED`
 - `ENVIRONMENT ACCESS REQUIRED`
 - `PRODUCT PURPOSE UNCLEAR`
-
-The onboarding is complete when the map is sufficient to bound the next task,
-commands are not overstated, contradictions remain visible, and no inferred
-architecture is presented as established fact.

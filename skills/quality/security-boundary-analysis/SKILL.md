@@ -1,6 +1,6 @@
 ---
 name: security-boundary-analysis
-description: Analyze an explicitly requested security or threat-modeling scope by mapping evidence-backed trust transitions, protected assets, realistic attacker capabilities, abuse paths, controls, and residual uncertainty. Do not use for generic code review, broad architecture summaries, or unspecific security advice.
+description: Build an evidence-based threat model. Use only for an explicitly authorized scope; map trust transitions, protected values, realistic attacker capabilities, abuse chains, controls, and residual uncertainty without reviewing a diff or implementing controls.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -11,89 +11,52 @@ metadata:
 
 Use the repository's established language and conventions for any artifacts you create or update.
 
-
-Produce an evidence-based security model for an explicitly authorized scope.
 Connect realistic attacker capabilities to concrete trust transitions and
-verifiable control obligations rather than supplying a generic checklist.
+verifiable controls. Avoid generic security checklists.
 
 ## Activation boundary
 
-Use this skill when the user explicitly requests a threat model, abuse-path
-analysis, trust-boundary analysis, or a security model for authentication,
-authorization, tenant isolation, untrusted inputs, uploads, webhooks, plugins,
-agent tools, skill supply chains, secrets, sensitive data, money movement, or
-irreversible actions.
+Use only for an explicitly requested and authorized threat model, abuse-path,
+trust-boundary, or security model covering consequential identities, inputs,
+data, capabilities, or actions.
 
-Do not use it when:
-
-- A finished diff merely needs review; use `fact-based-code-review` unless a
-  security model is explicitly requested as its contract.
-- A known local control only needs implementation; use `safe-code-change`.
-- The request is generic security education, an architecture summary, or vague
-  advice without a security decision.
-- Architecture or product options must be selected; supply security constraints
-  to `solution-framing` instead.
-- The task only designs visible consent, permission, or recovery interactions;
-  pass constraints to `product-interface-engineering`.
-
-## Capability disclosure
-
-- **Positive example:** Map trust transitions and abuse paths for a webhook that
-  accepts externally signed events and writes tenant data.
-- **Near non-trigger:** Review an authentication patch for correctness without a
-  threat-model request; use `fact-based-code-review`.
-- **Main output:** An authorized security-boundary model containing concrete
-  abuse chains, control obligations, and residual uncertainty.
-- **Explicit non-actions:** Do not exploit systems, change production, broaden
-  authorization, choose general architecture, design UI, or issue a merge verdict.
+Use `fact-based-code-review` for a finished diff, `safe-code-change` for a known
+control, `solution-framing` for architecture choice, and
+`product-interface-engineering` for visible consent or recovery behavior. Do not
+exploit systems, broaden scope, change production, or issue a merge verdict.
 
 ## Workflow
 
-### 1. Fix authorization and scope
+### 1. Fix scope and evidence
 
-Record the analysis objective, approved systems and paths, deployment exposure,
-known roles, exclusions, and missing access. Stop active investigation outside
-that boundary.
+Record objective, authorized systems and paths, exposure, roles, exclusions, and
+missing access. Stop active investigation outside that boundary. Derive sources,
+destinations, identities, permissions, validation, persistence, and crossings
+from repository or provided evidence; mark unsupported topology unknown.
 
-### 2. Derive trust transitions
+### 2. Model values and capabilities
 
-Use repository evidence, configuration, and user-provided facts to map sources,
-destinations, data or actions, identities, permissions, validation, persistence,
-and process or network crossings. Mark unsupported topology as unknown.
+Prioritize confidentiality, integrity, availability, credentials, artifacts,
+audit and recovery data, and consequential actions. Describe attacker
+capabilities and explicit limitations. For agents, tools, sandboxes, generated
+configuration, or external outputs, use
+[agentic boundaries](references/agentic-boundaries.md). Separate context influence
+from file, process, network, credential, and tool side effects.
 
-### 3. Inventory protected values and capabilities
+### 3. Construct and prioritize abuse chains
 
-Prioritize confidentiality, integrity, availability, credentials, release
-artifacts, audit data, recovery material, and consequential actions. Describe
-attacker capabilities narrowly, including capabilities they do not possess.
-Use [agentic boundaries](references/agentic-boundaries.md) when skills, agents,
-tools, sandboxes, generated configuration, or external outputs are in scope.
+Connect entry condition, trust transition, control weakness or assumption,
+attacker action, affected value, and concrete impact. Distinguish untrusted data
+from instructions. Reject generic threats not tied to scoped evidence.
 
-Separate context influence from side effects. For file, process, network,
-credential, and tool access, state whether the capability is declared, observed,
-assumed, or unknown and whether it is temporary or persistent.
+For each chain, state prerequisites, controls, likelihood, impact, uncertainty,
+and the strongest risk-reducing observation. Use
+[risk reasoning](references/risk-reasoning.md); avoid unsupported numeric precision.
 
-### 4. Construct abuse chains
+### 4. Define controls and handoff
 
-For each credible chain connect an entry condition, trust transition, control
-weakness or assumption, attacker action, affected value, and concrete impact.
-Distinguish untrusted data from instructions, especially in agentic systems.
-Avoid generic threats that cannot be tied to scoped evidence.
-
-### 5. Reason about priority
-
-For each chain, explain prerequisites, existing controls, likelihood, impact,
-uncertainty, and the strongest risk-reducing observation. Apply
-[risk reasoning](references/risk-reasoning.md); avoid numeric precision that the
-evidence cannot support.
-
-### 6. Define control obligations
-
-Separate evidenced controls, required controls, compensating controls, and items
-requiring an owner decision. Every obligation must identify its trust transition,
-placement, intended protection, and verification signal.
-
-### 7. Select the handoff
+Separate evidenced, required, compensating, and owner-decided controls. Each
+obligation names transition, placement, protection, and verification signal.
 
 Choose exactly one state:
 
@@ -103,8 +66,8 @@ Choose exactly one state:
 - `SCOPE NOT AUTHORIZED`
 - `IMMEDIATE RISK ESCALATION`
 
-Send selected controls to `safe-code-change`. Send a later implementation diff to
-`fact-based-code-review`; do not make the merge decision here.
+Send selected controls to `safe-code-change` and later diffs to
+`fact-based-code-review`.
 
 ## Output contract
 
@@ -124,6 +87,6 @@ Use these exact headings in this order:
 ## Handoff state
 ```
 
-Each chain must use `### Title` followed by `Entry condition`, `Trust transition`,
+Each chain uses `### Title` with `Entry condition`, `Trust transition`,
 `Attacker action`, `Affected value`, `Existing control`, `Control gap`, `Impact`,
-`Likelihood`, `Confidence`, and `Verification` fields.
+`Likelihood`, `Confidence`, and `Verification`.

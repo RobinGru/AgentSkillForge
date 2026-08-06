@@ -36,6 +36,7 @@ TARGET_SKILLS = frozenset(
         "project-discovery",
         "feature-specification",
         "feature-lifecycle",
+        "feature-delivery",
         "session-handoff",
         "adversarial-deep-review",
         "repository-knowledge-curation",
