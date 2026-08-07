@@ -4,7 +4,7 @@ description: Define one substantial product capability as an observable, testabl
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Feature specification

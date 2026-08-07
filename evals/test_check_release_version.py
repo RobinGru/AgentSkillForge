@@ -25,6 +25,17 @@ def test_release_version_validation_accepts_matching_versions(tmp_path: Path) ->
     assert check_release_version(tmp_path, "1.2.3") == []
 
 
+def test_release_version_validation_checks_nested_skills(tmp_path: Path) -> None:
+    write_repository(tmp_path, "1.2.3", "1.2.3")
+    nested_skill = tmp_path / "skills" / "core" / "nested" / "SKILL.md"
+    nested_skill.parent.mkdir(parents=True)
+    nested_skill.write_text("---\nmetadata:\n  version: 1.2.2\n---\n", encoding="utf-8")
+
+    findings = check_release_version(tmp_path, "1.2.3")
+
+    assert any("skills/core/nested/SKILL.md has version" in finding for finding in findings)
+
+
 def test_release_version_validation_rejects_non_semver_tags(tmp_path: Path) -> None:
     write_repository(tmp_path, "1.2.3", "1.2.3")
 

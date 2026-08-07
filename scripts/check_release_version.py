@@ -53,7 +53,7 @@ def check_release_version(root: Path, tag: str) -> list[str]:
         findings.append(f"release tag {tag!r} does not match package version {expected_tag!r}")
 
     expected_version = expected_skill_version(package_version)
-    for path in sorted((root / "skills").glob("*/SKILL.md")):
+    for path in sorted((root / "skills").rglob("SKILL.md")):
         match = SKILL_VERSION.search(path.read_text(encoding="utf-8"))
         actual_version = match.group("version") if match else None
         if actual_version != expected_version:

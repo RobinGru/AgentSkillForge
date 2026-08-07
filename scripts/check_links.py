@@ -14,6 +14,7 @@ LINK_PATTERN = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
 HEADING_PATTERN = re.compile(r"^#{1,6}\s+(.+?)\s*#*\s*$", re.MULTILINE)
 FENCED_CODE_PATTERN = re.compile(r"^```.*?^```[ \t]*$", re.MULTILINE | re.DOTALL)
 INLINE_CODE_PATTERN = re.compile(r"`[^`]*`")
+EXCLUDED_DIRECTORIES = frozenset({".git", ".venv", "__pycache__", "build", ".pytest_cache", ".ruff_cache"})
 
 
 @dataclass(frozen=True)
@@ -97,7 +98,7 @@ def main() -> int:
     root = args.root.resolve()
     findings: list[Finding] = []
     for path in sorted(root.rglob("*.md")):
-        if ".git" not in path.parts:
+        if not EXCLUDED_DIRECTORIES.intersection(path.relative_to(root).parts):
             findings.extend(check_markdown_file(path, args.external))
 
     for finding in findings:

@@ -4,7 +4,7 @@ description: Build, change, debug, or review user-facing UI/UX and frontend beha
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Product interface engineering
