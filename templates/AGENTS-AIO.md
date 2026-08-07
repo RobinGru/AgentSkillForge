@@ -27,6 +27,10 @@ Optimize for:
 
 ## Working Method
 
+Use the smallest sufficient context, tool call, and output. Expand inspection only
+when new evidence can affect the current decision. Reuse unchanged evidence and
+stop once the task can proceed and be verified safely.
+
 Before changing code or design:
 
 1. Read the relevant instructions, files, tests, components, styles, data models, and surrounding implementation.

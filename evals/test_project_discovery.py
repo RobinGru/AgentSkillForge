@@ -39,7 +39,8 @@ def test_project_discovery_is_portable_and_compact() -> None:
     assert len(text.splitlines()) <= 160
     assert "| ID | Feature | Status | Spec |" in text
     assert all(status in text for status in ("Idea", "Ready", "In Progress", "Done"))
-    assert "it is not `docs/features/INDEX.md`" in text
+    assert "it is not `docs/features/index.md`" in text
+    assert "`feature-specification`" in text
     assert "`feature-lifecycle`" in text
 
 

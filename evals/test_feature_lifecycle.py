@@ -41,9 +41,11 @@ def test_feature_lifecycle_is_portable_and_has_a_bounded_ledger() -> None:
 
     assert name == "feature-lifecycle"
     assert not [finding for finding in findings if finding.level == "error"]
-    assert len(text.splitlines()) <= 110
+    assert len(text.splitlines()) <= 125
     assert "compact, revision-bound record" in text
     assert "project-management system" in text
+    assert "task list" in text
+    assert "Do not select or execute tasks" in text
     assert "exactly one bounded next action" in text
     assert not (SKILL.parent / "references").exists()
 
@@ -56,6 +58,8 @@ def test_feature_lifecycle_output_contract_and_state_guards_are_exact() -> None:
     assert "Observed revision" in text
     assert "Verified revision" in text
     assert "exactly one bounded next action" in text
+    assert "docs/features/index.md" in text
+    assert "`feature-delivery`" in text
 
 
 def test_feature_lifecycle_evals_cover_boundaries_and_evidence() -> None:

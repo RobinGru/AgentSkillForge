@@ -1,6 +1,6 @@
 ---
 name: compatibility-migration
-description: Plan and coordinate a selected migration when old and new schemas, interfaces, dependencies, implementations, or consumers must remain valid across multiple steps. Define the compatibility envelope, safe intermediate states, transition evidence, rollback limits, and retirement conditions.
+description: Coordinate a selected multi-step migration while old and new contracts coexist. Use when consumers, interfaces, schemas, or data move independently and need safe states, transition evidence, rollback limits, and retirement gates; do not choose strategy or implement steps.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -10,104 +10,68 @@ metadata:
 # Compatibility migration
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
-
-Coordinate a chosen change through independently safe states while old and new
-contracts coexist. Make every transition observable, reversible where possible,
-and destructive only after evidence permits retirement.
+Move a chosen contract through independently safe states while old and new forms
+coexist. Make each transition observable and destructive retirement evidence-gated.
 
 ## Activation boundary
 
-Use this skill when schemas, interfaces, events, dependencies, implementations,
-formats, protocols, or consumers must coexist across multiple steps or mixed
-deployments. It applies when consumers move independently, data needs backfill or
-reconciliation, rollout and data state differ, or removal depends on usage proof.
+Use when schemas, interfaces, events, dependencies, formats, protocols,
+implementations, or consumers must coexist across steps or mixed deployments.
 
-Do not use it when:
-
-- The migration direction is still undecided; use `solution-framing` first.
-- A single local change is already compatible; use `safe-code-change`.
-- A completed migration diff needs assessment; use `fact-based-code-review`.
-- The task only explains migration concepts or writes deprecation prose.
-- No coexistence, consumer coordination, or multi-step transition exists.
-- The need is a general launch checklist, communication plan, or production
-  approval after compatibility has already been established.
-
-## Capability disclosure
-
-- **Positive example:** Move an event field while old and new producers and
-  consumers deploy independently over several releases.
-- **Near non-trigger:** Choose between two incompatible target schemas; that
-  strategic decision belongs to `solution-framing`.
-- **Main output:** A compatibility envelope and ordered safe states with evidence,
-  rollback limits, and retirement criteria.
-- **Explicit non-actions:** Do not choose the migration strategy, implement local
-  steps, approve a diff, or claim unrun compatibility checks passed.
+Route an undecided direction to `solution-framing`, one already-compatible local
+change to `safe-code-change`, a completed diff to `fact-based-code-review`, and
+measured transition bottlenecks to `performance-investigation`. Do not use without
+coexistence or multi-step coordination.
 
 ## Workflow
 
-### 1. Establish the current contract
+### 1. Establish contracts and envelope
 
-Inventory observable behavior, producers, consumers, data and interface shapes,
-versions, deployment order, owners, current usage, and evidenced undocumented
-dependencies. Distinguish known consumers from assumed completeness.
+Inventory current and target behavior, producers, consumers, owners, versions,
+data shapes, deployment order, usage, and undocumented dependencies. Distinguish
+known consumers from assumed completeness.
 
-### 2. Bound the compatibility envelope
+Define invariants, allowed temporary differences, invalid combinations,
+coexistence duration, integrity, and availability. Use the
+[compatibility envelope](references/compatibility-envelope.md) for mixed states.
 
-Define target behavior, invariants that must hold throughout transition, allowed
-temporary differences, invalid combinations, coexistence duration, and integrity
-and availability requirements. Use
-[compatibility envelope](references/compatibility-envelope.md) to expose mixed
-producer, consumer, and deployment combinations.
+### 2. Design safe intermediate states
 
-### 3. Design safe intermediate states
+Create the smallest ordered sequence that introduces the new path, supports
+coexistence, moves consumers or data, and retires the old path. Every state must
+be safe to pause in and independently deployable when deployment is involved.
+Record preconditions, change, valid combinations, verification, rollback, and
+exit criterion.
 
-Build the smallest ordered sequence that makes the new capability available,
-allows controlled coexistence, moves consumers or data, and retires the old path.
-Name states for the actual system rather than forcing generic labels.
+### 3. Plan data movement
 
-For every state record preconditions, the change, valid old/new combinations,
-verification, rollback, and exit criterion. Each state must be safe to pause in
-and independently deployable when deployment is involved.
-
-### 4. Plan data transition
-
-When data changes, identify the source of truth, read and write rules per state,
-transformation or backfill, idempotency, resumability, reconciliation, conflict
-handling, load boundaries, and values the target cannot represent. Apply
+When data changes, define source of truth, read/write rules per state,
+transformation or backfill, idempotency, resumability, reconciliation, conflicts,
+load limits, and unrepresentable values. Apply
 [data transition checks](references/data-transition-checks.md).
 
-Route measured backfill or resource bottlenecks to `performance-investigation`;
-retain only their resulting constraints in this plan.
+### 4. Gate transitions and retirement
 
-### 5. Define transition evidence
+Define advance, hold, and stop evidence using consumer status, old-path usage,
+reconciliation, divergence, compatibility tests, observation windows, and owner
+approval. Absence of reported errors is not proof.
 
-Specify advance, hold, and stop conditions using consumer status, old-path usage,
-data reconciliation, error or divergence signals, compatibility tests, observation
-windows, and accountable approval. Absence of reported errors is not proof.
+Classify rollback as fully reversible, reversible before data movement, forward-
+recoverable, or irreversible. A code revert does not restore transformed data.
+Retire only after consumers moved, required zero-usage evidence exists,
+documentation and ownership are current, and rollback no longer depends on the
+old path.
 
-### 6. Mark rollback limits
+Choose one state: `READY TO RETIRE`, `HOLD`, `MORE EVIDENCE REQUIRED`, or
+`DECISION REQUIRED`.
 
-Classify each state as fully reversible, reversible only before data movement,
-recoverable through a forward correction, or irreversible. Do not equate a code
-revert with restoration of transformed data.
-
-### 7. Gate retirement and hand off
-
-Retire old behavior only after known consumers have moved, old-path usage is
-absent for the required window, ownership and documentation are current, and no
-supported rollback still depends on it. Choose one state:
-
-- `READY TO RETIRE`
-- `HOLD`
-- `MORE EVIDENCE REQUIRED`
-- `DECISION REQUIRED`
-
-Hand each implementation step to `safe-code-change` and each completed diff to
-`fact-based-code-review`. For a tracked feature, `feature-lifecycle` may link
-this plan and record feature-level evidence, but this skill remains authoritative
-for compatibility states, transition evidence, rollback limits, and retirement.
-It does not own implementation or general release approval.
+Hand each implementation step to `safe-code-change` and completed diff to
+`fact-based-code-review`. `feature-lifecycle` may link feature evidence; this
+skill remains authoritative for compatibility states and retirement.
 
 ## Output contract
 
@@ -126,5 +90,5 @@ Use these exact headings in this order:
 ## Handoff state
 ```
 
-Each state must use `### State name` followed by `Preconditions`, `Change`,
-`Valid combinations`, `Verification`, `Rollback`, and `Exit criterion` fields.
+Each state uses `### State name` with `Preconditions`, `Change`,
+`Valid combinations`, `Verification`, `Rollback`, and `Exit criterion`.

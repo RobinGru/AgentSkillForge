@@ -12,7 +12,7 @@
 
 Wiederverwendbare Agent Skills, die KI-Coding-Assistenten zu sorgfältigen Änderungen und verständlichen Ergebnissen anleiten.
 
-[Skills entdecken](#skill-katalog) · [Mit Zed oder Codex installieren](#schnellstart) · [All-in-one-Vorlage nutzen](#all-in-one-anweisungen-für-projekte) · [Mitwirken](CONTRIBUTING.md)
+[Skills entdecken](#skill-katalog) · [Getrackte Features liefern](#getrackte-feature-lieferung) · [Mit Zed oder Codex installieren](#schnellstart) · [All-in-one-Vorlage nutzen](#all-in-one-anweisungen-für-projekte) · [Mitwirken](CONTRIBUTING.md)
 
 > [!NOTE]
 > Statische Repository-Prüfungen laufen für jeden Pull Request. Deterministische Runtime-Contract-Checks prüfen den Eval-Runner, während authentifizierte Codex-Smoke-Tests und interaktive Zed-Prüfungen optionale Release-Belege sind. Die [Kompatibilitäts- und Wartungsrichtlinie](docs/compatibility.md) beschreibt die Support-Matrix und ihre klaren Grenzen.
@@ -29,6 +29,10 @@ Agent Skills sind einfache Markdown-Verzeichnisse mit einer zentralen `SKILL.md`
 - **Belege vor Annahmen:** Skills unterscheiden Beobachtungen, Schlussfolgerungen und nicht ausgeführte Prüfungen.
 - **Portable Agent Skills:** Kopiere ein vollständiges Skill-Verzeichnis in einen kompatiblen Client – ohne Python-Laufzeit für die Skill-Dokumente.
 - **Geprüfte Distribution:** Die Repository-Automatisierung prüft Struktur, Links, Tests, statische Eval-Fälle und Paketinhalt.
+
+### Kompaktes Skill-Design
+
+Jede `SKILL.md` enthält nur Aktivierungsgrenze, unverzichtbare Invarianten, ausführbaren Workflow und Output-Vertrag. Ausführliche Hinweise liegen bedarfsgesteuert in `references/` oder `assets/`. Repository-Tests begrenzen jeden verteilten Skill auf 120 Zeilen und verlangen ein explizites Routing-Signal in seiner Beschreibung.
 
 ## All-in-one-Anweisungen für Projekte
 
@@ -69,7 +73,8 @@ Nutze diese Skills vor dem Programmieren, wenn du entscheiden musst, was gebaut 
 | [`feature-specification`](skills/planning/feature-specification/) | Für ein geplantes Feature klare Regeln fehlen: Was dürfen Nutzer tun, was passiert in jeder Situation und woran erkennt man den Erfolg? | Du noch klären musst, was das Produkt erreichen soll (`project-discovery`), oder wie es technisch gebaut wird (`solution-framing`). |
 | [`solution-framing`](skills/planning/solution-framing/) | Das Ziel klar ist, aber du noch einen wichtigen technischen Weg auswählen musst. | Der Weg schon feststeht und alte sowie neue Versionen eine Zeit lang zusammen laufen müssen (`compatibility-migration`). |
 | [`compatibility-migration`](skills/planning/compatibility-migration/) | Du eine API, ein Datenformat oder ein System änderst und alte und neue Versionen eine Zeit lang zusammen funktionieren müssen. | Du den grundsätzlichen Weg erst noch auswählen musst (`solution-framing`) oder nur eine einzelne sichere Änderung machst (`safe-code-change`). |
-| [`feature-lifecycle`](skills/planning/feature-lifecycle/) | Ein größeres Feature über mehrere Sitzungen oder Personen hinweg einen kurzen, aktuellen Stand braucht. | Du nur einmal unfertige Arbeit übergeben musst (`session-handoff`). |
+| [`feature-lifecycle`](skills/planning/feature-lifecycle/) | Ein größeres Feature über mehrere Sitzungen einen kurzen, revisionsgebundenen Status braucht. | Du seine technischen Aufgaben auswählen und ausführen musst (`feature-delivery`). |
+| [`feature-delivery`](skills/planning/feature-delivery/) | Du ein getracktes Feature über mehrere begrenzte Aufgaben strikt sequenziell mit einem Agenten liefern musst. | Du nur eine begrenzte Codeänderung (`safe-code-change`) oder nur den Status (`feature-lifecycle`) aktualisieren musst. |
 
 ### Qualität, Untersuchung und Review
 
@@ -81,7 +86,7 @@ Nutze diese Skills, um ein Problem zu verstehen, Leistung zu messen, Sicherheits
 | [`performance-investigation`](skills/quality/performance-investigation/) | Die Anwendung zu langsam ist oder zu viel Speicher beziehungsweise andere Ressourcen nutzt und du das messen kannst. | Du eine andere Art von Fehler untersuchst (`failure-investigation`). Bei „Mach es schneller“ ohne Messwert misst du zuerst. |
 | [`security-boundary-analysis`](skills/quality/security-boundary-analysis/) | Du prüfen musst, wer worauf zugreifen darf, wie Angreifer etwas missbrauchen könnten und welche Schutzmaßnahmen nötig sind. | Du nur eine normale Prüfung von Codeänderungen brauchst (`fact-based-code-review`). |
 | [`fact-based-code-review`](skills/quality/fact-based-code-review/) | Du konkrete Codeänderungen vor dem Zusammenführen praktisch bewerten möchtest. | Du eine ausdrücklich besonders strenge Prüfung einer riskanten Änderung brauchst (`adversarial-deep-review`). |
-| [`adversarial-deep-review`](skills/quality/adversarial-deep-review/) | Du eine riskante Änderung ausdrücklich auf Ausfälle, Missbrauch, Wiederherstellung, parallele Arbeit und Betrieb prüfen möchtest. | Du das normale Review vor dem Zusammenführen brauchst (`fact-based-code-review`); dieser Skill liefert dafür zusätzliche Risikofunde. |
+| [`adversarial-deep-review`](skills/quality/adversarial-deep-review/) | Du eine riskante Änderung ausdrücklich auf Ausfälle, Missbrauch, Wiederherstellung, Nebenläufigkeit und Betrieb prüfen möchtest. | Du das normale Review vor dem Zusammenführen brauchst (`fact-based-code-review`); dieser Skill liefert dafür zusätzliche Risikofunde. |
 
 ### Spezialisierte Engineering-Arbeit
 
@@ -93,6 +98,27 @@ Nutze diese Skills, wenn es konkret um eine Benutzeroberfläche oder um eine Vue
 | [`vue-sfc-decomposition`](skills/specialized/vue-sfc-decomposition/) | Eine Vue- oder Nuxt-Komponente schwer wartbar geworden ist und sich in klarere, kleinere Aufgaben aufteilen lässt. | Du änderst, was Nutzer sehen oder wie die Oberfläche funktioniert (`product-interface-engineering`). |
 
 Lies vor der Verwendung die `SKILL.md` eines Skills. Bewahre das ganze Skill-Verzeichnis einschließlich `references/` und `assets/` auf, weil der Skill darauf verweisen kann.
+
+## Getrackte Feature-Lieferung
+
+Ein Feature verwaltet Verhalten, Lifecycle-Status und technische Unteraufgaben in getrennten kanonischen Artefakten:
+
+```text
+docs/features/
+├── index.md
+└── <feature-id>/
+    ├── specification.md
+    ├── implementation.md
+    └── tasks.md
+```
+
+- `feature-specification` besitzt `specification.md` und erstellt oder aktualisiert die kompakte Zeile in `index.md`.
+- `feature-lifecycle` besitzt den revisionsgebundenen Feature-Status in `implementation.md`.
+- `feature-delivery` besitzt die begrenzten Unteraufgaben des Features in `tasks.md` und wendet für jede Aufgabe den benannten Spezialvertrag an.
+- `safe-code-change` oder ein anderer Spezial-Skill besitzt eine konkrete Aufgabe und ihren direkten Nachweis.
+- `index.md` ist nur eine Zusammenfassung. Vollständige Aufgaben und Nachweise bleiben im Feature-Verzeichnis.
+
+Die Lieferung läuft strikt sequenziell mit demselben Agenten. Verwende niemals parallele Agenten und markiere nie mehr als eine Aufgabe als `IN PROGRESS`. Nachdem eine Aufgabe `DONE`, `BLOCKED` oder `ABANDONED` erreicht, gleicht `feature-delivery` die Datensätze ab und wählt bei beauftragter Komplettlieferung die nächste ausführbare `READY`-Aufgabe.
 
 ## Schnellstart
 
@@ -160,7 +186,7 @@ Häufige Reihenfolgen sind:
 
 - Unbekanntes Repository: `repository-onboarding` erstellt vor umfangreicher Arbeit eine technische Arbeitskarte; `repository-knowledge-curation` übernimmt verifizierte wiederverwendbare Fakten, wenn sie einen kanonischen dauerhaften Ablageort benötigen.
 - Neues Produkt: `project-discovery` legt Produktgrenze und Capability-Map fest; anschließend definiert `feature-specification` eine Capability vor technischer Planung oder Implementierung.
-- Mehrsitzungs-Feature: `feature-specification` besitzt den Verhaltensvertrag; `solution-framing` klärt folgenreiche technische Entscheidungen, `feature-lifecycle` führt den dauerhaften revisionsgebundenen Datensatz, `safe-code-change` implementiert jede begrenzte Arbeitseinheit und `session-handoff` übernimmt nur tatsächlich unterbrochene konkrete Arbeit.
+- Mehrsitzungs-Feature: Folge dem Modell der [getrackten Feature-Lieferung](#getrackte-feature-lieferung); nutze `solution-framing` für folgenreiche technische Entscheidungen und `session-handoff` nur für unterbrochene konkrete Arbeit.
 
 - Unbekannter technischer Fehler außerhalb der Performance-Domäne: `failure-investigation` belegt Ursache und sichere Änderungsgrenze, danach implementiert `safe-code-change` den Fix und `fact-based-code-review` prüft ihn.
 - Gemessenes Latenz-, Durchsatz-, Speicher- oder Ressourcenproblem: Verwende `performance-investigation`, nicht `failure-investigation`; übergib eine verstandene Änderung an `safe-code-change` und prüfe sie anschließend mit `fact-based-code-review`.

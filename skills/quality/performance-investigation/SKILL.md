@@ -1,6 +1,6 @@
 ---
 name: performance-investigation
-description: Investigate a measured performance concern with a comparable baseline, bounded hypotheses, discriminating experiments, and proportionate regression protection. Use for observed latency, responsiveness, throughput, memory, or resource problems.
+description: Investigate a measured latency, responsiveness, throughput, memory, or resource concern. Use when a comparable baseline can be established; test bounded hypotheses with discriminating experiments and retain changes only with proportionate regression protection.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -10,92 +10,67 @@ metadata:
 # Performance investigation
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
+Treat performance work as measurement-driven investigation, not an optimization
+list. Do not change behavior before evidence identifies a plausible bottleneck.
 
-Treat performance work as an investigation, not a list of optimizations. Change
-behavior only after measurements identify a plausible bottleneck and an experiment
-can distinguish it from competing explanations.
+## Activation boundary
 
-## Use this skill when
+Use for a repeatable slow path, monitored regression, breached budget or SLO,
+resource exhaustion, planned demand against a limit, or an available trace,
+profile, metric, or reproducible workload.
 
-- A user reports a repeatable slow path, monitoring detects a regression, or a
-  service-level objective or agreed budget is breached.
-- A planned load change, resource limit, or measured responsiveness issue needs
-  a risk assessment.
-- A profiling artifact, trace, metric, or reproducible workload can guide an
-  investigation.
-
-## Do not use this skill when
-
-- Someone requests that code be faster but supplies no signal, affected journey,
-  or target. Request those details and prepare a measurement plan instead.
-- An asset, query, cache, or framework change is proposed without a measurement showing that
-  it affects a measured problem.
-- A structural refactor is the primary task. Use this skill only if measurement
-  establishes a performance cause that the refactor must address.
+Without a signal, affected journey, or target, define a measurement plan instead.
+Do not optimize a suspected asset, query, cache, framework, or structure without
+evidence connecting it to the measured concern.
 
 ## Workflow
 
-### 1. Signal
+### 1. Define signal and baseline
 
-Record the observed issue and its impact: affected journey or operation, users
-or systems affected, frequency, onset, and reason it matters. Classify the signal
-as user report, alert, regression, budget breach, reproducible slow journey,
-resource exhaustion, or planned demand. Do not infer a cause from the symptom.
+Record affected operation, impact, users or systems, frequency, onset, signal
+source, and reason it matters. Do not infer cause from symptom.
 
-### 2. Baseline
+Make measurements comparable: environment, revision, dataset, load, tool,
+sampling, primary and side metrics, and limits. Separate lab from field data and
+retain enough evidence to repeat the comparison.
 
-Make measurements comparable. Record environment, build or revision, dataset,
-load shape, tool, sampling method and count, primary metric, side metrics, and
-known limits. State whether each result is lab data, field data, or both; do not
-combine them as though they had identical conditions. Preserve enough raw output
-or an accessible summary for another investigator to repeat the comparison.
+### 2. Partition and hypothesize
 
-### 3. Partition
+Divide the path into observable relevant portions such as network, server,
+queueing, storage, serialization, cache, client main thread, rendering,
+concurrency, or collection. Record unknown portions. Use
+[web signals](references/web-signals.md) or
+[backend signals](references/backend-signals.md) when applicable.
 
-Divide the affected path into observable portions before proposing a fix. Check
-only portions relevant to the signal, such as network transfer, server time,
-queueing, database or storage, serialization, cache behavior, client main
-thread, rendering, assets, concurrency, or memory collection. Record unknown
-portions explicitly.
+Keep bounded hypotheses supported by current measurements.
 
-Use [web signals](references/web-signals.md) or [backend signals](references/backend-signals.md)
-when their scope matches the path.
+### 3. Run discriminating experiments
 
-### 4. Experiment
+Apply [experiment design](references/experiment-design.md): change one material
+variable, predict a result that differs if the hypothesis is false, and preserve
+comparable conditions. Record expected and actual results. Do not implement a
+suspected fix before the experiment distinguishes it from alternatives.
 
-For each live hypothesis, use [experiment design](references/experiment-design.md).
-Change one material variable, choose the smallest test that would produce a
-different result if the hypothesis were false, and keep comparable conditions.
-Do not rewrite a suspected N+1 query, render path, or cache layer before a
-measurement can distinguish it from alternatives.
+### 4. Decide and guard
 
-### 5. Decide and guard
-
-Retain, revert, or continue investigating based on observed results, not
-expectation. Any retained performance change needs before-and-after measurements
-for the primary metric plus relevant side effects. Choose proportionate
-protection: regression test, repository budget, telemetry, alert, load test, or
-documented manual check. [Example budgets](references/example-budgets.md) help
-format local targets; product and repository budgets take precedence.
+Retain, revert, or continue based on observed results. Any retained change needs
+comparable before-and-after primary metrics plus relevant side effects. Add a
+proportionate regression test, budget, telemetry, alert, load test, or documented
+manual check. Local budgets override
+[example budgets](references/example-budgets.md).
 
 ## Output contract
 
-Report `Signal`, `Baseline`, `Partition`, `Hypotheses`, `Experiments`,
-`Decision`, `Before and after`, `Guard`, and `Limits`. For every experiment
-include:
+Report `Signal`, `Baseline`, `Partition`, `Hypotheses`, `Experiments`, `Decision`,
+`Before and after`, `Guard`, and `Limits`. Each experiment states hypothesis,
+supporting facts, smallest discriminating check, expected and actual result,
+decision, and next evidence if inconclusive.
 
-- hypothesis and its supporting facts;
-- smallest discriminating experiment;
-- expected and actual result;
-- decision and next information needed, if inconclusive.
-
-Label claims as measured, observed, inferred, or unknown. State measurement
-limitations and unverified assumptions. Do not claim improvement without a
-comparable before-and-after result.
-
-## Investigation examples
-
-See [investigation examples](references/investigation-examples.md) for small
-API queueing, Vue input lag, and batch memory-spike investigations. They model
-questions and experiments, not universal implementation advice.
+Label claims measured, observed, inferred, or unknown. Never claim improvement
+without comparable before-and-after evidence. See
+[investigation examples](references/investigation-examples.md) for patterns, not
+universal advice.

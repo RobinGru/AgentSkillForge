@@ -1,6 +1,6 @@
 ---
 name: fact-based-code-review
-description: Review a concrete code change by tracing its relevant effects and separating observed defects, risks, missing facts, and preferences. Use when a diff or changed files can be inspected.
+description: Review a concrete diff or changed-file set for integration readiness. Use when relevant effects can be traced; separate observed defects and risks from missing facts and preferences, then return actionable findings plus one evidence-based decision.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -10,70 +10,46 @@ metadata:
 # Fact-based code review
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
+Review a concrete change against intended behavior and repository evidence. Never
+turn missing context into forced approval or rejection.
 
-Review a proposed change against its intended behavior and the facts available
-in the repository. Do not turn unknown context into a forced approval or
-rejection.
+## Activation boundary
 
-## Use this skill when
-
-- A diff, patch, pull request, or changed-file set is available.
-- The change needs an integration decision or actionable findings.
-- Tests, configuration, interfaces, or runtime effects can be inspected.
-
-## Do not use this skill when
-
-- No concrete change is available.
-- The request is to implement rather than assess a change.
-- The primary question is a measured performance investigation.
+Use when a diff, patch, PR, or changed-file set exists and needs findings or an
+integration decision. Do not use without a concrete change, for implementation,
+or as a performance investigation.
 
 ## Workflow
 
-### 1. Scope
+### 1. Establish intent and scope
 
-Record supplied files or diff, available specification or issue, existing
-tests, and checks that can actually run. State any missing review context.
+Inspect the supplied change, specification or issue, relevant tests, and runnable
+checks. Identify intended behavior, contracts to preserve, affected users or
+systems, and missing context. If intent cannot be established, return `BLOCKED`.
 
-### 2. Reconstruct intent
+### 2. Trace relevant effects
 
-Identify intended behavior change, contracts that should remain stable,
-affected users or systems, and success criteria. If intent cannot be inferred,
-record the review as blocked rather than inventing a verdict.
+Follow only affected interfaces and callers, data transformations, persistence,
+side effects, failure and recovery paths, authorization, configuration, and
+material runtime effects. Do not apply irrelevant review lenses.
 
-### 3. Trace change effects
+Label supporting claims `Observed`, `Reproduced`, `Required`, `Inferred`, or
+`Unverified`.
 
-Follow only paths relevant to the change:
+### 3. Write actionable findings
 
-- public interfaces and callers;
-- added, removed, or transformed data;
-- side effects and persistence or migration paths;
-- failures and recovery behavior;
-- authorization boundaries;
-- runtime or resource impact.
-
-Do not apply irrelevant lenses by default.
-
-### 4. Classify supporting details
-
-Label each claim with one status:
-
-- **Observed:** directly present in code, configuration, or supplied artifact.
-- **Reproduced:** demonstrated by an executed test or controlled run.
-- **Required:** imposed by the stated contract or authoritative requirement.
-- **Inferred:** reasoned from available facts but not directly observed.
-- **Unverified:** cannot be confirmed with available information.
-
-### 5. Write findings
-
-Use a finding only when it has a location or a precisely bounded missing
-context. Classify type as **Defect**, **Risk**, **Missing information**,
-**Maintainability concern**, or **Preference**. Use severity **Blocker**,
-**Major**, **Moderate**, or **Minor**. Preferences cannot block integration.
+Create a finding only for a located defect or risk, or precisely bounded missing
+information. Classify type as `Defect`, `Risk`, `Missing information`,
+`Maintainability concern`, or `Preference`; severity as `Blocker`, `Major`,
+`Moderate`, or `Minor`; confidence as `High`, `Medium`, or `Low`. Preferences
+cannot block integration.
 
 ```markdown
 ### [Severity] Title
-
 - Type:
 - Location:
 - Supporting details:
@@ -84,19 +60,17 @@ context. Classify type as **Defect**, **Risk**, **Missing information**,
 - Verification:
 ```
 
-Set confidence to High, Medium, or Low. Mark unexecuted checks as unverified.
+### 4. Decide
 
-### 6. Decide
+Choose one:
 
-Choose one decision:
-
-- **APPROVE:** the facts support integration and no blocking finding remains.
-- **COMMENT:** observations or suggestions do not require a change.
-- **REQUEST CHANGES:** a supported defect, risk, or missing information requires action.
-- **BLOCKED:** required intent or review context is unavailable.
+- `APPROVE` — evidence supports integration and no blocker remains;
+- `COMMENT` — only non-required observations remain;
+- `REQUEST CHANGES` — a supported concern requires action;
+- `BLOCKED` — required intent or evidence is unavailable.
 
 ## Output contract
 
-Return sections named `Scope`, `Intent`, `Facts considered`, `Findings`,
-`Checks not run`, and `Decision`. Every finding must include all template
-fields. The decision must name its factual basis and remaining uncertainty.
+Return `Scope`, `Intent`, `Facts considered`, `Findings`, `Checks not run`, and
+`Decision`. Include every finding field, the decision's factual basis, and
+remaining uncertainty. Never claim an unrun check.

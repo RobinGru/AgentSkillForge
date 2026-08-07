@@ -18,6 +18,7 @@ HEADINGS = [
     "## Acceptance criteria",
     "## Traceability",
     "## Assumptions and blockers",
+    "## Updated artifacts",
     "## Handoff state",
 ]
 
@@ -40,6 +41,10 @@ def test_feature_specification_is_portable_and_compact() -> None:
     assert "one substantial product capability" in text
     assert "small, understood change" in text
     assert "`feature-lifecycle`" in text
+    assert "docs/features/index.md" in text
+    assert "specification.md" in text
+    assert "tasks.md" in text
+    assert "before technical direction" in text
 
 
 def test_feature_specification_output_contract_is_exact() -> None:
@@ -69,3 +74,6 @@ def test_feature_specification_evals_cover_behavior_boundaries() -> None:
         "feature-specification",
         "feature-lifecycle",
     ]
+    assert "updates only the matching compact index row" in by_id[
+        "specification-positive-existing-draft"
+    ]["assertions"]

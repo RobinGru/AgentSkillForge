@@ -2,6 +2,7 @@ from pathlib import Path
 
 from scripts.validate_repository import (
     TARGET_SKILLS,
+    TOKEN_EFFICIENCY_RULE,
     validate_repository,
     validate_skill,
 )
@@ -18,7 +19,7 @@ def test_valid_repository_passes(tmp_path: Path) -> None:
         write_skill(
             tmp_path,
             name,
-            f"---\nname: {name}\ndescription: A portable example.\n---\n\n# Example\n\nUse this skill.\n",
+            f"---\nname: {name}\ndescription: A portable example.\n---\n\n# Example\n\nUse this skill.\n\n{TOKEN_EFFICIENCY_RULE}\n",
         )
     inventory = "\n".join(f"`skills/{name}/`" for name in sorted(TARGET_SKILLS))
     (tmp_path / "README.md").write_text(inventory + "\n", encoding="utf-8")
@@ -31,7 +32,7 @@ def test_readme_inventory_accepts_markdown_link_targets(tmp_path: Path) -> None:
         write_skill(
             tmp_path,
             name,
-            f"---\nname: {name}\ndescription: A portable example.\n---\n\n# Example\n\nUse this skill.\n",
+            f"---\nname: {name}\ndescription: A portable example.\n---\n\n# Example\n\nUse this skill.\n\n{TOKEN_EFFICIENCY_RULE}\n",
         )
     inventory = "\n".join(f"[{name}](skills/category/{name}/)" for name in sorted(TARGET_SKILLS))
     (tmp_path / "README.md").write_text(inventory + "\n", encoding="utf-8")
@@ -46,6 +47,19 @@ def test_skills_require_repository_language_and_conventions() -> None:
     assert len(skill_files) == len(TARGET_SKILLS)
     for path in skill_files:
         assert required_rule in path.read_text(encoding="utf-8")
+
+
+def test_token_efficiency_rule_is_required_exactly_once(tmp_path: Path) -> None:
+    path = tmp_path / "SKILL.md"
+    base = "---\nname: example\ndescription: Example.\n---\n\n# Example\n\nUse this skill.\n"
+
+    _ = path.write_text(base, encoding="utf-8")
+    _, missing = validate_skill(path)
+    _ = path.write_text(f"{base}\n{TOKEN_EFFICIENCY_RULE}\n\n{TOKEN_EFFICIENCY_RULE}\n", encoding="utf-8")
+    _, duplicate = validate_skill(path)
+
+    assert any("token-efficiency rule exactly once (found 0)" in finding.message for finding in missing)
+    assert any("token-efficiency rule exactly once (found 2)" in finding.message for finding in duplicate)
 
 
 def test_extra_skill_is_an_error(tmp_path: Path) -> None:

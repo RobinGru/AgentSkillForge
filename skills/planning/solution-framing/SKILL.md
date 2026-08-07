@@ -1,6 +1,6 @@
 ---
 name: solution-framing
-description: Choose a defensible technical or delivery direction for a consequential software decision after product intent and observable behavior are sufficiently known. Use when approaches, interfaces, ownership, risks, or reversibility need an explicit decision record.
+description: Select a defensible technical or delivery direction for one consequential decision after product intent is known. Use when viable approaches differ materially in interfaces, ownership, cost, risk, compatibility, or reversibility and need an inspectable decision brief.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -10,112 +10,77 @@ metadata:
 # Solution framing
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
+Turn one uncertain consequential choice into a bounded, evidence-linked decision.
+Do not disguise discovery or implementation planning as a decision.
 
-Turn an uncertain technical request into a bounded decision that another
-person or agent can inspect and act on. The result is a decision brief, not an
-implementation plan disguised as discovery.
+## Activation boundary
 
-## Use this skill when
+Use when implementation or delivery direction is ambiguous, crosses boundaries,
+has materially different viable options, or is expensive to reverse.
 
-Use this skill when one or more of these conditions apply:
+Do not use for initial product direction, one capability's behavior contract, an
+accepted decision, a fully bounded local change, code review, or unmeasured
+performance diagnosis.
 
-- The implementation or delivery approach remains ambiguous.
-- The work crosses system boundaries, interfaces, or ownership lines.
-- Several feasible directions have materially different costs or risks.
-- Choosing the wrong direction would make later work expensive to undo.
-- Constraints, non-goals, risks, or acceptance checks are absent.
+## Rules
 
-## Do not use this skill when
-
-Do not use this skill to establish initial product direction or define the
-observable contract for one capability. Also do not use it for a fully specified
-local change, an accepted decision brief, or a code review with a known change
-set. Route a performance symptom without a baseline to a performance
-investigation instead.
-
-## Operating rules
-
-- Inspect available project facts before asking for information.
-- Label each important statement as observed, provided, assumed, or unknown.
-- Ask only for information that can change the decision or prevent unsafe work.
-- Prefer a reversible, smaller direction when it satisfies the stated need.
-- Do not present an assumption, estimate, or unrun check as facts.
-- Do not begin implementation until the handoff outcome permits it.
+- Inspect project facts before asking questions.
+- Label material claims observed, provided, assumed, or unknown.
+- Ask only for information that can change or safely block the decision.
+- Prefer the smallest reversible option that satisfies known obligations.
+- Do not present estimates, assumptions, or unrun checks as facts.
+- Do not implement before the handoff permits it.
 
 ## Workflow
 
-### 1. Frame the problem
+### 1. Frame and bound
 
-State the requested change without prescribing a solution. Identify the
-affected users or systems, the observed starting condition, and the desired
-end condition. If any of these are unknown, record that uncertainty.
+State affected users or systems, current and desired conditions, in-scope work,
+non-goals, constraints, interfaces, owners, assumptions, and blockers. Use
+[risk and reversibility](references/risk-and-reversibility.md) to decide whether
+an unknown can remain an assumption.
 
-**Exit:** a one-paragraph problem statement that can be disproved or refined.
+### 2. Compare viable options
 
-### 2. Bound the decision
+Compare only feasible options using problem-derived criteria such as safety,
+compatibility, migration cost, reversibility, operational burden, and evidence
+cost. Reject a hard-constraint violation directly. If one option remains, state
+why comparison is unnecessary.
 
-List in-scope work, excluded work, hard constraints, reversible assumptions,
-blockers, and affected interfaces. Use
-[`risk-and-reversibility.md`](references/risk-and-reversibility.md) to assess
-whether a missing fact blocks progress or can remain an assumption.
+### 3. Decide and prove readiness
 
-**Exit:** a bounded decision surface with explicit ownership and dependencies.
+Use the [decision brief template](assets/solution-brief-template.md) and
+[decision record fields](references/decision-record.md). Link facts to the choice,
+state consequences, mitigations, acceptance checks, and blockers.
 
-### 3. Compare options when needed
+For tracked work, `feature-lifecycle` may link the brief; this brief remains
+authoritative. Choose exactly one handoff:
 
-Compare only genuinely viable options. Use criteria that arise from the
-problem, such as safety, compatibility, migration cost, reversibility,
-operational burden, or time to confirm key facts. An option may be rejected
-without a full comparison when it violates a hard constraint.
-
-**Exit:** a concise comparison or a reason why only one viable direction
-exists.
-
-### 4. Decide in a brief
-
-Create the decision brief using
-[`solution-brief-template.md`](assets/solution-brief-template.md). Every
-required heading must be present. Link facts to the choice, separate
-assumptions from facts, and state how acceptance will be demonstrated. Consult
-[`decision-record.md`](references/decision-record.md) for field definitions.
-
-**Exit:** a complete decision brief with no unlabelled uncertainty.
-
-### 5. Choose a handoff state
-
-For durable feature coordination, `feature-lifecycle` may link this brief and
-record readiness; this brief remains authoritative for the chosen approach.
-
-Choose exactly one result:
-
-- **Ready to implement:** scope, constraints, owner, and acceptance checks
-  are sufficient.
-- **Research required:** a named unknown prevents a safe decision.
-- **Decision required:** a stakeholder must choose among stated trade-offs.
-- **Split required:** independent decisions should be resolved separately.
+- **Ready to implement**
+- **Research required**
+- **Decision required**
+- **Split required**
 
 ## Output contract
 
-Return one decision brief with these exact headings:
+Return exactly these headings:
 
-1. `## Decision`
-2. `## Facts`
-3. `## Assumptions`
-4. `## Boundaries`
-5. `## Selected approach`
-6. `## Rejected approaches`
-7. `## Risks and mitigations`
-8. `## Acceptance checks`
-9. `## Open blockers`
-10. `## Handoff state`
+```markdown
+## Decision
+## Facts
+## Assumptions
+## Boundaries
+## Selected approach
+## Rejected approaches
+## Risks and mitigations
+## Acceptance checks
+## Open blockers
+## Handoff state
+```
 
-A brief is complete only when every heading has substantive content, each
-claim is labelled as observed, provided, assumed, or unknown; rejected
-options have a reason, and the handoff state is one of the four allowed values.
-
-## References
-
-- [Decision record fields](references/decision-record.md)
-- [Risk and reversibility guide](references/risk-and-reversibility.md)
-- [Decision brief template](assets/solution-brief-template.md)
+Every heading must be substantive, uncertainty labelled, rejected options
+reasoned, and the handoff one of the four allowed values.

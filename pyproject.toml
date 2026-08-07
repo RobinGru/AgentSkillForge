@@ -45,6 +45,7 @@ py-modules = []
   "skills/planning/compatibility-migration/references/data-transition-checks.md",
 ]
 "share/agent-skill-forge/skills/quality/fact-based-code-review" = ["skills/quality/fact-based-code-review/SKILL.md"]
+"share/agent-skill-forge/skills/planning/feature-delivery" = ["skills/planning/feature-delivery/SKILL.md"]
 "share/agent-skill-forge/skills/planning/feature-lifecycle" = ["skills/planning/feature-lifecycle/SKILL.md"]
 "share/agent-skill-forge/skills/planning/feature-specification" = ["skills/planning/feature-specification/SKILL.md"]
 "share/agent-skill-forge/skills/quality/failure-investigation" = [

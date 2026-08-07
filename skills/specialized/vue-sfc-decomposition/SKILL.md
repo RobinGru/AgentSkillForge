@@ -1,6 +1,6 @@
 ---
 name: vue-sfc-decomposition
-description: Refactor a Vue single-file component by characterizing behavior, selecting one fact-based responsibility seam, preserving reactive and lifecycle semantics, and verifying the bounded extraction. Use for an observed Vue or Nuxt component decomposition problem.
+description: Refactor a Vue or Nuxt single-file component by selecting one evidence-based responsibility seam, preserving public, reactive, lifecycle, SSR, and cleanup behavior, and verifying the bounded extraction. Use only for an observed decomposition problem.
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
@@ -10,87 +10,65 @@ metadata:
 # Vue SFC decomposition
 
 Use the repository's established language and conventions for any artifacts you create or update.
+Use the smallest sufficient context and bounded tool output. Reuse inspected
+evidence and stop once the task can proceed safely; never trade correctness,
+safety, or required verification for brevity.
 
+Decompose only to solve an observed responsibility, maintenance, reuse, or
+testability problem. Component length alone is not evidence.
 
-Decompose a Vue component only to solve an observed responsibility, maintenance,
-or testability problem. Choose the extraction boundary from behavior and
-ownership, not component length alone.
+## Activation boundary
 
-## Use this skill when
-
-- A Vue single-file component mixes separable visual, reactive, I/O, domain, or
-  browser-integration responsibilities and that mix causes a concrete problem.
-- A bounded refactor must preserve component behavior while making one concern
-  independently testable or reusable.
-
-## Do not use this skill when
-
-- A component is merely long but has no observed change, ownership, or
-  testability problem.
-- Work changes user interaction or visual behavior rather than preserving it.
-  Use an interface-engineering workflow for that scope.
-- A measured performance investigation has not established a structural Vue
-  cause. Investigate the performance signal before extracting code.
+Use when a Vue SFC mixes separable visual, reactive, I/O, domain, state, or
+browser responsibilities and that mix causes a concrete problem. Do not use for
+UI behavior changes or speculative performance refactors.
 
 ## Workflow
 
-### 1. Characterize
+### 1. Characterize and protect
 
-Record Vue and Nuxt versions, Composition or Options API, TypeScript use, public
-props, emits, slots, exposed values, router, store, data-query use, watchers,
-lifecycle hooks, browser or DOM dependencies, and available test coverage. Read
-nearby conventions before selecting a new location.
+Record Vue/Nuxt versions, API style, TypeScript, props, emits, slots, exposed
+values, router, store, queries, watchers, lifecycle, DOM dependencies, SSR, and
+tests. Read nearby conventions.
 
-### 2. Protect
+Define behavior to preserve: output, events, requests, states, side-effect order,
+reactivity, watcher timing, lifecycle, cleanup, routes, SSR, and hydration. Add a
+characterization check before extraction when practical coverage is absent.
 
-List behavior that must not change: rendered output, events, network calls,
-loading and failure states, side-effect order, unmount cleanup, route or URL
-behavior, and SSR or hydration when relevant. If practical coverage is absent,
-add a characterization test or reproducible manual check before the extraction.
+### 2. Choose one seam
 
-### 3. Choose one seam
+Select the smallest fact-supported boundary:
 
-Choose the smallest responsibility boundary supported by facts:
+- self-contained visual region → child component;
+- reusable reactive behavior → composable;
+- transport mapping → existing query, service, or repository layer;
+- shared state → existing store;
+- pure calculation → TypeScript module;
+- domain rule → domain module;
+- local UI state → keep local;
+- browser integration → focused composable with cleanup.
 
-| Observed responsibility | Preferred boundary |
-| --- | --- |
-| Self-contained visual region | Child component |
-| Reusable reactive behavior | Composable |
-| Remote I/O or transport mapping | Existing query, service, or repository layer |
-| Shared application state | Existing store |
-| Pure calculation or formatting | Plain TypeScript module |
-| Domain rule | Domain module |
-| Local open or closed UI state | Keep in component |
-| Browser or DOM integration | Focused composable with cleanup |
+Do not centralize by default. Use
+[Nuxt boundaries](references/nuxt-boundaries.md) for runtime-sensitive scope.
 
-Do not create a central composable by default. Use
-[Nuxt boundaries](references/nuxt-boundaries.md) when Nuxt runtime behavior is
-in scope.
+### 3. Extract and verify
 
-### 4. Extract
+Make one seam per patch. Preserve public APIs unless explicitly changed. Retain
+ref, computed, readonly, watcher, lifecycle, error, and cleanup semantics; avoid
+destructuring that breaks reactivity. Do not combine redesign or domain changes.
 
-Make one seam per patch. Retain public APIs unless the task explicitly changes
-them. Preserve ref, computed, and readonly semantics; avoid destructuring that
-breaks reactivity. Retain watcher flush and immediate behavior, lifecycle order,
-cleanup, and error handling. Do not combine UI redesign or domain-rule changes
-with the extraction.
+Run targeted tests and type checks. Verify output, events, request counts,
+watchers, lifecycle, cleanup, and SSR/hydration when applicable. Record unrun
+checks and risk.
 
-### 5. Observe
+### 4. Continue deliberately
 
-Run targeted tests and type checks where available. Check rendered output,
-events, API-call count, watcher and lifecycle behavior, and cleanup. Check SSR
-and hydration if the component participates in server rendering. Record checks
-not run and why.
-
-### 6. Continue deliberately
-
-After a verified extraction, select the next seam from the remaining observed
-problem. Stop only when an architectural decision, missing information, or user
-approval is needed; do not stop merely because one seam was extracted.
+After a verified extraction, choose another seam only if the observed problem
+remains and no decision, evidence, or approval blocker exists. Never extract
+solely to reduce line count.
 
 ## Output contract
 
 Report `Characterization`, `Protected behavior`, `Selected seam`, `Patch`,
-`Facts`, `Remaining risks`, and `Next seam`. State unknown framework or
-runtime facts. For each selected seam, explain why the responsibility belongs
-there and why alternatives were not chosen.
+`Facts`, `Remaining risks`, and `Next seam`. Explain why the responsibility
+belongs at the selected boundary and why relevant alternatives were rejected.
