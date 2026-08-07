@@ -198,7 +198,7 @@ Dein KI-Client entscheidet, wann er einen installierten Skill lädt. Beschreibun
 
 ## Optionale Repository-Anweisungen
 
-[`templates/AGENTS.md`](templates/AGENTS.md) ist eine bewusst meinungsstarke Routing-Vorlage für diesen Katalog mit einer kompakten Write-Then-Verify-Regel. Kopiere sie nur in ein Ziel-Repository, wenn deutsche Antworten und `codebase-memory-mcp` gewünscht sind; passe diese Anforderungen andernfalls vorher an oder entferne sie.
+[`templates/AGENTS.md`](templates/AGENTS.md) ist eine bewusst meinungsstarke Routing-Vorlage für diesen Katalog. Sie verlangt deutsche Antworten und enthält Hinweise für dauerhaftes Repository-Wissen sowie eine kompakte Write-Then-Verify-Regel. Passe diese Anforderungen an oder entferne sie, bevor du die Vorlage in ein Projekt kopierst, in dem sie nicht passen.
 
 
 ## Kompatibilität

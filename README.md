@@ -198,7 +198,7 @@ Your AI client decides when to load an installed skill. Descriptions are routing
 
 ## Optional repository instructions
 
-[`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated routing template for this catalog with a compact write-then-verify rule. Copy it only when German responses and `codebase-memory-mcp` are intended; otherwise adapt or remove those requirements first.
+[`templates/AGENTS.md`](templates/AGENTS.md) is an opinionated routing template for this catalog. It asks agents to respond in German and includes durable repository-memory guidance plus a compact write-then-verify rule. Adapt or remove those requirements before copying it into a project where they do not fit.
 
 
 ## Compatibility
