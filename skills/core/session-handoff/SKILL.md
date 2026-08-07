@@ -4,7 +4,7 @@ description: Preserve a compact verified continuation record for unfinished repo
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Session handoff

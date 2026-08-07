@@ -4,7 +4,7 @@ description: Adversarially assess a concrete high-risk code change. Use only whe
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Adversarial deep review

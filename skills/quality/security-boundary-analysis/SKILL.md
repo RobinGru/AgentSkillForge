@@ -4,7 +4,7 @@ description: Build an evidence-based threat model. Use only for an explicitly au
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Security boundary analysis

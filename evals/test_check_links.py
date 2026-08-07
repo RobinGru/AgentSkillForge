@@ -1,6 +1,11 @@
 from pathlib import Path
 
-from scripts.check_links import check_markdown_file
+from scripts.check_links import EXCLUDED_DIRECTORIES, check_markdown_file
+
+
+def test_generated_directories_are_excluded_from_link_checks() -> None:
+    assert ".venv" in EXCLUDED_DIRECTORIES
+    assert "build" in EXCLUDED_DIRECTORIES
 
 
 def test_valid_local_file_and_anchor_pass(tmp_path: Path) -> None:

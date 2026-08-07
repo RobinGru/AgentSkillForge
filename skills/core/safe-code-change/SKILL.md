@@ -4,7 +4,7 @@ description: Make one bounded, understood code change and prove its intended beh
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Safe code change

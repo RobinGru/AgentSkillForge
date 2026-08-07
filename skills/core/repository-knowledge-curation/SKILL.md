@@ -4,7 +4,7 @@ description: Persist one verified repository-specific fact in its smallest canon
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Repository knowledge curation

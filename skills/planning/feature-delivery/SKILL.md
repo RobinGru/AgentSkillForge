@@ -4,7 +4,7 @@ description: Deliver one tracked feature through its bounded ready tasks, strict
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Feature delivery

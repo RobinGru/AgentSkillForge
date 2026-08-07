@@ -4,7 +4,7 @@ description: Refactor a Vue or Nuxt single-file component by selecting one evide
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Vue SFC decomposition

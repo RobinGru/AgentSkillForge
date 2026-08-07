@@ -4,7 +4,7 @@ description: Maintain one compact, revision-bound status record for a substantia
 license: Apache-2.0
 compatibility: AgentSkillForge
 metadata:
-  version: 0.6.4
+  version: 0.6.5
 ---
 
 # Feature lifecycle
