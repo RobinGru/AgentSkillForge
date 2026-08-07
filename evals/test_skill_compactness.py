@@ -28,7 +28,7 @@ def test_templates_require_token_efficient_execution() -> None:
     agents = (ROOT / "templates" / "AGENTS.md").read_text(encoding="utf-8")
     aio = " ".join((ROOT / "templates" / "AGENTS-AIO.md").read_text(encoding="utf-8").split())
 
-    assert "Reuse already inspected, unchanged evidence; do not reread it without a concrete reason." in agents
+    assert "Reuse already verified, unchanged evidence instead of rereading it without a concrete reason." in agents
     assert "Stop exploration once enough evidence exists to decide, act, and verify safely." in agents
     assert "Use the smallest sufficient context, tool call, and output." in aio
     assert "Reuse unchanged evidence and stop once the task can proceed and be verified safely." in aio

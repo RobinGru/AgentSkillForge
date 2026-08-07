@@ -71,6 +71,8 @@ Use a skill only when its workflow materially improves the task.
 
 Match verification effort to the change's size, boundary, and risk.
 
+`Targeted read → Write → Inspect changed range → Narrow proof → Compact report`
+
 For every change:
 
 1. Write the smallest coherent change.
@@ -89,8 +91,8 @@ For larger or higher-risk changes, also:
 For auto-fixable Biome issues:
 
 ```sh
-rtk npm run lint:fix
-rtk npm run lint
+npm run lint:fix
+npm run lint
 ```
 
 Never claim a file change, test result, repository status, or memory update without verification.

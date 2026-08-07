@@ -19,11 +19,12 @@ def test_repository_agents_template_has_the_compact_routing_contract() -> None:
     assert "Handle trivial, localized, low-risk changes directly" in text
     assert "Use the narrowest applicable skill" in text
     assert "Do not activate skills based on keywords alone" in text
-    assert "Do not combine multiple skills unless each is independently necessary" in text
-    assert "`feature-delivery`" in text
-    assert "Never use parallel agents" in text
+    assert "Combine skills only when each is independently necessary" in text
+    assert "Do not let a skill expand the task beyond the user's requested scope" in text
     assert "workflow-navigator" not in text
+    assert "For every change:" in text
     assert "Targeted read → Write → Inspect changed range → Narrow proof → Compact report" in text
+    assert "rtk" not in text
 
 
 def test_distribution_metadata_lists_every_skill_document() -> None:
